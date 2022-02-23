@@ -10,35 +10,7 @@ import {
 } from "react-native";
 import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 
-const Section: React.FC<{
-    title: string;
-}> = ({ children, title }) => {
-    const isDarkMode = useColorScheme() === "dark";
-    return (
-        <View style={styles.sectionContainer}>
-            <Text
-                style={[
-                    styles.sectionTitle,
-                    {
-                        color: isDarkMode ? Colors.white : Colors.black
-                    }
-                ]}
-            >
-                {title}
-            </Text>
-            <Text
-                style={[
-                    styles.sectionDescription,
-                    {
-                        color: isDarkMode ? Colors.light : Colors.dark
-                    }
-                ]}
-            >
-                {children}
-            </Text>
-        </View>
-    );
-};
+import { API_URL } from "react-native-dotenv";
 
 const App = () => {
     const isDarkMode = useColorScheme() === "dark";
@@ -48,7 +20,7 @@ const App = () => {
     };
 
     return (
-        <SafeAreaView style={backgroundStyle}>
+        <SafeAreaView style={styles.appContainer}>
             <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
             <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
                 <Header />
@@ -57,7 +29,8 @@ const App = () => {
                         backgroundColor: isDarkMode ? Colors.black : Colors.white
                     }}
                 >
-                    <Section title="Step One">Keep My Paws Warm</Section>
+                    <Text>Keep My Paws Warm</Text>
+                    <Text>{API_URL}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -65,6 +38,9 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+    appContainer: {
+        flex: 1
+    },
     sectionContainer: {
         marginTop: 32,
         paddingHorizontal: 24
