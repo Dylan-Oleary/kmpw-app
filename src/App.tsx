@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 
-import { API_URL } from "react-native-dotenv";
-
 const App = () => {
     const isDarkMode = useColorScheme() === "dark";
 
@@ -30,7 +28,6 @@ const App = () => {
                     }}
                 >
                     <Text>Keep My Paws Warm</Text>
-                    <Text>{API_URL}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -59,4 +56,5 @@ const styles = StyleSheet.create({
     }
 });
 
+export { App };
 export default App;
