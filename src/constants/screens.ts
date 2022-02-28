@@ -1,4 +1,5 @@
 export const screenNames = {
     LOGIN: "Login",
-    REGISTER: "Register"
+    REGISTER: "Register",
+    HOME: "Home"
 };

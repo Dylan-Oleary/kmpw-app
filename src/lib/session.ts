@@ -8,7 +8,14 @@ export const getRefreshTokenFromStorage = async () => {
 
         return refreshToken;
     } catch (error) {
-        console.log(error);
+        throw error;
+    }
+};
+
+export const setRefreshTokenInStorage = async (refreshToken: string) => {
+    try {
+        await EncryptedStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+    } catch (error) {
         throw error;
     }
 };

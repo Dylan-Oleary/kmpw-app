@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { getRefreshTokenFromStorage } from "../../lib/session";
+import { getRefreshTokenFromStorage, setRefreshTokenInStorage } from "../../lib/session";
 
 interface IUserState {
     id: string;
@@ -23,6 +23,17 @@ export const initializeUser = createAsyncThunk("user/initializeUser", async () =
     }
 });
 
+export const setUserTokens = createAsyncThunk(
+    "user/setTokens",
+    async (tokens: { accessToken: string; refreshToken: string }) => {
+        const { accessToken, refreshToken } = tokens;
+
+        await setRefreshTokenInStorage(refreshToken);
+
+        return accessToken;
+    }
+);
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -30,6 +41,11 @@ export const userSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(initializeUser.fulfilled, () => {
             console.log("User Initialization Complete");
+        });
+        builder.addCase(setUserTokens.fulfilled, (state, action) => {
+            const accessToken = action?.payload;
+
+            state.accessToken = accessToken;
         });
     }
 });

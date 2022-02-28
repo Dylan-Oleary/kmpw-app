@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { screenNames } from "./constants";
 import { useAppDispatch, useAppSelector } from "./hooks";
+import { AuthorizedNavController } from "./navigation";
 import { LoginScreen, RegisterScreen, SplashScreen } from "./screens";
 import { initializeUser } from "./redux/slices/user";
 import { initializeApplication } from "./redux/slices/application";
@@ -29,16 +30,25 @@ const App = () => {
         <SafeAreaView style={styles.appContainer}>
             <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
             <Stack.Navigator>
-                {user?.isAuthenticated ? (
-                    <Stack.Group>
-                        <Stack.Screen component={LoginScreen} name={screenNames.LOGIN} />
-                        <Stack.Screen component={RegisterScreen} name={screenNames.REGISTER} />
-                    </Stack.Group>
+                {user?.accessToken ? (
+                    <Stack.Screen
+                        component={AuthorizedNavController}
+                        name="AuthorizedNav"
+                        options={{ headerShown: false }}
+                    />
                 ) : (
-                    <Stack.Group screenOptions={{ headerShown: false }}>
-                        <Stack.Screen component={LoginScreen} name={screenNames.LOGIN} />
-                        <Stack.Screen component={RegisterScreen} name={screenNames.REGISTER} />
-                    </Stack.Group>
+                    <>
+                        <Stack.Screen
+                            component={LoginScreen}
+                            name={screenNames.LOGIN}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            component={RegisterScreen}
+                            name={screenNames.REGISTER}
+                            options={{ headerShown: false }}
+                        />
+                    </>
                 )}
             </Stack.Navigator>
         </SafeAreaView>
