@@ -2,39 +2,45 @@ import React, { useEffect } from "react";
 import { SafeAreaView, StatusBar, StyleSheet, useColorScheme } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { screenNames } from "./constants";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import { LoginScreen, SplashScreen } from "./screens";
+import { LoginScreen, RegisterScreen, SplashScreen } from "./screens";
+import { initializeUser } from "./redux/slices/user";
 import { initializeApplication } from "./redux/slices/application";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-    const { isLoading, user } = useAppSelector(({ application }) => application);
+    const { application, user } = useAppSelector((state) => state);
     const dispatch = useAppDispatch();
     const isDarkMode = useColorScheme() === "dark";
 
     useEffect(() => {
-        dispatch(initializeApplication());
+        dispatch(initializeUser()).then(() => {
+            dispatch(initializeApplication());
+        });
     }, []);
+
+    if (application.isLoading) {
+        return <SplashScreen />;
+    }
 
     return (
         <SafeAreaView style={styles.appContainer}>
             <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-            {isLoading ? (
-                <SplashScreen />
-            ) : (
-                <Stack.Navigator>
-                    {user ? (
-                        <>
-                            <Stack.Screen component={LoginScreen} name="Login" />
-                        </>
-                    ) : (
-                        <>
-                            <Stack.Screen component={LoginScreen} name="Login" />
-                        </>
-                    )}
-                </Stack.Navigator>
-            )}
+            <Stack.Navigator>
+                {user?.isAuthenticated ? (
+                    <Stack.Group>
+                        <Stack.Screen component={LoginScreen} name={screenNames.LOGIN} />
+                        <Stack.Screen component={RegisterScreen} name={screenNames.REGISTER} />
+                    </Stack.Group>
+                ) : (
+                    <Stack.Group screenOptions={{ headerShown: false }}>
+                        <Stack.Screen component={LoginScreen} name={screenNames.LOGIN} />
+                        <Stack.Screen component={RegisterScreen} name={screenNames.REGISTER} />
+                    </Stack.Group>
+                )}
+            </Stack.Navigator>
         </SafeAreaView>
     );
 };

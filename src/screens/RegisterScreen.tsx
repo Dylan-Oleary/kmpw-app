@@ -4,16 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 
 import { screenNames } from "../constants/screens";
 
-const LoginScreen: FC = () => {
+const RegisterScreen: FC = () => {
     const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
-            <Text>Login</Text>
-            <Button
-                title="Go to register"
-                onPress={() => navigation.navigate(screenNames.REGISTER)}
-            />
+            <Text>Register</Text>
+            <Button title="Back to login" onPress={() => navigation.navigate(screenNames.LOGIN)} />
         </View>
     );
 };
@@ -22,5 +19,5 @@ const styles = StyleSheet.create({
     container: {}
 });
 
-export { LoginScreen };
-export default LoginScreen;
+export { RegisterScreen };
+export default RegisterScreen;
