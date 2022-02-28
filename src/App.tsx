@@ -1,35 +1,40 @@
-import React from "react";
-import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View
-} from "react-native";
-import { Colors, Header } from "react-native/Libraries/NewAppScreen";
+import React, { useEffect } from "react";
+import { SafeAreaView, StatusBar, StyleSheet, useColorScheme } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import { useAppDispatch, useAppSelector } from "./hooks";
+import { LoginScreen, SplashScreen } from "./screens";
+import { initializeApplication } from "./redux/slices/application";
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
+    const { isLoading, user } = useAppSelector(({ application }) => application);
+    const dispatch = useAppDispatch();
     const isDarkMode = useColorScheme() === "dark";
 
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
-    };
+    useEffect(() => {
+        dispatch(initializeApplication());
+    }, []);
 
     return (
         <SafeAreaView style={styles.appContainer}>
             <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-            <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-                <Header />
-                <View
-                    style={{
-                        backgroundColor: isDarkMode ? Colors.black : Colors.white
-                    }}
-                >
-                    <Text>Keep My Paws Warm</Text>
-                </View>
-            </ScrollView>
+            {isLoading ? (
+                <SplashScreen />
+            ) : (
+                <Stack.Navigator>
+                    {user ? (
+                        <>
+                            <Stack.Screen component={LoginScreen} name="Login" />
+                        </>
+                    ) : (
+                        <>
+                            <Stack.Screen component={LoginScreen} name="Login" />
+                        </>
+                    )}
+                </Stack.Navigator>
+            )}
         </SafeAreaView>
     );
 };
