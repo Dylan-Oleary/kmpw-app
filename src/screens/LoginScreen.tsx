@@ -5,20 +5,16 @@ import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../hooks";
 import { screenNames } from "../constants/screens";
 import { loginUser } from "../api/auth/index";
-import { setUserTokens } from "../redux/slices/user";
+import { setUserTokens } from "../redux/thunks";
 
 const LoginScreen: FC = () => {
     const dispatch = useAppDispatch();
     const navigation = useNavigation();
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("test@gmail.com");
+    const [password, setPassword] = useState<string>("asd123ASD!");
 
     const handleSubmit = () => {
-        loginUser({ email, password })
-            .then((response) => dispatch(setUserTokens(response)))
-            .catch((error) => {
-                //TODO: Global Error State for Notifications
-            });
+        loginUser({ email, password }).then((response) => dispatch(setUserTokens(response)));
     };
 
     return (

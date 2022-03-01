@@ -6,8 +6,8 @@ import { screenNames } from "./constants";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { AuthorizedNavController } from "./navigation";
 import { LoginScreen, RegisterScreen, SplashScreen } from "./screens";
-import { initializeUser } from "./redux/slices/user";
-import { initializeApplication } from "./redux/slices/application";
+import { initializeApplication } from "./redux/slices";
+import { initializeUser } from "./redux/thunks";
 
 const Stack = createNativeStackNavigator();
 
