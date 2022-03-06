@@ -2,6 +2,22 @@ import { kmpwApi } from "..";
 import { ILoginUserData, IRegisterUserData } from "../../types";
 
 /**
+ * Fetches a new token set for the user
+ *
+ * /auth/refresh
+ *
+ * @param refreshToken A user refresh token
+ * @returns An object containing a new access token and refresh token
+ */
+export const getFreshTokens = (refreshToken: string) =>
+    kmpwApi
+        .post<{ accessToken: string; refreshToken: string }>("/auth/refresh", {
+            client: "native",
+            refresh: refreshToken
+        })
+        .then(({ data }) => data);
+
+/**
  * Logs a user into the system
  *
  * /auth/login

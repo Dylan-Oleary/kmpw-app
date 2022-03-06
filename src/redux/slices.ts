@@ -12,12 +12,19 @@ export const applicationSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(setUserTokens.rejected, (state, action) => {
-            const error = action.payload;
+        builder
+            .addCase(setUserTokens.rejected, (state, action) => {
+                const error = action.payload;
 
-            //@ts-ignore
-            state.errors.push(error);
-        });
+                //@ts-ignore
+                state.errors.push(error);
+            })
+            .addCase(initializeUser.rejected, (state, action) => {
+                const error = action.payload;
+
+                //@ts-ignore
+                state.errors.push(error);
+            });
     }
 });
 
@@ -27,8 +34,10 @@ export const userSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(initializeUser.fulfilled, () => {
-                console.log("User Initialization Complete");
+            .addCase(initializeUser.fulfilled, (state, action) => {
+                const accessToken = action?.payload;
+
+                if (accessToken) state.accessToken = accessToken;
             })
             .addCase(setUserTokens.fulfilled, (state, action) => {
                 const accessToken = action?.payload;
