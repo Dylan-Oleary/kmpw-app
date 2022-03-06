@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { initializeUser, setUserTokens } from "./thunks";
+import { initializeUser, setUserTokens, clearUser } from "./thunks";
 import { IApplicationState, IUserState } from "../types";
 
 export const applicationSlice = createSlice({
@@ -26,14 +26,16 @@ export const userSlice = createSlice({
     initialState: {} as IUserState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(initializeUser.fulfilled, () => {
-            console.log("User Initialization Complete");
-        });
-        builder.addCase(setUserTokens.fulfilled, (state, action) => {
-            const accessToken = action?.payload;
+        builder
+            .addCase(initializeUser.fulfilled, () => {
+                console.log("User Initialization Complete");
+            })
+            .addCase(setUserTokens.fulfilled, (state, action) => {
+                const accessToken = action?.payload;
 
-            state.accessToken = accessToken;
-        });
+                state.accessToken = accessToken;
+            })
+            .addCase(clearUser.fulfilled, () => ({} as IUserState));
     }
 });
 

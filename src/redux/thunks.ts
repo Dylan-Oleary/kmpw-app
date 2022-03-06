@@ -1,6 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { getRefreshTokenFromStorage, setRefreshTokenInStorage } from "../lib/session";
+import {
+    getRefreshTokenFromStorage,
+    removeRefreshTokenFromStorage,
+    setRefreshTokenInStorage
+} from "../lib/session";
 
 export const initializeUser = createAsyncThunk("user/initializeUser", async () => {
     const refreshToken = await getRefreshTokenFromStorage();
@@ -29,3 +33,14 @@ export const setUserTokens = createAsyncThunk(
         }
     }
 );
+
+export const clearUser = createAsyncThunk("user/cleanUser", async (_, { rejectWithValue }) => {
+    try {
+        await removeRefreshTokenFromStorage();
+    } catch (error) {
+        throw rejectWithValue({
+            status: 500,
+            message: "Token Error"
+        });
+    }
+});

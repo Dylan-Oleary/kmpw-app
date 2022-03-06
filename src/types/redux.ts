@@ -14,5 +14,4 @@ export interface IUserState {
     updatedAt: Date;
     email: string;
     accessToken: string;
-    isAuthenticated: boolean;
 }

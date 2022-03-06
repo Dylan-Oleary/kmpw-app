@@ -18,6 +18,19 @@ export const loginUser = (data: ILoginUserData) =>
         .then(({ data }) => data);
 
 /**
+ * Logs a user out of the system
+ *
+ * /auth/logout
+ *
+ * @param accessToken The user's access token
+ */
+export const logoutUser = (accessToken: string) =>
+    kmpwApi.post("/auth/logout", null, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+    });
+
+/**
+ * Registers a new user into the system
  *
  * /auth/register
  *
