@@ -1,17 +1,18 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import HomeScreen from "../screens/HomeScreen";
+import { HomeScreen } from "../screens";
+import { AuthorizedStackParams } from "./types";
+import { AUTHORIZED_SCREEN_NAMES } from "../constants";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<AuthorizedStackParams>();
 
-const AuthorizedNavController = () => {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        </Tab.Navigator>
-    );
-};
-
-export { AuthorizedNavController };
-export default AuthorizedNavController;
+export const AuthorizedNavController = () => (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen
+            name={AUTHORIZED_SCREEN_NAMES.HOME}
+            component={HomeScreen}
+            options={{ tabBarStyle: { display: "none" } }}
+        />
+    </Tab.Navigator>
+);
