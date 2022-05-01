@@ -1,21 +1,19 @@
 import React, { FC } from "react";
 import { Dimensions, ScrollView } from "react-native";
-// import { useNavigation } from "@react-navigation/native";
-// import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Container, HeaderText, Image } from "../../components";
 import { RegisterForm } from "../../forms";
-import { styles } from "./styles";
-// import { UnauthorizedStackParams } from "../../navigation";
+import { getContainerStyle, getFooterImageStyle, styles } from "./styles";
 
 import DogImage from "../../assets/images/test-pup.jpg";
 
-const RegisterScreen: FC = () => {
-    // const { navigate } = useNavigation<NativeStackNavigationProp<UnauthorizedStackParams>>();
+export const RegisterScreen: FC = () => {
+    const insets = useSafeAreaInsets();
     const screenWidth = Dimensions.get("screen").width;
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={getContainerStyle()}>
             <Container style={styles.contentContainer}>
                 <HeaderText>It's time to use</HeaderText>
                 <HeaderText style={styles.headerTextAccent}>the W word.</HeaderText>
@@ -23,10 +21,12 @@ const RegisterScreen: FC = () => {
                     <RegisterForm />
                 </Container>
             </Container>
-            <Image aspectRatio={[127, 100]} source={DogImage} width={screenWidth} />
+            <Image
+                aspectRatio={[127, 100]}
+                containerStyle={getFooterImageStyle(insets)}
+                source={DogImage}
+                width={screenWidth}
+            />
         </ScrollView>
     );
 };
-
-export { RegisterScreen };
-export default RegisterScreen;

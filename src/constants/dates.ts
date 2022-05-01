@@ -1,0 +1,1 @@
+export const LOCATION_CACHE_IN_MILLISECONDS = 300000; // 5 minutes

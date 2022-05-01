@@ -2,9 +2,10 @@ import React, { FC } from "react";
 import { Dimensions, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button, Container, HeaderText, Image, Text } from "../../components";
-import { styles } from "./styles";
+import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
 import { LoginForm } from "../../forms/LoginForm";
 import { UnauthorizedStackParams } from "../../navigation";
 import { UNAUTHORIZED_SCREEN_NAMES } from "../../constants/screens";
@@ -13,11 +14,12 @@ import ArrowRightIcon from "../../assets/svg/arrow-right.svg";
 import DogImage from "../../assets/images/test-pup.jpg";
 
 export const LoginScreen: FC = () => {
+    const insets = useSafeAreaInsets();
     const { navigate } = useNavigation<NativeStackNavigationProp<UnauthorizedStackParams>>();
     const screenWidth = Dimensions.get("screen").width;
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={getContainerStyle(insets)}>
             <Container style={styles.contentContainer}>
                 <HeaderText>Those paws</HeaderText>
                 <HeaderText>
@@ -29,7 +31,7 @@ export const LoginScreen: FC = () => {
                 </Container>
             </Container>
             <Image aspectRatio={[16, 8]} source={DogImage} width={screenWidth} />
-            <Container style={[styles.footerContainer]}>
+            <Container style={getFooterContainerStyle(insets)}>
                 <HeaderText style={styles.footerText}>Looking to get</HeaderText>
                 <HeaderText style={styles.footerText}>started?</HeaderText>
                 <Text style={[styles.footerText, styles.footerCopy]}>

@@ -5,6 +5,7 @@ export type AppStackParams = {
 
 export type AuthorizedStackParams = {
     Home: undefined;
+    LocationDisabled: undefined;
 };
 
 export type UnauthorizedStackParams = {
