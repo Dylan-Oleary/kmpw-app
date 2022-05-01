@@ -23,12 +23,14 @@ export const LoginForm: FC = () => {
             <Text>Use your credentials to sign in below.</Text>
             <Container style={styles.formFieldsContainer}>
                 <TextInput
+                    autoCapitalize="none"
                     autoComplete="email"
                     onChangeText={setEmail}
                     placeholder="Email"
                     value={email}
                 />
                 <TextInput
+                    autoCapitalize="none"
                     autoComplete="password"
                     containerStyle={{ marginTop: theme.spacing[3] }}
                     onChangeText={setPassword}

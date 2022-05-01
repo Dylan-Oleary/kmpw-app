@@ -4,25 +4,27 @@ import { EdgeInsets } from "react-native-safe-area-context";
 import { theme } from "../../constants";
 
 export const styles = StyleSheet.create({
-    contentContainer: {
-        flex: 1,
-        paddingHorizontal: theme.spacing[8],
-        paddingBottom: theme.spacing[8]
+    backgroundImage: {
+        height: "100%",
+        width: "100%"
     },
     headerTextAccent: {
         color: theme.colors.brand5
     },
-    loginContainer: {
-        marginTop: theme.spacing[5]
+    locationCtaText: {
+        marginTop: theme.spacing[7]
     },
-    footerText: {
+    settingsButton: {
+        marginTop: theme.spacing[4]
+    },
+    settingsButtonText: {
         color: theme.colors.white
     },
-    footerCopy: {
-        marginTop: theme.spacing[4]
+    transparentBackground: {
+        backgroundColor: "transparent"
     },
-    registerButtonContainer: {
-        marginTop: theme.spacing[4]
+    wrapperContainer: {
+        flex: 1
     }
 });
 
@@ -32,9 +34,13 @@ export const getContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (
     const { top } = insets;
 
     return {
-        backgroundColor: theme.colors.white,
         flexGrow: 1,
+        paddingBottom: theme.spacing[8],
+        paddingHorizontal: theme.spacing[8],
         ...Platform.select({
+            android: {
+                paddingTop: theme.spacing[4]
+            },
             ios: {
                 paddingTop: top / 2
             }
@@ -48,15 +54,9 @@ export const getFooterContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyl
     const { bottom } = insets;
 
     return {
-        backgroundColor: theme.colors.brand5,
-        flex: 0,
-        paddingHorizontal: theme.spacing[8],
-        paddingTop: theme.spacing[8],
         ...Platform.select({
-            android: {
-                paddingBottom: theme.spacing[8]
-            },
             ios: {
+                backgroundColor: theme.colors.brand5,
                 paddingBottom: bottom
             }
         })

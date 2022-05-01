@@ -1,13 +1,10 @@
-import { StyleSheet } from "react-native";
+import { ImageStyle, Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { EdgeInsets } from "react-native-safe-area-context";
 
 import { theme } from "../../constants";
 
 export const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1
-    },
     contentContainer: {
-        flex: 1,
         paddingHorizontal: theme.spacing[8],
         paddingBottom: theme.spacing[8]
     },
@@ -32,3 +29,33 @@ export const styles = StyleSheet.create({
         marginTop: theme.spacing[4]
     }
 });
+
+export const getContainerStyle: () => StyleProp<ViewStyle> = () => {
+    return {
+        backgroundColor: theme.colors.white,
+        flexGrow: 1,
+        ...Platform.select({
+            ios: {
+                paddingTop: theme.spacing[2]
+            }
+        })
+    };
+};
+
+export const getFooterImageStyle: (insets: EdgeInsets) => StyleProp<ImageStyle> = (
+    insets: EdgeInsets
+) => {
+    const { bottom } = insets;
+
+    return {
+        ...Platform.select({
+            android: {
+                flex: 1
+            },
+            ios: {
+                flex: 1,
+                paddingBottom: bottom
+            }
+        })
+    };
+};
