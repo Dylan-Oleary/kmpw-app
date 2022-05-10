@@ -1,13 +1,14 @@
 import React, { FC, useState } from "react";
 
-import { useAppDispatch } from "../../hooks";
-import { Button, Container, Text } from "../../components";
-import { TextInput } from "../../forms";
-import { loginUser } from "../../api/auth/index";
-import { setUserTokens } from "../../redux/thunks";
+import { loginUser } from "@/api";
+import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
+import { Button, Container, Text } from "@/components";
+import { theme } from "@/constants";
+import { useAppDispatch } from "@/hooks";
+import { TextInput } from "@/forms";
+import { setUserTokens } from "@/redux";
+
 import { styles } from "./styles";
-import { theme } from "../../constants";
-import ArrowRightIcon from "../../assets/svg/arrow-right.svg";
 
 export const LoginForm: FC = () => {
     const dispatch = useAppDispatch();

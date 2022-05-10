@@ -3,12 +3,11 @@ import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { StatusBar } from "./components";
-import { useAppDispatch, useAppSelector } from "./hooks";
-import { AppStackParams, AuthorizedNavController, UnauthorizedNavController } from "./navigation";
-import { SplashScreen } from "./screens";
-import { initializeApplication } from "./redux/slices";
-import { initializeUser } from "./redux/thunks";
+import { StatusBar } from "@/components";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { AppStackParams, AuthorizedNavController, UnauthorizedNavController } from "@/navigation";
+import { initializeApplication, initializeUser } from "@/redux";
+import { SplashScreen } from "@/screens";
 
 const Stack = createNativeStackNavigator<AppStackParams>();
 

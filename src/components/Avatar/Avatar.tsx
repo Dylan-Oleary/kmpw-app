@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 
-import { theme } from "../../constants";
-import { Image, IImageProps } from "../Image";
-import { AvatarSize } from "../../types";
+import { Image, IImageProps } from "@/components";
+import { theme } from "@/constants";
+import { AvatarSize } from "@/types";
+
 import { styles } from "./styles";
 
 interface IAvatarProps extends IImageProps {

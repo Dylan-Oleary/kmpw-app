@@ -2,6 +2,7 @@ export * from "./Avatar";
 export * from "./Button";
 export * from "./Container";
 export * from "./DogCard";
+export * from "./DogList";
 export * from "./Footer";
 export * from "./HeaderText";
 export * from "./Image";

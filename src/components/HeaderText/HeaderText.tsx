@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { TextProps } from "react-native";
 
-import { Text } from "../../components";
+import { Text } from "@/components";
+import { FontSize } from "@/types";
+
 import { styles } from "./styles";
-import { FontSize } from "../../types";
 
 interface IHeaderTextProps extends TextProps {
     size?: FontSize;

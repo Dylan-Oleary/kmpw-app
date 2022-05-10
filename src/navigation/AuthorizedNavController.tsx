@@ -3,13 +3,13 @@ import { AppState, AppStateStatus } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { HomeScreen, LocationDisabledScreen } from "../screens";
+import { AUTHORIZED_SCREEN_NAMES, LOCATION_CACHE_IN_MILLISECONDS } from "@/constants";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { checkCurrentLocationPermission, isTimestampStale, getUserGeoLocation } from "@/lib";
+import { setLocation, setLocationError } from "@/redux";
+import { HomeScreen, LocationDisabledScreen } from "@/screens";
+
 import { AuthorizedStackParams } from "./types";
-import { AUTHORIZED_SCREEN_NAMES, LOCATION_CACHE_IN_MILLISECONDS } from "../constants";
-import { isTimestampStale, getUserGeoLocation } from "../lib";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { setLocation, setLocationError } from "../redux/slices";
-import { checkCurrentLocationPermission } from "../lib";
 
 const Stack = createNativeStackNavigator<AuthorizedStackParams>();
 const Tab = createBottomTabNavigator<AuthorizedStackParams>();

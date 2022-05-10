@@ -2,8 +2,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Platform } from "react-native";
 
-import { UNAUTHORIZED_SCREEN_NAMES } from "../constants";
-import { LoginScreen, RegisterScreen } from "../screens";
+import { UNAUTHORIZED_SCREEN_NAMES } from "@/constants";
+import { LoginScreen, RegisterScreen } from "@/screens";
+
 import { UnauthorizedStackParams } from "./types";
 
 const Stack = createNativeStackNavigator<UnauthorizedStackParams>();

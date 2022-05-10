@@ -1,5 +1,5 @@
-import { kmpwApi } from "..";
-import { ILoginUserData, IRegisterUserData } from "../../types";
+import { kmpwApi } from "@/api";
+import { ILoginUserData, IRegisterUserData } from "@/types";
 
 /**
  * Fetches a new token set for the user

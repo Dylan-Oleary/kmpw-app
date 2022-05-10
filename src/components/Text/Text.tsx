@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import { Text as RNText, TextProps } from "react-native";
 
+import { FontSize } from "@/types";
+
 import { styles } from "./styles";
-import { FontSize } from "../../types";
 
 interface ITextProps extends TextProps {
     size?: FontSize;

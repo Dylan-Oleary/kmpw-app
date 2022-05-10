@@ -1,14 +1,14 @@
 import React, { FC, useState } from "react";
 
-import { useAppDispatch } from "../../hooks";
-import { Button, Container, Text } from "../../components";
-import { TextInput } from "../../forms";
-import { loginUser } from "../../api/auth/index";
-import { setUserTokens } from "../../redux/thunks";
-import { styles } from "./styles";
-import { theme } from "../../constants";
+import { loginUser } from "@/api";
+import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
+import { Button, Container, Text } from "@/components";
+import { theme } from "@/constants";
+import { TextInput } from "@/forms";
+import { useAppDispatch } from "@/hooks";
+import { setUserTokens } from "@/redux";
 
-import ArrowRightIcon from "../../assets/svg/arrow-right.svg";
+import { styles } from "./styles";
 
 export const RegisterForm: FC = () => {
     const dispatch = useAppDispatch();

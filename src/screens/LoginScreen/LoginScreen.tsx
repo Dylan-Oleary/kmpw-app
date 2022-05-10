@@ -4,14 +4,15 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Button, Container, HeaderText, Image, Text } from "../../components";
-import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
-import { LoginForm } from "../../forms/LoginForm";
-import { UnauthorizedStackParams } from "../../navigation";
-import { UNAUTHORIZED_SCREEN_NAMES } from "../../constants/screens";
+import { Button, Container, HeaderText, Image, Text } from "@/components";
+import { UNAUTHORIZED_SCREEN_NAMES } from "@/constants";
+import { LoginForm } from "@/forms";
+import { UnauthorizedStackParams } from "@/navigation";
 
-import ArrowRightIcon from "../../assets/svg/arrow-right.svg";
-import DogImage from "../../assets/images/test-pup.jpg";
+import DogImage from "@/assets/images/test-pup.jpg";
+import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
+
+import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
 
 export const LoginScreen: FC = () => {
     const insets = useSafeAreaInsets();

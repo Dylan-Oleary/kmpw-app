@@ -1,6 +1,29 @@
 import { PermissionsAndroid, Platform } from "react-native";
 import Geolocation, { GeoCoordinates } from "react-native-geolocation-service";
 
+export const buildGeolocationString = (latitude?: number, longitude?: number) =>
+    latitude && longitude ? `${latitude},${longitude}` : "";
+
+export const checkCurrentLocationPermission: () => Promise<boolean> = async () => {
+    try {
+        if (Platform.OS === "ios") {
+            const permissionStatus = await Geolocation.requestAuthorization("whenInUse");
+
+            return permissionStatus?.toLowerCase() === "granted" || false;
+        }
+
+        if (Platform.OS === "android") {
+            return await PermissionsAndroid.check(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+            );
+        }
+
+        throw new Error(`Unsupported OS: ${Platform.OS}`);
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const getUserGeoLocation: () => Promise<{
     permissionGranted: boolean;
     location: GeoCoordinates | null;
@@ -32,26 +55,6 @@ export const getUserGeoLocation: () => Promise<{
             permissionGranted: isLocationPermitted,
             requestTimestamp: Date.now()
         };
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const checkCurrentLocationPermission: () => Promise<boolean> = async () => {
-    try {
-        if (Platform.OS === "ios") {
-            const permissionStatus = await Geolocation.requestAuthorization("whenInUse");
-
-            return permissionStatus?.toLowerCase() === "granted" || false;
-        }
-
-        if (Platform.OS === "android") {
-            return await PermissionsAndroid.check(
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-            );
-        }
-
-        throw new Error(`Unsupported OS: ${Platform.OS}`);
     } catch (error) {
         throw error;
     }

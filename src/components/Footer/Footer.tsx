@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 
-import { logoutUser } from "../../api/auth";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { clearUser } from "../../redux/thunks";
-import { Button, Container } from "../index";
-import LogoutIcon from "../../assets/svg/logout.svg";
+import { logoutUser } from "@/api";
+import LogoutIcon from "@/assets/svg/logout.svg";
+import { Button, Container } from "@/components";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { clearUser } from "@/redux";
+
 import { styles } from "./styles";
 
 export const Footer: FC = () => {
