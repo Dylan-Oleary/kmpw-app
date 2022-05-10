@@ -1,6 +1,8 @@
 import EncryptedStorage from "react-native-encrypted-storage";
 
-import { REFRESH_TOKEN_KEY } from "../constants";
+import { REFRESH_TOKEN_KEY } from "@/constants";
+
+export const buildAuthenticationHeader = (accessToken: string) => `Bearer ${accessToken}`;
 
 export const getRefreshTokenFromStorage = async () => {
     try {

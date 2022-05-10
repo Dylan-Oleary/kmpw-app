@@ -1,4 +1,4 @@
-export interface ISafetyLevel {
+export type SafetyLevel = {
     level: number;
     message: string;
-}
+};

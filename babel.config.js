@@ -7,6 +7,7 @@ module.exports = {
                 envName: "APP_ENV",
                 moduleName: "react-native-dotenv"
             }
-        ]
+        ],
+        ["module-resolver", { alias: { "@": "./src" } }]
     ]
 };

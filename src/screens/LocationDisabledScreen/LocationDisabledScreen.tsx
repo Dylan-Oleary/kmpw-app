@@ -2,12 +2,12 @@ import React, { FC } from "react";
 import { ImageBackground } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Button, Container, Footer, HeaderText } from "../../components";
-import { openNativeAppSettings } from "../../lib";
-import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
+import DogImage from "@/assets/images/beach-pup.jpg";
+import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
+import { Button, Container, Footer, HeaderText } from "@/components";
+import { openNativeAppSettings } from "@/lib";
 
-import ArrowRightIcon from "../../assets/svg/arrow-right.svg";
-import DogImage from "../../assets/images/beach-pup.jpg";
+import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
 
 export const LocationDisabledScreen: FC = () => {
     const insets = useSafeAreaInsets();

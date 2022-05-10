@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import { Image as RNImage, ImageProps, ImageStyle, StyleProp, View, ViewStyle } from "react-native";
 
-import { getRatio } from "../../lib";
-import type { AspectRatio } from "../../types";
+import { getRatio } from "@/lib";
+import type { AspectRatio } from "@/types";
+
 import { styles } from "./styles";
 
 export interface IImageProps extends ImageProps {

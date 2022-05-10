@@ -1,7 +1,7 @@
 import { ImageStyle, Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
 
-import { theme } from "../../constants";
+import { theme } from "@/constants";
 
 export const styles = StyleSheet.create({
     contentContainer: {

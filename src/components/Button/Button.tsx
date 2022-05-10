@@ -8,8 +8,9 @@ import {
     ViewStyle
 } from "react-native";
 
-import { Text } from "../../components";
-import { theme } from "../../constants";
+import { Text } from "@/components";
+import { theme } from "@/constants";
+
 import { styles } from "./styles";
 
 interface IButtonProps extends TouchableOpacityProps {

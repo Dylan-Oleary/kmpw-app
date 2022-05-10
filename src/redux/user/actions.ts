@@ -1,11 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { getFreshTokens } from "../api/auth";
+import { getFreshTokens } from "@/api";
 import {
     getRefreshTokenFromStorage,
     removeRefreshTokenFromStorage,
     setRefreshTokenInStorage
-} from "../lib/session";
+} from "@/lib";
+
+export const clearUser = createAsyncThunk("user/cleanUser", async (_, { rejectWithValue }) => {
+    try {
+        await removeRefreshTokenFromStorage();
+    } catch (error) {
+        throw rejectWithValue({
+            status: 500,
+            message: "Token Error"
+        });
+    }
+});
 
 export const initializeUser = createAsyncThunk(
     "user/initializeUser",
@@ -48,14 +59,3 @@ export const setUserTokens = createAsyncThunk(
         }
     }
 );
-
-export const clearUser = createAsyncThunk("user/cleanUser", async (_, { rejectWithValue }) => {
-    try {
-        await removeRefreshTokenFromStorage();
-    } catch (error) {
-        throw rejectWithValue({
-            status: 500,
-            message: "Token Error"
-        });
-    }
-});

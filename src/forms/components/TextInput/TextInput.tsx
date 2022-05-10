@@ -8,7 +8,8 @@ import {
     ViewStyle
 } from "react-native";
 
-import { theme } from "../../../constants";
+import { theme } from "@/constants";
+
 import { styles } from "./styles";
 
 interface ITextInputProps extends TextInputProps {

@@ -1,17 +1,26 @@
 import React, { FC } from "react";
 import { TouchableOpacity, View, ViewProps } from "react-native";
 
-import DogImage from "../../assets/images/test-pup.jpg";
-import PencilAltIcon from "../../assets/svg/pencil-alt.svg";
-import { Container } from "../index";
+import DogImage from "@/assets/images/test-pup.jpg";
+import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
+import { Avatar, Container, SafetyLevel, Text } from "@/components";
+import { getDogAge } from "@/lib";
+import { Dog } from "@/types";
+
 import { styles } from "./styles";
-import { Text } from "../Text";
-import { Avatar } from "../Avatar";
-import { SafetyLevel } from "../SafetyLevel";
 
-interface IDogCardProps extends ViewProps {}
+interface IDogCardProps extends ViewProps {
+    dog: Dog;
+}
 
-export const DogCard: FC<IDogCardProps> = ({ ...props }) => {
+interface IDogInformationProps {
+    label: string;
+    value?: string;
+}
+
+export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
+    const { birthday, breed, name, safetyLevel, weightMetric } = dog;
+
     return (
         <Container {...props}>
             <Container style={styles.infoContainer}>
@@ -23,44 +32,27 @@ export const DogCard: FC<IDogCardProps> = ({ ...props }) => {
                 </View>
                 <View style={styles.dogInfoContainer}>
                     <View style={styles.infoRow}>
-                        <View style={styles.infoRowItem}>
-                            <Text size="xs" style={styles.infoLabel}>
-                                Name
-                            </Text>
-                            <Text size="xs" style={styles.infoValue}>
-                                Roxanne
-                            </Text>
-                        </View>
-                        <View style={styles.infoRowItem}>
-                            <Text size="xs" style={styles.infoLabel}>
-                                Weight
-                            </Text>
-                            <Text size="xs" style={styles.infoValue}>
-                                56 lbs
-                            </Text>
-                        </View>
+                        <DogInformation label="Name" value={name} />
+                        <DogInformation label="Weight" value={`${weightMetric} lbs`} />
                     </View>
                     <View style={[styles.infoRow, styles.nthInfoRow]}>
-                        <View style={styles.infoRowItem}>
-                            <Text size="xs" style={styles.infoLabel}>
-                                Breed
-                            </Text>
-                            <Text size="xs" style={styles.infoValue}>
-                                Lab
-                            </Text>
-                        </View>
-                        <View style={styles.infoRowItem}>
-                            <Text size="xs" style={styles.infoLabel}>
-                                Age
-                            </Text>
-                            <Text size="xs" style={styles.infoValue}>
-                                21 (3 Human)
-                            </Text>
-                        </View>
+                        <DogInformation label="Breed" value={breed?.name} />
+                        <DogInformation label="Age" value={getDogAge(birthday)} />
                     </View>
                 </View>
             </Container>
-            <SafetyLevel safetyLevel={{ message: "Good to go!", level: 1 }} />
+            <SafetyLevel {...safetyLevel} />
         </Container>
     );
 };
+
+export const DogInformation: FC<IDogInformationProps> = ({ label, value }) => (
+    <View style={styles.infoRowItem}>
+        <Text size="xs" style={styles.infoLabel}>
+            {label}
+        </Text>
+        <Text size="xs" style={styles.infoValue}>
+            {value || <>&#8212;</>}
+        </Text>
+    </View>
+);

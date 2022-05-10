@@ -1,22 +1,19 @@
 import React, { FC } from "react";
 import { View, ViewProps } from "react-native";
 
-import { HeaderText } from "..";
+import CheckBundleIcon from "@/assets/svg/check-bundle.svg";
+import CheckCircleIcon from "@/assets/svg/check-circle.svg";
+import CheckShieldIcon from "@/assets/svg/check-shield.svg";
+import CloseCircleIcon from "@/assets/svg/close-circle.svg";
+import { HeaderText } from "@/components";
+import { theme } from "@/constants";
+import type { SafetyLevel as SafetyLevelType } from "@/types";
+
 import { styles } from "./styles";
-import { ISafetyLevel } from "./types";
-import { theme } from "../../constants";
 
-import CheckBundleIcon from "../../assets/svg/check-bundle.svg";
-import CheckCircleIcon from "../../assets/svg/check-circle.svg";
-import CheckShieldIcon from "../../assets/svg/check-shield.svg";
-import CloseCircleIcon from "../../assets/svg/close-circle.svg";
+export type SafetyLevelProps = SafetyLevelType & ViewProps;
 
-export interface ISafetyLevelProps extends ViewProps {
-    safetyLevel: ISafetyLevel;
-}
-
-export const SafetyLevel: FC<ISafetyLevelProps> = ({ safetyLevel, ...rest }) => {
-    const { message, level } = safetyLevel;
+export const SafetyLevel: FC<SafetyLevelProps> = ({ level, message, ...rest }) => {
     const iconProps = { color: styles.text.color };
 
     let icon;

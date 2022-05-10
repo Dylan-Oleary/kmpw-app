@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { StatusBar as RNStatusBar, StatusBarProps } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { theme } from "../../constants/theme";
-import { Container } from "../Container";
+import { Container } from "@/components";
+import { theme } from "@/constants";
 
 interface IStatusBarProps extends StatusBarProps {
     withBrand?: boolean;
