@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 export type SafetyLevelProps = SafetyLevelType & ViewProps;
 
-export const SafetyLevel: FC<SafetyLevelProps> = ({ level, message, ...rest }) => {
+export const SafetyLevel: FC<SafetyLevelProps> = ({ level, message, style, ...rest }) => {
     const iconProps = { color: styles.text.color };
 
     let icon;
@@ -47,7 +47,7 @@ export const SafetyLevel: FC<SafetyLevelProps> = ({ level, message, ...rest }) =
     }
 
     return (
-        <View style={[styles.container, { backgroundColor }]} {...rest}>
+        <View style={[styles.container, { backgroundColor }, style]} {...rest}>
             <HeaderText size="base" style={styles.text}>
                 {message}
             </HeaderText>

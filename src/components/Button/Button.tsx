@@ -10,8 +10,9 @@ import {
 
 import { Text } from "@/components";
 import { theme } from "@/constants";
+import { ButtonSize } from "@/types";
 
-import { styles } from "./styles";
+import { buttonBoxStyles, styles } from "./styles";
 
 interface IButtonProps extends TouchableOpacityProps {
     containerStyle?: StyleProp<ViewStyle>;
@@ -19,9 +20,24 @@ interface IButtonProps extends TouchableOpacityProps {
     icon?: ReactNode | JSX.Element;
     iconLeft?: boolean;
     secondary?: boolean;
+    size?: ButtonSize;
     text: string;
     textStyle?: StyleProp<TextStyle>;
 }
+
+export const getButtonBoxStyles = (size: ButtonSize = "md") => {
+    switch (size) {
+        case "xs":
+            return buttonBoxStyles.boxXs;
+        case "sm":
+            return buttonBoxStyles.boxSm;
+        case "lg":
+            return buttonBoxStyles.boxLg;
+        case "md":
+        default:
+            return buttonBoxStyles.boxMd;
+    }
+};
 
 export const Button: FC<IButtonProps> = ({
     containerStyle = {},
@@ -29,6 +45,7 @@ export const Button: FC<IButtonProps> = ({
     iconLeft = false,
     fullWidth = false,
     secondary = false,
+    size = "md",
     style = {},
     text = "",
     textStyle = {},
@@ -41,6 +58,7 @@ export const Button: FC<IButtonProps> = ({
             activeOpacity={theme.ACTIVE_OPACITY}
             style={[
                 styles.button,
+                getButtonBoxStyles(size),
                 { backgroundColor },
                 !fullWidth ? { alignSelf: "flex-start" } : {},
                 containerStyle

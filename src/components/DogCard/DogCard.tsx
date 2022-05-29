@@ -1,15 +1,16 @@
-import React, { FC } from "react";
-import { TouchableOpacity, View, ViewProps } from "react-native";
+import React, { FC, useState } from "react";
+import { TouchableOpacity, TouchableOpacityProps, View } from "react-native";
 
+import { useDeleteDogMutation } from "@/api/graphql/mutations/useDeleteDogMutation";
 import DogImage from "@/assets/images/test-pup.jpg";
 import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
-import { Avatar, Container, SafetyLevel, Text } from "@/components";
+import { Avatar, Container, SafetyLevel, Text, UpdateActions } from "@/components";
 import { getDogAge } from "@/lib";
 import { Dog } from "@/types";
 
 import { styles } from "./styles";
 
-interface IDogCardProps extends ViewProps {
+interface IDogCardProps extends TouchableOpacityProps {
     dog: Dog;
 }
 
@@ -19,12 +20,27 @@ interface IDogInformationProps {
 }
 
 export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
-    const { birthday, breed, name, safetyLevel, weightMetric } = dog;
+    const [isUpdateMenuOpen, setIsUpdateMenuOpen] = useState<boolean>(false);
+    const { birthday, breed, id, name, safetyLevel, weightMetric } = dog;
+    const { deleteDog } = useDeleteDogMutation(id);
+
+    const onLongPress = () => {
+        if (isUpdateMenuOpen) return;
+
+        setIsUpdateMenuOpen(true);
+    };
 
     return (
-        <Container {...props}>
+        <TouchableOpacity
+            activeOpacity={isUpdateMenuOpen ? 1 : 0.85}
+            onLongPress={onLongPress}
+            {...props}
+        >
             <Container style={styles.infoContainer}>
-                <TouchableOpacity style={styles.editIconContainer}>
+                <TouchableOpacity
+                    onPress={() => setIsUpdateMenuOpen(!isUpdateMenuOpen)}
+                    style={styles.editIconContainer}
+                >
                     <PencilAltIcon color={styles.editIcon.color} />
                 </TouchableOpacity>
                 <View style={styles.dogImageColumn}>
@@ -41,8 +57,17 @@ export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
                     </View>
                 </View>
             </Container>
-            <SafetyLevel {...safetyLevel} />
-        </Container>
+            {isUpdateMenuOpen ? (
+                <UpdateActions
+                    onExitPress={() => setIsUpdateMenuOpen(false)}
+                    onDeletePress={deleteDog}
+                    onUpdatePress={() => true}
+                    style={styles.footerContainer}
+                />
+            ) : (
+                <SafetyLevel {...safetyLevel} style={styles.footerContainer} />
+            )}
+        </TouchableOpacity>
     );
 };
 

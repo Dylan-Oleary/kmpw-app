@@ -2,11 +2,32 @@ import { StyleSheet } from "react-native";
 
 import { theme } from "@/constants";
 
-export const styles = StyleSheet.create({
-    button: {
-        borderRadius: 60,
+export const buttonBoxStyles = StyleSheet.create({
+    boxXs: {
+        minHeight: 24,
+        paddingHorizontal: theme.spacing[4],
+        paddingVertical: theme.spacing[1]
+    },
+    boxSm: {
+        minHeight: 32,
+        paddingHorizontal: theme.spacing[5],
+        paddingVertical: theme.spacing[2]
+    },
+    boxMd: {
+        minHeight: 40,
         paddingHorizontal: theme.spacing[6],
         paddingVertical: theme.spacing[3]
+    },
+    boxLg: {
+        minHeight: 48,
+        paddingHorizontal: theme.spacing[7],
+        paddingVertical: theme.spacing[4]
+    }
+});
+
+export const styles = StyleSheet.create({
+    button: {
+        borderRadius: 60
     },
     content: {
         alignItems: "center",

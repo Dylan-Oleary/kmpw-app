@@ -1,4 +1,5 @@
 export type AvatarSize = "base" | "xxs" | "xs" | "sm" | "lg" | "xl";
+export type ButtonSize = "xs" | "sm" | "md" | "lg";
 export type FontSize = "base" | "xxs" | "xs" | "sm" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
 export type Spacing =
     | "0"

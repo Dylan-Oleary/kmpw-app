@@ -1,5 +1,5 @@
 import React from "react";
-import { AppRegistry } from "react-native";
+import { AppRegistry, LogBox } from "react-native";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { ApolloProvider } from "@apollo/client";
@@ -24,6 +24,8 @@ if (__DEV__) {
         global.Blob = global.originalBlob || global.Blob;
         global.FileReader = global.originalFileReader || global.FileReader;
     }
+
+    LogBox.ignoreLogs([/Require cycle/gi, /I tried to enable Network Inspect/gi]);
 }
 
 const WrappedApp = () => (

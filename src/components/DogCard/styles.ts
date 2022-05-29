@@ -3,16 +3,6 @@ import { StyleSheet } from "react-native";
 import { theme } from "@/constants";
 
 export const styles = StyleSheet.create({
-    infoContainer: {
-        backgroundColor: theme.colors.gray3,
-        borderColor: theme.colors.gray5,
-        borderWidth: 1,
-        borderBottomWidth: 0,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        flexDirection: "row",
-        position: "relative"
-    },
     dogImageColumn: {
         alignContent: "center",
         justifyContent: "center",
@@ -32,21 +22,37 @@ export const styles = StyleSheet.create({
     editIcon: {
         color: theme.colors.brand5
     },
+    infoContainer: {
+        backgroundColor: theme.colors.gray3,
+        borderColor: theme.colors.gray5,
+        borderWidth: 1,
+        borderBottomWidth: 0,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        flexDirection: "row",
+        position: "relative"
+    },
+    infoLabel: {
+        lineHeight: 16
+    },
     infoRow: {
         flexDirection: "row"
-    },
-    nthInfoRow: {
-        marginTop: 8
     },
     infoRowItem: {
         alignItems: "flex-start",
         flex: 1
     },
-    infoLabel: {
-        lineHeight: 16
-    },
     infoValue: {
         lineHeight: 16,
         fontWeight: "700"
+    },
+    footerContainer: {
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        height: 48,
+        paddingVertical: 12
+    },
+    nthInfoRow: {
+        marginTop: 8
     }
 });
