@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { useAppSelector } from "@/hooks";
 import { clearUser, initializeUser, setUserTokens, IUserState } from "@/redux";
@@ -6,7 +6,11 @@ import { clearUser, initializeUser, setUserTokens, IUserState } from "@/redux";
 export const userSlice = createSlice({
     name: "user",
     initialState: {} as IUserState,
-    reducers: {},
+    reducers: {
+        setUserIdentifier: (state, action: PayloadAction<string>) => {
+            state.id = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(initializeUser.fulfilled, (state, action) => {
@@ -23,6 +27,7 @@ export const userSlice = createSlice({
     }
 });
 
+export const { setUserIdentifier } = userSlice.actions;
 export const { reducer: userReducer } = userSlice;
 
 export const useUserSelector = () => useAppSelector(({ user }) => user);

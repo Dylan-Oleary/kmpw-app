@@ -24,3 +24,19 @@ export type DogSize = {
     isDeleted: boolean;
     weightClass: WeightClass;
 };
+
+export interface DogFormSubmission {
+    id?: string;
+    breed: Breed;
+    name: string;
+    weightImperial: number;
+    birthday?: Date;
+}
+
+export interface GraphQlDogMutationData {
+    birthday?: string;
+    breedId: string;
+    name: string;
+    profilePicture?: string;
+    weightImperial: number;
+}

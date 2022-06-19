@@ -9,9 +9,6 @@ export const styles = StyleSheet.create({
         paddingHorizontal: theme.spacing[8],
         paddingBottom: theme.spacing[8]
     },
-    headerTextAccent: {
-        color: theme.colors.brand5
-    },
     loginContainer: {
         marginTop: theme.spacing[5]
     },

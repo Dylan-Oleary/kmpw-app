@@ -32,5 +32,6 @@ export type BreedGroup = {
     updatedAt: Date;
     isDeleted: boolean;
     name: string;
+    breeds: Breed[];
     description?: string;
 };

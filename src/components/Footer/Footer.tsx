@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useApolloClient } from "@apollo/client";
 
 import { logoutUser } from "@/api";
 import LogoutIcon from "@/assets/svg/logout.svg";
@@ -9,16 +10,18 @@ import { clearUser } from "@/redux";
 import { styles } from "./styles";
 
 export const Footer: FC = () => {
+    const client = useApolloClient();
     const dispatch = useAppDispatch();
     const { accessToken } = useAppSelector((state) => state.user);
 
     const handleLogout = () => {
         logoutUser(accessToken)
-            .then(() => dispatch(clearUser()))
+            .then(() => client.clearStore())
             .catch((error) => {
                 //TODO: Handle API errors
                 console.log(error);
-            });
+            })
+            .finally(() => dispatch(clearUser()));
     };
 
     return (

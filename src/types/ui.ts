@@ -18,3 +18,4 @@ export type Spacing =
 export type AspectWidth = number;
 export type AspectHeight = number;
 export type AspectRatio = [AspectWidth, AspectHeight];
+export type UserMessageTheme = "error" | "info" | "success" | "warning";

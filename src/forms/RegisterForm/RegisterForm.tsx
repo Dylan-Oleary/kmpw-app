@@ -3,7 +3,6 @@ import React, { FC, useState } from "react";
 import { loginUser } from "@/api";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { Button, Container, Text } from "@/components";
-import { theme } from "@/constants";
 import { TextInput } from "@/forms";
 import { useAppDispatch } from "@/hooks";
 import { setUserTokens } from "@/redux";
@@ -29,20 +28,21 @@ export const RegisterForm: FC = () => {
             <Container style={styles.formFieldsContainer}>
                 <TextInput
                     autoComplete="email"
+                    label="Email"
                     onChangeText={setEmail}
                     placeholder="Email"
                     value={email}
                 />
                 <TextInput
                     autoComplete="password"
-                    containerStyle={{ marginTop: theme.spacing[3] }}
+                    label="Password"
                     onChangeText={setPassword}
                     placeholder="Password"
                     value={password}
                 />
                 <TextInput
                     autoComplete="password"
-                    containerStyle={{ marginTop: theme.spacing[3] }}
+                    label="Confirm Password"
                     onChangeText={setConfirmPassword}
                     placeholder="Confirm Password"
                     value={confirmPassword}

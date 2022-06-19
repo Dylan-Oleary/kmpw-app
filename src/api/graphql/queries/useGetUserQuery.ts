@@ -1,7 +1,10 @@
+import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 
+import { setUserIdentifier, useUserSelector } from "@/redux";
 import { User } from "@/types";
 
+export type GetUserQueryResult = { me: User };
 export type GetUserQueryVariables = { location?: { q: string } };
 
 export const GET_USER = gql`
@@ -19,6 +22,7 @@ export const GET_USER = gql`
                 name
                 birthday
                 profilePicture
+                weightImperial
                 weightMetric
                 breed {
                     id
@@ -54,8 +58,15 @@ export const buildGetUserQueryVariables = (geolocation: string = ""): GetUserQue
     geolocation?.trim().length > 0 ? { location: { q: geolocation } } : {};
 
 export const useGetUserQuery = (geolocation: string = "") => {
-    const { data, error, loading } = useQuery<{ me: User }, GetUserQueryVariables>(GET_USER, {
-        variables: buildGetUserQueryVariables(geolocation)
+    const dispatch = useDispatch();
+    const { id = null } = useUserSelector();
+    const variables = buildGetUserQueryVariables(geolocation);
+    const { data, error, loading } = useQuery<GetUserQueryResult, GetUserQueryVariables>(GET_USER, {
+        skip: !variables.location,
+        variables,
+        onCompleted: ({ me: user }) => {
+            if (!id) dispatch(setUserIdentifier(user.id));
+        }
     });
 
     return { error, loading, user: data?.me };

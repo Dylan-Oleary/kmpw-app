@@ -15,8 +15,5 @@ export const styles = StyleSheet.create({
     },
     dogCardNthItem: {
         marginTop: 18
-    },
-    headerTextAccent: {
-        color: theme.colors.brand5
     }
 });

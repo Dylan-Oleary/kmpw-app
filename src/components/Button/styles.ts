@@ -5,7 +5,7 @@ import { theme } from "@/constants";
 export const buttonBoxStyles = StyleSheet.create({
     boxXs: {
         minHeight: 24,
-        paddingHorizontal: theme.spacing[4],
+        paddingHorizontal: theme.spacing[2],
         paddingVertical: theme.spacing[1]
     },
     boxSm: {

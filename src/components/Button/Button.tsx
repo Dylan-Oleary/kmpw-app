@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import {
+    GestureResponderEvent,
     StyleProp,
     TextStyle,
     TouchableOpacity,
@@ -16,6 +17,7 @@ import { buttonBoxStyles, styles } from "./styles";
 
 interface IButtonProps extends TouchableOpacityProps {
     containerStyle?: StyleProp<ViewStyle>;
+    disabled?: boolean;
     fullWidth?: boolean;
     icon?: ReactNode | JSX.Element;
     iconLeft?: boolean;
@@ -41,9 +43,11 @@ export const getButtonBoxStyles = (size: ButtonSize = "md") => {
 
 export const Button: FC<IButtonProps> = ({
     containerStyle = {},
+    disabled = false,
     icon,
     iconLeft = false,
     fullWidth = false,
+    onPress,
     secondary = false,
     size = "md",
     style = {},
@@ -53,15 +57,21 @@ export const Button: FC<IButtonProps> = ({
 }) => {
     const backgroundColor = secondary ? theme.colors.brand2 : theme.colors.brand5;
 
+    const handlePress: (event: GestureResponderEvent) => void = (event) => {
+        if (!disabled) onPress?.(event);
+    };
+
     return (
         <TouchableOpacity
-            activeOpacity={theme.ACTIVE_OPACITY}
+            activeOpacity={disabled ? theme.DISABLED_OPACITY : theme.ACTIVE_OPACITY}
+            onPress={handlePress}
             style={[
                 styles.button,
                 getButtonBoxStyles(size),
                 { backgroundColor },
                 !fullWidth ? { alignSelf: "flex-start" } : {},
-                containerStyle
+                containerStyle,
+                { opacity: disabled ? theme.DISABLED_OPACITY : 1 }
             ]}
             {...props}
         >

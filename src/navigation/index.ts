@@ -1,3 +1,5 @@
 export * from "./AuthorizedNavController";
-export * from "./UnauthorizedNavController";
+export * from "./config";
+export * from "./HomeNavController";
 export * from "./types";
+export * from "./UnauthorizedNavController";

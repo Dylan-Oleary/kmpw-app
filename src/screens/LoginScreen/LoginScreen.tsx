@@ -1,13 +1,13 @@
 import React, { FC } from "react";
-import { Dimensions, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Button, Container, HeaderText, Image, Text } from "@/components";
+import { BrandHeader, Button, Container, HeaderText, Image, Text } from "@/components";
 import { UNAUTHORIZED_SCREEN_NAMES } from "@/constants";
 import { LoginForm } from "@/forms";
-import { UnauthorizedStackParams } from "@/navigation";
+import { UnauthorizedStackNavigationProp } from "@/navigation";
+import { screenWidth } from "@/styles";
 
 import DogImage from "@/assets/images/test-pup.jpg";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
@@ -16,17 +16,12 @@ import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
 
 export const LoginScreen: FC = () => {
     const insets = useSafeAreaInsets();
-    const { navigate } = useNavigation<NativeStackNavigationProp<UnauthorizedStackParams>>();
-    const screenWidth = Dimensions.get("screen").width;
+    const { navigate } = useNavigation<UnauthorizedStackNavigationProp>();
 
     return (
         <ScrollView contentContainerStyle={getContainerStyle(insets)}>
             <Container style={styles.contentContainer}>
-                <HeaderText>Those paws</HeaderText>
-                <HeaderText>
-                    were <HeaderText style={styles.headerTextAccent}>made for</HeaderText>
-                </HeaderText>
-                <HeaderText style={styles.headerTextAccent}>walking.</HeaderText>
+                <BrandHeader content={["Those paws were ", "made for walking."]} />
                 <Container style={styles.loginContainer}>
                     <LoginForm />
                 </Container>

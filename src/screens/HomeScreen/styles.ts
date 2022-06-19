@@ -12,8 +12,5 @@ export const styles = StyleSheet.create({
     },
     headerContainer: {
         padding: 30
-    },
-    headerTextAccent: {
-        color: theme.colors.brand5
     }
 });

@@ -32,9 +32,6 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         position: "relative"
     },
-    infoLabel: {
-        lineHeight: 16
-    },
     infoRow: {
         flexDirection: "row"
     },
@@ -43,7 +40,6 @@ export const styles = StyleSheet.create({
         flex: 1
     },
     infoValue: {
-        lineHeight: 16,
         fontWeight: "700"
     },
     footerContainer: {

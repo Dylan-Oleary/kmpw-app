@@ -1,28 +1,30 @@
 import React, { FC, useState } from "react";
-import { TouchableOpacity, TouchableOpacityProps, View } from "react-native";
+import { StyleProp, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { useDeleteDogMutation } from "@/api/graphql/mutations/useDeleteDogMutation";
-import DogImage from "@/assets/images/test-pup.jpg";
 import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
-import { Avatar, Container, SafetyLevel, Text, UpdateActions } from "@/components";
+import DogImage from "@/assets/images/test-pup.jpg";
+import { Avatar, Container, SafetyLevel, Text, TextProps, UpdateActions } from "@/components";
 import { getDogAge } from "@/lib";
+import { HomeStackNavigationProp } from "@/navigation";
 import { Dog } from "@/types";
 
 import { styles } from "./styles";
 
-interface IDogCardProps extends TouchableOpacityProps {
+interface DogCardProps extends TouchableOpacityProps {
     dog: Dog;
 }
 
-interface IDogInformationProps {
+interface DogInformationProps extends Pick<TextProps, "size"> {
     label: string;
+    style?: StyleProp<ViewStyle>;
     value?: string;
 }
 
-export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
+export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
     const [isUpdateMenuOpen, setIsUpdateMenuOpen] = useState<boolean>(false);
-    const { birthday, breed, id, name, safetyLevel, weightMetric } = dog;
-    const { deleteDog } = useDeleteDogMutation(id);
+    const { navigate } = useNavigation<HomeStackNavigationProp>();
+    const { birthday, breed, name, safetyLevel, weightImperial } = dog;
 
     const onLongPress = () => {
         if (isUpdateMenuOpen) return;
@@ -49,7 +51,7 @@ export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
                 <View style={styles.dogInfoContainer}>
                     <View style={styles.infoRow}>
                         <DogInformation label="Name" value={name} />
-                        <DogInformation label="Weight" value={`${weightMetric} lbs`} />
+                        <DogInformation label="Weight" value={`${weightImperial} lbs`} />
                     </View>
                     <View style={[styles.infoRow, styles.nthInfoRow]}>
                         <DogInformation label="Breed" value={breed?.name} />
@@ -60,8 +62,8 @@ export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
             {isUpdateMenuOpen ? (
                 <UpdateActions
                     onExitPress={() => setIsUpdateMenuOpen(false)}
-                    onDeletePress={deleteDog}
-                    onUpdatePress={() => true}
+                    onDeletePress={() => navigate("ConfirmRemoveDog", { dog })}
+                    onUpdatePress={() => navigate("AddOrEditDog", { dog })}
                     style={styles.footerContainer}
                 />
             ) : (
@@ -71,12 +73,10 @@ export const DogCard: FC<IDogCardProps> = ({ dog, ...props }) => {
     );
 };
 
-export const DogInformation: FC<IDogInformationProps> = ({ label, value }) => (
-    <View style={styles.infoRowItem}>
-        <Text size="xs" style={styles.infoLabel}>
-            {label}
-        </Text>
-        <Text size="xs" style={styles.infoValue}>
+export const DogInformation: FC<DogInformationProps> = ({ label, size = "xs", style, value }) => (
+    <View style={[styles.infoRowItem, style]}>
+        <Text size={size}>{label}</Text>
+        <Text size={size} style={styles.infoValue}>
             {value || <>&#8212;</>}
         </Text>
     </View>
