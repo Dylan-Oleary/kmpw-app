@@ -1,4 +1,5 @@
 import React, { FC, useMemo, useState } from "react";
+import { Pressable } from "react-native";
 
 import EyeIcon from "@/assets/svg/eye.svg";
 import EyeSlashIcon from "@/assets/svg/eye-slash.svg";
@@ -21,12 +22,18 @@ export const PasswordInput: FC<PasswordInputProps> = ({ isNewPassword = false, .
     const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
 
     const postFix = useMemo(
-        () =>
-            isPasswordHidden ? (
-                <EyeIcon {...styles.icon} onPress={() => setIsPasswordHidden(false)} />
-            ) : (
-                <EyeSlashIcon {...styles.icon} onPress={() => setIsPasswordHidden(true)} />
-            ),
+        () => (
+            <Pressable
+                onPress={() => setIsPasswordHidden(!isPasswordHidden)}
+                style={styles.iconContainer}
+            >
+                {isPasswordHidden ? (
+                    <EyeIcon {...styles.icon} />
+                ) : (
+                    <EyeSlashIcon {...styles.icon} />
+                )}
+            </Pressable>
+        ),
         [isPasswordHidden]
     );
 
