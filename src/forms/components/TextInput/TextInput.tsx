@@ -70,7 +70,7 @@ export const renderFix = (
         );
     }
 
-    return fix;
+    return <View style={[fixStyles, globalStyles.alignItemsCenter]}>{fix}</View>;
 };
 
 export const TextInput: FC<TextInputProps> = ({
