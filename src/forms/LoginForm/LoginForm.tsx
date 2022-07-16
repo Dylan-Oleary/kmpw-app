@@ -4,7 +4,7 @@ import { loginUser } from "@/api";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { Button, Container, Text } from "@/components";
 import { useAppDispatch } from "@/hooks";
-import { TextInput } from "@/forms";
+import { PasswordInput, TextInput } from "@/forms";
 import { setUserTokens } from "@/redux";
 
 import { styles } from "./styles";
@@ -30,9 +30,7 @@ export const LoginForm: FC = () => {
                     placeholder="Email"
                     value={email}
                 />
-                <TextInput
-                    autoCapitalize="none"
-                    autoComplete="password"
+                <PasswordInput
                     label="Password"
                     onChangeText={setPassword}
                     placeholder="Password"
