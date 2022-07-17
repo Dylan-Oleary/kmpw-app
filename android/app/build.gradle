@@ -1,5 +1,16 @@
 apply plugin: "com.android.application"
 
+project.ext.envConfigFiles = [
+   developmentrelease: ".env.development",
+   developmentdebug: ".env.development",
+   stagingrelease: ".env.staging",
+   stagingdebug: ".env.staging",
+   productiondebug: ".env.production",
+   productionrelease: ".env.production"
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 
 /**
@@ -130,6 +141,28 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    flavorDimensions "default"
+    productFlavors {
+        production {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.kmpwapp"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.kmpwapp"
+        }
+        staging {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.kmpwapp.staging"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.kmpwapp"
+        }
+        development {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.kmpwapp.development"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.kmpwapp"
+        }
+    }
+
     defaultConfig {
         applicationId "com.kmpwapp"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -156,6 +189,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
             if (nativeArchitectures) {
                 ndk {
                     abiFilters nativeArchitectures.split(',')

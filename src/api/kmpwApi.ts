@@ -1,4 +1,4 @@
 import axios from "axios";
-import { API_BASE_URL } from "react-native-dotenv";
+import Config from "react-native-config";
 
-export const kmpwApi = axios.create({ baseURL: API_BASE_URL });
+export const kmpwApi = axios.create({ baseURL: Config.API_BASE_URL });
