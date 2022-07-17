@@ -25,14 +25,15 @@ export const LoginForm: FC = () => {
                 <TextInput
                     autoCapitalize="none"
                     autoComplete="email"
+                    keyboardType="email-address"
                     label="Email"
-                    onChangeText={setEmail}
+                    onChange={(value) => setEmail(value as string)}
                     placeholder="Email"
                     value={email}
                 />
                 <PasswordInput
                     label="Password"
-                    onChangeText={setPassword}
+                    onChange={(value) => setPassword(value as string)}
                     placeholder="Password"
                     value={password}
                 />

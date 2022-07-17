@@ -50,10 +50,13 @@ export const logoutUser = (accessToken: string) =>
  *
  * /auth/register
  *
- * @param data The user's registratio data
+ * @param data The user's registration data
  * @returns An object containing the user's access token and refresh token
  */
 export const registerUser = (data: IRegisterUserData) =>
     kmpwApi
-        .post<{ accessToken: string }>("/auth/register", { ...data, client: "native" })
+        .post<{ accessToken: string; refreshToken: string }>("/auth/register", {
+            ...data,
+            client: "native"
+        })
         .then(({ data }) => data);

@@ -4,6 +4,7 @@ import { Pressable } from "react-native";
 import EyeIcon from "@/assets/svg/eye.svg";
 import EyeSlashIcon from "@/assets/svg/eye-slash.svg";
 import { TextInput, TextInputProps } from "@/forms";
+import { removeAllSpaces } from "@/lib";
 
 import { styles } from "./styles";
 
@@ -14,11 +15,9 @@ type TextInputOmitProp =
     | "preFix"
     | "secureTextEntry";
 
-export interface PasswordInputProps extends Omit<TextInputProps, TextInputOmitProp> {
-    isNewPassword?: boolean;
-}
+export interface PasswordInputProps extends Omit<TextInputProps, TextInputOmitProp> {}
 
-export const PasswordInput: FC<PasswordInputProps> = ({ isNewPassword = false, ...props }) => {
+export const PasswordInput: FC<PasswordInputProps> = ({ ...props }) => {
     const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
 
     const postFix = useMemo(
@@ -40,9 +39,10 @@ export const PasswordInput: FC<PasswordInputProps> = ({ isNewPassword = false, .
     return (
         <TextInput
             autoCapitalize="none"
-            autoComplete={isNewPassword ? "password-new" : "password"}
+            autoComplete="password"
             autoCorrect={false}
             postFix={postFix}
+            sanititize={removeAllSpaces}
             secureTextEntry={isPasswordHidden}
             {...props}
         />

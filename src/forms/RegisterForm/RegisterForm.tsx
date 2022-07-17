@@ -1,23 +1,82 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
-import { loginUser } from "@/api";
+import { registerUser } from "@/api";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
-import { Button, Container, Text } from "@/components";
+import { Alert, AlertControl, Button, Container, Text } from "@/components";
 import { PasswordInput, TextInput } from "@/forms";
 import { useAppDispatch } from "@/hooks";
 import { setUserTokens } from "@/redux";
+import { FormInputWithError } from "@/types";
 
+import {
+    validateConfirmPassword,
+    validateEmail,
+    validatePassword,
+    validateSubmission
+} from "./validation";
 import { styles } from "./styles";
 
 export const RegisterForm: FC = () => {
     const dispatch = useAppDispatch();
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [alert, setAlert] = useState<AlertControl>({ show: false });
+    const [email, setEmail] = useState<FormInputWithError>({ value: "" });
+    const [password, setPassword] = useState<FormInputWithError>({ value: "" });
+    const [confirmPassword, setConfirmPassword] = useState<FormInputWithError>({ value: "" });
+    const [hasSubmissionBeenAttempted, setHasSubmissionBeenAttempted] = useState<boolean>(false);
+
+    const [hasPasswordBeenFocused, setHasPasswordBeenFocused] = useState<boolean>(false);
+    const [hasConfirmPasswordBeenBlurred, setHasConfirmPasswordBeenBlurred] =
+        useState<boolean>(false);
+    const [enableConfirmPasswordValidation, setEnableConfirmPasswordValidation] =
+        useState<boolean>(false);
 
     const handleSubmit = () => {
-        loginUser({ email, password }).then((response) => dispatch(setUserTokens(response)));
+        validateSubmission({
+            email: email?.value,
+            password: password?.value,
+            confirmPassword: confirmPassword?.value
+        }).then(([isReadyToSubmit, errors]) => {
+            if (!hasSubmissionBeenAttempted) setHasSubmissionBeenAttempted(true);
+
+            if (!isReadyToSubmit) {
+                const singleError = errors.length === 1;
+
+                setAlert({
+                    messageList: errors,
+                    show: true,
+                    theme: "error",
+                    title: `There ${singleError ? "is" : "are"} ${errors.length} error${
+                        singleError ? "" : "s"
+                    }`
+                });
+
+                return;
+            }
+
+            registerUser({
+                email: email.value?.trim() as string,
+                password: password?.value?.trim() as string,
+                confirmPassword: confirmPassword?.value?.trim() as string
+            }).then((response) => dispatch(setUserTokens(response)));
+        });
     };
+
+    useEffect(() => {
+        if (hasPasswordBeenFocused && hasConfirmPasswordBeenBlurred) {
+            setEnableConfirmPasswordValidation(true);
+        }
+    }, [hasPasswordBeenFocused, hasConfirmPasswordBeenBlurred]);
+
+    useEffect(() => {
+        if (enableConfirmPasswordValidation) {
+            setConfirmPassword({
+                ...confirmPassword,
+                error: validateConfirmPassword(confirmPassword?.value, {
+                    password: password?.value
+                })
+            });
+        }
+    }, [enableConfirmPasswordValidation, password?.value, confirmPassword?.value]);
 
     return (
         <Container>
@@ -25,28 +84,56 @@ export const RegisterForm: FC = () => {
                 Let’s get walking! Sign up is easy. Fill out the fields below and you can get
                 started right away.
             </Text>
+            {alert?.show && alert?.title && (
+                <Alert
+                    isDismissable
+                    messageList={alert?.messageList}
+                    onDismiss={() => setAlert({ ...alert, show: false })}
+                    style={styles.spacer}
+                    theme={alert?.theme}
+                    title={alert?.title}
+                />
+            )}
             <Container style={styles.formFieldsContainer}>
                 <TextInput
+                    autoCapitalize="none"
                     autoComplete="email"
+                    error={email?.error}
+                    keyboardType="email-address"
                     label="Email"
-                    onChangeText={setEmail}
+                    onChange={(value, error) => setEmail({ error, value })}
                     placeholder="Email"
-                    value={email}
+                    validation={validateEmail}
+                    value={email?.value}
                 />
                 <PasswordInput
+                    error={password?.error}
                     label="Password"
-                    onChangeText={setPassword}
+                    onFocus={() => {
+                        if (!hasPasswordBeenFocused) {
+                            setHasPasswordBeenFocused(true);
+                        }
+                    }}
+                    onChange={(value, error) => setPassword({ error, value })}
                     placeholder="Password"
-                    value={password}
+                    validation={validatePassword}
+                    value={password?.value}
                 />
                 <PasswordInput
+                    error={confirmPassword?.error}
+                    forceLiveValidation={enableConfirmPasswordValidation}
                     label="Confirm Password"
-                    onChangeText={setConfirmPassword}
+                    onBlur={() => {
+                        if (!hasConfirmPasswordBeenBlurred) {
+                            setHasConfirmPasswordBeenBlurred(true);
+                        }
+                    }}
+                    onChange={(value) => setConfirmPassword({ ...confirmPassword, value })}
                     placeholder="Confirm Password"
-                    value={confirmPassword}
+                    value={confirmPassword?.value}
                 />
                 <Button
-                    containerStyle={styles.submitButtonContainer}
+                    containerStyle={styles.spacer}
                     icon={<ArrowRightIcon color={styles.submitIcon.color} />}
                     onPress={handleSubmit}
                     text="Get Started"
