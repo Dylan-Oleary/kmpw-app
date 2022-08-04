@@ -34,10 +34,10 @@ export const WeatherBanner: FC<IWeatherBannerProps> = ({
             </View>
             <View style={styles.temperatureContainer}>
                 <HeaderText size="xl" style={styles.textColor}>
-                    {weather?.current?.temp_c}&#176;
+                    {Math.round(weather!.current?.temp_c)}&#176;
                 </HeaderText>
                 <Text size="xs" style={styles.textColor}>
-                    Feels like {weather?.current?.feelslike_c}&#176;
+                    Feels like {Math.round(weather!.current?.feelslike_c)}&#176;
                 </Text>
             </View>
         </View>
