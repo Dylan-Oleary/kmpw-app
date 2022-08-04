@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
         flexGrow: 1,
         fontFamily: "Poppins",
         fontWeight: "500",
+        height: 36.7,
         paddingHorizontal: 8,
         paddingVertical: 4
     },
