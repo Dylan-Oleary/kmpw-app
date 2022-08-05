@@ -9,6 +9,7 @@ export * from "./DogList";
 export * from "./Footer";
 export * from "./HeaderText";
 export * from "./Image";
+export * from "./ImagePicker";
 export * from "./Modal";
 export * from "./StatusBar";
 export * from "./Text";

@@ -1,12 +1,13 @@
 import React, { FC, useRef, useState } from "react";
 import { Platform, StyleProp, ViewStyle } from "react-native";
+import { Image } from "react-native-image-crop-picker";
 import { isValueOfType } from "@theonlydevsever/utilities";
 import dayjs from "dayjs";
 
 import { useGetBreedsQuery } from "@/api/graphql";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { Alert, AlertControl, BrandHeader, Button, Container } from "@/components";
-import { DateInput, EmptyBreedList, SelectDropdown, TextInput } from "@/forms";
+import { DateInput, EmptyBreedList, ImageInput, SelectDropdown, TextInput } from "@/forms";
 import { convertDateToStartOfDay, removeAllNonDigits } from "@/lib";
 import { Breed, Dog, DogFormSubmission, FormInputWithError } from "@/types";
 
@@ -41,6 +42,7 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
     const [birthday, setBirthday] = useState<FormInputWithError<Date>>({
         value: dog?.birthday ? dayjs(dog.birthday).toDate() : undefined
     });
+    const [newProfilePicture, setNewProfilePicture] = useState<FormInputWithError<Image>>();
     const [hasSubmissionBeenAttempted, setHasSubmissionBeenAttempted] = useState<boolean>(false);
 
     const handleSubmit = () => {
@@ -72,6 +74,8 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
                     birthday: birthday?.value,
                     breed: breed?.value as Breed,
                     name: name?.value as string,
+                    newProfilePicture: newProfilePicture?.value,
+                    profilePicture: dog?.profilePicture,
                     weightImperial: Number(weightImperial?.value) as number
                 },
                 dog?.id
@@ -96,6 +100,16 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
                 />
             )}
             <Container style={styles.spacer}>
+                <Container style={styles.imageInputContainer}>
+                    <ImageInput
+                        onChange={(image) => setNewProfilePicture({ value: image })}
+                        value={
+                            newProfilePicture?.value
+                                ? newProfilePicture?.value?.path
+                                : dog?.profilePicture
+                        }
+                    />
+                </Container>
                 <TextInput
                     autoCapitalize="words"
                     error={name?.error}

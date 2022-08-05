@@ -5,13 +5,14 @@ import { DATE_FORMATS } from "@/constants";
 import { Breed, DogFormSubmission, FormInputValidator, GraphQlDogMutationData } from "@/types";
 
 export const buildDogMutationData: (data: DogFormSubmission) => GraphQlDogMutationData = (data) => {
-    const { birthday, breed, name, weightImperial } = data;
+    const { birthday, breed, name, profilePicture, weightImperial } = data;
     const mutationData: GraphQlDogMutationData = {
         birthday: isValueOfType(birthday, "date")
             ? dayjs(birthday).format(DATE_FORMATS.DATE_TIME)
             : undefined,
         breedId: breed?.id,
         name,
+        profilePicture,
         weightImperial
     };
 
