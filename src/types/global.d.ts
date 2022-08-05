@@ -2,6 +2,7 @@ declare module "react-native-config" {
     const config: {
         API_BASE_URL: string;
         API_GRAPHQL_URL: string;
+        USER_MAX_NUM_OF_DOGS: string;
     };
     export default config;
 }

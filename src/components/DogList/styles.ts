@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { theme } from "@/constants";
+import { globalStyles } from "@/styles";
 
 export const styles = StyleSheet.create({
     addDogButtonContainer: {
@@ -12,6 +13,11 @@ export const styles = StyleSheet.create({
     },
     dogListContainer: {
         marginTop: theme.spacing["7"]
+    },
+    dogListTitleContainer: {
+        ...globalStyles.flexRow,
+        ...globalStyles.justifyFlexSpaceBetween,
+        ...globalStyles.alignItemsCenter
     },
     dogCardNthItem: {
         marginTop: 18
