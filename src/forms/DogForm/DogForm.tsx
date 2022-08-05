@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { useGetBreedsQuery } from "@/api/graphql";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { Alert, AlertControl, BrandHeader, Button, Container } from "@/components";
-import { DateInput, EmptyBreedList, SelectDropdown, TextInput } from "@/forms";
+import { DateInput, EmptyBreedList, ImageUploader, SelectDropdown, TextInput } from "@/forms";
 import { convertDateToStartOfDay, removeAllNonDigits } from "@/lib";
 import { Breed, Dog, DogFormSubmission, FormInputWithError } from "@/types";
 
@@ -96,6 +96,7 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
                 />
             )}
             <Container style={styles.spacer}>
+                <ImageUploader style={styles.imageUploader} />
                 <TextInput
                     autoCapitalize="words"
                     error={name?.error}
