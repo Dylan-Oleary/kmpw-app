@@ -1,6 +1,6 @@
 export * from "./DateInput";
 export * from "./DatePicker";
-export * from "./ImageUploader";
+export * from "./ImageInput";
 export * from "./InputError";
 export * from "./InputLabel";
 export * from "./PasswordInput";

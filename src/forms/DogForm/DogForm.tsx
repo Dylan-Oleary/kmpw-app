@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { useGetBreedsQuery } from "@/api/graphql";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { Alert, AlertControl, BrandHeader, Button, Container } from "@/components";
-import { DateInput, EmptyBreedList, ImageUploader, SelectDropdown, TextInput } from "@/forms";
+import { DateInput, EmptyBreedList, ImageInput, SelectDropdown, TextInput } from "@/forms";
 import { convertDateToStartOfDay, removeAllNonDigits } from "@/lib";
 import { Breed, Dog, DogFormSubmission, FormInputWithError } from "@/types";
 
@@ -40,6 +40,9 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
     });
     const [birthday, setBirthday] = useState<FormInputWithError<Date>>({
         value: dog?.birthday ? dayjs(dog.birthday).toDate() : undefined
+    });
+    const [profilePicture, setProfilePicture] = useState<FormInputWithError>({
+        value: dog?.profilePicture
     });
     const [hasSubmissionBeenAttempted, setHasSubmissionBeenAttempted] = useState<boolean>(false);
 
@@ -96,7 +99,11 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
                 />
             )}
             <Container style={styles.spacer}>
-                <ImageUploader style={styles.imageUploader} />
+                <ImageInput
+                    onChange={({ path }) => setProfilePicture({ value: path })}
+                    style={styles.imageUploader}
+                    value={profilePicture?.value}
+                />
                 <TextInput
                     autoCapitalize="words"
                     error={name?.error}
