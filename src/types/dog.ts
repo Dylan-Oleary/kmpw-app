@@ -1,3 +1,5 @@
+import { Image } from "react-native-image-crop-picker";
+
 import { Breed, SafetyLevel, WeightClass } from "@/types";
 
 export type Dog = {
@@ -31,6 +33,8 @@ export interface DogFormSubmission {
     name: string;
     weightImperial: number;
     birthday?: Date;
+    profilePicture?: string;
+    newProfilePicture?: Image;
 }
 
 export interface GraphQlDogMutationData {

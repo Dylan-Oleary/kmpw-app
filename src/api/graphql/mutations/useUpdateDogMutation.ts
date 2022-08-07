@@ -33,13 +33,17 @@ export const UPDATE_DOG = gql`
     }
 `;
 
-export const useUpdateDogMutation = (data: GraphQlDogMutationData, id: string) => {
+export const useUpdateDogMutation = (id: string) => {
     const [user, userCacheKey] = useApolloCacheUser();
     const [updateDog, { error, loading }] = useMutation<
         UpdateDogMutationResult,
         UpdateDogMutationVariables
     >(UPDATE_DOG, {
-        variables: { data, id, temperatureFarenheit: user?.weather!.current.temp_f },
+        variables: {
+            data: {} as GraphQlDogMutationData,
+            id,
+            temperatureFarenheit: user?.weather!.current.temp_f
+        },
         update: (cache, { data }) => {
             const updatedDog = data?.updateDog;
 
