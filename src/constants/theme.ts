@@ -51,7 +51,11 @@ const spacing = {
     9: BASE_REM * 2.25,
     10: BASE_REM * 2.5,
     11: BASE_REM * 2.75,
-    12: BASE_REM * 3
+    12: BASE_REM * 3,
+    13: BASE_REM * 3.25,
+    14: BASE_REM * 3.5,
+    15: BASE_REM * 3.75,
+    16: BASE_REM * 4
 };
 
 const typography = {
