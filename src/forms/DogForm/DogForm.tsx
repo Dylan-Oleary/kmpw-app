@@ -100,15 +100,16 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
                 />
             )}
             <Container style={styles.spacer}>
-                <ImageInput
-                    onChange={(image) => setNewProfilePicture({ value: image })}
-                    style={styles.imageUploader}
-                    value={
-                        newProfilePicture?.value
-                            ? newProfilePicture?.value?.path
-                            : dog?.profilePicture
-                    }
-                />
+                <Container style={styles.imageInputContainer}>
+                    <ImageInput
+                        onChange={(image) => setNewProfilePicture({ value: image })}
+                        value={
+                            newProfilePicture?.value
+                                ? newProfilePicture?.value?.path
+                                : dog?.profilePicture
+                        }
+                    />
+                </Container>
                 <TextInput
                     autoCapitalize="words"
                     error={name?.error}
