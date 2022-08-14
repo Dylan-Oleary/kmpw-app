@@ -15,12 +15,20 @@ export interface IImagePickerProps extends ViewProps {
 
 const COMMON_IMAGE_PICKER_OPTIONS: Partial<Options> = {
     cropping: true,
-    cropperActiveWidgetColor: theme.colors.brand5,
-    cropperCircleOverlay: true,
     height: 128,
     mediaType: "photo",
+    width: 128,
+    // Android only
+    cropperActiveWidgetColor: theme.colors.brand5,
+    cropperCircleOverlay: true,
+    cropperToolbarWidgetColor: theme.colors.textDark,
+    cropperStatusBarColor: theme.colors.brand5,
+    // iOS only
+    cropperChooseText: "Confirm",
+    loadingLabelText: "Loading...",
+    maxFiles: 1,
     showsSelectedCount: false,
-    width: 128
+    smartAlbums: ["UserLibrary", "PhotoStream", "Panoramas", "Bursts"]
 };
 
 export const ImagePicker: FC<IImagePickerProps> = ({ onSelection = () => {}, style, ...rest }) => {
