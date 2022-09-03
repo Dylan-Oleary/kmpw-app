@@ -15,6 +15,9 @@
 		2249E6080B1230F2C60EEDC9 /* libPods-kmpwappCommonPods-kmpwappDev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94DB83CCB34E872E57A7630C /* libPods-kmpwappCommonPods-kmpwappDev.a */; };
 		29022DFD6B94454CB3E2C555 /* arrow-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = ED73513D0FFC4EE5B875CB7D /* arrow-right.svg */; };
 		34C7A86B09714E688D304948 /* check-shield.svg in Resources */ = {isa = PBXBuildFile; fileRef = E1AC902448D44B01969B7CDD /* check-shield.svg */; };
+		402FAE5E28C3EC4700227CB3 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402FAE5D28C3EC4700227CB3 /* BootSplash.storyboard */; };
+		402FAE5F28C3EC4700227CB3 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402FAE5D28C3EC4700227CB3 /* BootSplash.storyboard */; };
+		402FAE6028C3EC4700227CB3 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402FAE5D28C3EC4700227CB3 /* BootSplash.storyboard */; };
 		40DF1FC7281E5EDD0054DA38 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E25F164C82B432E91B7BCB1 /* Poppins-Medium.ttf */; };
 		40F1ED2E288E266F000780B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		40F1ED2F288E266F000780B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -66,7 +69,7 @@
 		BBF46C5E31CD4062A033301C /* test-pup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4743155F5A7549D394506D7C /* test-pup.jpg */; };
 		C4CB089310C34E3B8C64F94A /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39E7AE54451C4951A58B229D /* Poppins-Bold.ttf */; };
 		CFA273E9F607DDEA270DCF4F /* libPods-kmpwappCommonPods-kmpwappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A933BE0D5B4F6BFD7AB5E175 /* libPods-kmpwappCommonPods-kmpwappTests.a */; };
-		D347EFDB7C18420E8F139979 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		D347EFDB7C18420E8F139979 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D384008364804F2AA5D4A7E2 /* logout.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3432A0D0386149A283D7C083 /* logout.svg */; };
 		E654EB5453614D108486B94D /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 627739E56C6749409FDE458C /* Poppins-Black.ttf */; };
 		F80A89A4A069423BB745D210 /* pencil-alt.svg in Resources */ = {isa = PBXBuildFile; fileRef = B362C2E7A19446DFBEFECC3E /* pencil-alt.svg */; };
@@ -108,6 +111,7 @@
 		3432A0D0386149A283D7C083 /* logout.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = logout.svg; path = ../src/assets/svg/logout.svg; sourceTree = "<group>"; };
 		39E7AE54451C4951A58B229D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		3CA14F6758F5400F99666564 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		402FAE5D28C3EC4700227CB3 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = kmpwapp/BootSplash.storyboard; sourceTree = "<group>"; };
 		40AC781C2828A29600C4B871 /* kmpwapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "kmpwapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		40F1ED4B288E266F000780B3 /* kmpwappDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kmpwappDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F1ED4C288E266F000780B3 /* kmpwappDev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "kmpwappDev-Info.plist"; path = "/Users/dylanoleary/Documents/development/keep-my-paws-warm/kmpw-app/ios/kmpwappDev-Info.plist"; sourceTree = "<absolute>"; };
@@ -174,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D347EFDB7C18420E8F139979 /* BuildFile in Frameworks */,
+				D347EFDB7C18420E8F139979 /* (null) in Frameworks */,
 				9290BC33654536AA11BF799A /* libPods-kmpwappCommonPods-kmpwapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +224,7 @@
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				402FAE5D28C3EC4700227CB3 /* BootSplash.storyboard */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				40F1ED4D288E2C1D000780B3 /* geolocation-dependency.swift */,
@@ -501,6 +506,7 @@
 				40DF1FC7281E5EDD0054DA38 /* Poppins-Medium.ttf in Resources */,
 				C4CB089310C34E3B8C64F94A /* Poppins-Bold.ttf in Resources */,
 				29022DFD6B94454CB3E2C555 /* arrow-right.svg in Resources */,
+				402FAE5E28C3EC4700227CB3 /* BootSplash.storyboard in Resources */,
 				BBF46C5E31CD4062A033301C /* test-pup.jpg in Resources */,
 				98297AE0C59E492991468CEA /* Poppins.ttf in Resources */,
 				9DC874BAED094F688E0F13D4 /* check-bundle.svg in Resources */,
@@ -524,6 +530,7 @@
 				40F1ED38288E266F000780B3 /* Poppins-Medium.ttf in Resources */,
 				40F1ED39288E266F000780B3 /* Poppins-Bold.ttf in Resources */,
 				40F1ED3A288E266F000780B3 /* arrow-right.svg in Resources */,
+				402FAE5F28C3EC4700227CB3 /* BootSplash.storyboard in Resources */,
 				40F1ED3B288E266F000780B3 /* test-pup.jpg in Resources */,
 				40F1ED3C288E266F000780B3 /* Poppins.ttf in Resources */,
 				40F1ED3D288E266F000780B3 /* check-bundle.svg in Resources */,
@@ -547,6 +554,7 @@
 				40F1ED5D288E2D48000780B3 /* Poppins-Medium.ttf in Resources */,
 				40F1ED5E288E2D48000780B3 /* Poppins-Bold.ttf in Resources */,
 				40F1ED5F288E2D48000780B3 /* arrow-right.svg in Resources */,
+				402FAE6028C3EC4700227CB3 /* BootSplash.storyboard in Resources */,
 				40F1ED60288E2D48000780B3 /* test-pup.jpg in Resources */,
 				40F1ED61288E2D48000780B3 /* Poppins.ttf in Resources */,
 				40F1ED62288E2D48000780B3 /* check-bundle.svg in Resources */,

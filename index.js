@@ -1,7 +1,6 @@
 import React from "react";
 import { AppRegistry, LogBox } from "react-native";
 import { Provider } from "react-redux";
-import { NavigationContainer } from "@react-navigation/native";
 import { ApolloProvider } from "@apollo/client";
 
 import { App } from "./src/App";
@@ -31,9 +30,7 @@ if (__DEV__) {
 const WrappedApp = () => (
     <Provider store={store}>
         <ApolloProvider client={apolloClient}>
-            <NavigationContainer>
-                <App />
-            </NavigationContainer>
+            <App />
         </ApolloProvider>
     </Provider>
 );

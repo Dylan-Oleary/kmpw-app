@@ -5,7 +5,11 @@ import { IApplicationError, IApplicationState, initializeUser, setUserTokens } f
 
 export const applicationSlice = createSlice({
     name: "application",
-    initialState: { errors: [], isLoading: true } as IApplicationState,
+    initialState: {
+        errors: [],
+        isLoadingInitialData: true,
+        isNavigationReady: false
+    } as IApplicationState,
     reducers: {
         addApplicationError: (state, action: PayloadAction<IApplicationError>) => {
             state.errors = [...state.errors, action.payload];
@@ -13,8 +17,11 @@ export const applicationSlice = createSlice({
         clearApplicationErrors: (state) => {
             state.errors = [];
         },
-        initializeApplication: (state) => {
-            state.isLoading = false;
+        finishInitialDataLoad: (state) => {
+            state.isLoadingInitialData = false;
+        },
+        setIsNavigationReady: (state, action: PayloadAction<boolean>) => {
+            state.isNavigationReady = action?.payload || false;
         }
     },
     extraReducers: (builder) => {
@@ -34,8 +41,12 @@ export const applicationSlice = createSlice({
     }
 });
 
-export const { addApplicationError, clearApplicationErrors, initializeApplication } =
-    applicationSlice.actions;
+export const {
+    addApplicationError,
+    clearApplicationErrors,
+    finishInitialDataLoad,
+    setIsNavigationReady
+} = applicationSlice.actions;
 export const { reducer: applicationReducer } = applicationSlice;
 
 export const useApplicationSelector = () => useAppSelector(({ application }) => application);

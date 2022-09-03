@@ -6,6 +6,7 @@ export interface IApplicationError {
 }
 
 export interface IApplicationState {
-    isLoading: boolean;
     errors: IApplicationError[];
+    isLoadingInitialData: boolean;
+    isNavigationReady: boolean;
 }

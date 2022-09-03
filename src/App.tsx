@@ -1,50 +1,56 @@
 import React, { useEffect } from "react";
-import { StyleSheet } from "react-native";
+import RNBootSplash from "react-native-bootsplash";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { StatusBar } from "@/components";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch } from "@/hooks";
 import { AppStackParams, AuthorizedNavController, UnauthorizedNavController } from "@/navigation";
-import { initializeApplication, initializeUser } from "@/redux";
-import { SplashScreen } from "@/screens";
+import {
+    finishInitialDataLoad,
+    initializeUser,
+    setIsNavigationReady,
+    useApplicationSelector,
+    useUserSelector
+} from "@/redux";
+import { globalStyles } from "@/styles";
 
 const Stack = createNativeStackNavigator<AppStackParams>();
 
 const App = () => {
-    const { application, user } = useAppSelector((state) => state);
     const dispatch = useAppDispatch();
+    const { isLoadingInitialData, isNavigationReady } = useApplicationSelector();
+    const { accessToken } = useUserSelector();
 
     useEffect(() => {
         dispatch(initializeUser()).then(() => {
-            dispatch(initializeApplication());
+            dispatch(finishInitialDataLoad());
         });
     }, []);
 
-    if (application.isLoading) {
-        return <SplashScreen />;
-    }
+    useEffect(() => {
+        if (!isLoadingInitialData && isNavigationReady) {
+            RNBootSplash.hide({ fade: true });
+        }
+    }, [isLoadingInitialData, isNavigationReady]);
 
     return (
-        <SafeAreaProvider style={styles.appContainer}>
-            <StatusBar withBrand={user?.accessToken ? true : false} />
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen
-                    component={
-                        user?.accessToken ? AuthorizedNavController : UnauthorizedNavController
-                    }
-                    name={user?.accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
-                />
-            </Stack.Navigator>
-        </SafeAreaProvider>
+        <NavigationContainer onReady={() => dispatch(setIsNavigationReady(true))}>
+            <SafeAreaProvider style={globalStyles.defaultFlex}>
+                <StatusBar withBrand={accessToken ? true : false} />
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen
+                        component={
+                            accessToken ? AuthorizedNavController : UnauthorizedNavController
+                        }
+                        name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
+                    />
+                </Stack.Navigator>
+            </SafeAreaProvider>
+        </NavigationContainer>
     );
 };
-
-const styles = StyleSheet.create({
-    appContainer: {
-        flex: 1
-    }
-});
 
 export { App };
 export default App;
