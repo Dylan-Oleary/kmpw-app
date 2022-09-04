@@ -12,4 +12,5 @@ export * from "./Image";
 export * from "./Modal";
 export * from "./StatusBar";
 export * from "./Text";
+export * from "./WarmWeatherAlert";
 export * from "./WeatherBanner";

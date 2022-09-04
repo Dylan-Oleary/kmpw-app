@@ -3,8 +3,8 @@ import { View, ViewProps } from "react-native";
 import dayjs from "dayjs";
 
 import CloudIcon from "@/assets/svg/cloud.svg";
-import { HeaderText, Text } from "@/components";
-import { DATE_FORMATS } from "@/constants";
+import { HeaderText, Text, WarmWeatherAlert } from "@/components";
+import { DATE_FORMATS, WARM_WEATHER_ALERT_TEMP_F } from "@/constants";
 import { Weather } from "@/types";
 
 import { styles } from "./styles";
@@ -22,35 +22,40 @@ export const WeatherBanner: FC<IWeatherBannerProps> = ({
     weather,
     ...props
 }) => (
-    <View style={[styles.container, style]} {...props}>
-        <View style={styles.infoContainer}>
-            <View>
-                <HeaderText size="xl" style={styles.textColor}>
-                    {dayjs().format(DATE_FORMATS.FULL_MONTH_WITH_DAY)}
-                </HeaderText>
-                <Text size="xs" style={styles.textColor}>
-                    updated at {dayjs(lastUpdatedTimestamp).format(DATE_FORMATS.TIME)}
+    <View>
+        <View style={[styles.container, style]} {...props}>
+            <View style={styles.infoContainer}>
+                <View>
+                    <HeaderText size="xl" style={styles.textColor}>
+                        {dayjs().format(DATE_FORMATS.FULL_MONTH_WITH_DAY)}
+                    </HeaderText>
+                    <Text size="xs" style={styles.textColor}>
+                        updated at {dayjs(lastUpdatedTimestamp).format(DATE_FORMATS.TIME)}
+                    </Text>
+                </View>
+                <View style={styles.temperatureContainer}>
+                    {weather?.current?.temp_c && (
+                        <HeaderText size="xl" style={styles.textColor}>
+                            {Math.round(weather!.current?.temp_c)}&#176;
+                        </HeaderText>
+                    )}
+                    {weather?.current?.feelslike_c && (
+                        <Text size="xs" style={styles.textColor}>
+                            Feels like {Math.round(weather!.current?.feelslike_c)}&#176;
+                        </Text>
+                    )}
+                </View>
+            </View>
+            <View style={styles.divider} />
+            <View style={styles.iconContainer}>
+                <CloudIcon color={styles.textColor.color} />
+                <Text size="xxs" style={styles.textColor}>
+                    {weather?.current?.condition?.text}
                 </Text>
             </View>
-            <View style={styles.temperatureContainer}>
-                {weather?.current?.temp_c && (
-                    <HeaderText size="xl" style={styles.textColor}>
-                        {Math.round(weather!.current?.temp_c)}&#176;
-                    </HeaderText>
-                )}
-                {weather?.current?.feelslike_c && (
-                    <Text size="xs" style={styles.textColor}>
-                        Feels like {Math.round(weather!.current?.feelslike_c)}&#176;
-                    </Text>
-                )}
-            </View>
         </View>
-        <View style={styles.divider} />
-        <View style={styles.iconContainer}>
-            <CloudIcon color={styles.textColor.color} />
-            <Text size="xxs" style={styles.textColor}>
-                {weather?.current?.condition?.text}
-            </Text>
-        </View>
+        {weather?.current && weather.current.feelslike_c >= WARM_WEATHER_ALERT_TEMP_F && (
+            <WarmWeatherAlert />
+        )}
     </View>
 );

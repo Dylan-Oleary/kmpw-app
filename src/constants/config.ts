@@ -1,0 +1,1 @@
+export const WARM_WEATHER_ALERT_TEMP_F = 20;

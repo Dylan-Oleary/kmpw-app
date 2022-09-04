@@ -1,3 +1,4 @@
+export * from "./config";
 export * from "./dates";
 export * from "./screens";
 export * from "./session";
