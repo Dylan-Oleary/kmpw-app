@@ -69,7 +69,7 @@
 		BBF46C5E31CD4062A033301C /* test-pup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4743155F5A7549D394506D7C /* test-pup.jpg */; };
 		C4CB089310C34E3B8C64F94A /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39E7AE54451C4951A58B229D /* Poppins-Bold.ttf */; };
 		CFA273E9F607DDEA270DCF4F /* libPods-kmpwappCommonPods-kmpwappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A933BE0D5B4F6BFD7AB5E175 /* libPods-kmpwappCommonPods-kmpwappTests.a */; };
-		D347EFDB7C18420E8F139979 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		D347EFDB7C18420E8F139979 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		D384008364804F2AA5D4A7E2 /* logout.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3432A0D0386149A283D7C083 /* logout.svg */; };
 		E654EB5453614D108486B94D /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 627739E56C6749409FDE458C /* Poppins-Black.ttf */; };
 		F80A89A4A069423BB745D210 /* pencil-alt.svg in Resources */ = {isa = PBXBuildFile; fileRef = B362C2E7A19446DFBEFECC3E /* pencil-alt.svg */; };
@@ -178,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D347EFDB7C18420E8F139979 /* (null) in Frameworks */,
+				D347EFDB7C18420E8F139979 /* BuildFile in Frameworks */,
 				9290BC33654536AA11BF799A /* libPods-kmpwappCommonPods-kmpwapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

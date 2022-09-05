@@ -1,4 +1,4 @@
-import { kmpwApi } from "@/api";
+import { kmpwApi, KMPW_API_NUM_OF_RETRIES, retryOn401Error } from "@/api";
 import { ILoginUserData, IRegisterUserData } from "@/types";
 
 /**
@@ -42,7 +42,11 @@ export const loginUser = (data: ILoginUserData) =>
  */
 export const logoutUser = (accessToken: string) =>
     kmpwApi.post("/auth/logout", null, {
-        headers: { Authorization: `Bearer ${accessToken}` }
+        headers: { Authorization: `Bearer ${accessToken}` },
+        "axios-retry": {
+            retries: KMPW_API_NUM_OF_RETRIES,
+            retryCondition: retryOn401Error
+        }
     });
 
 /**

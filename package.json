@@ -41,13 +41,14 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@apollo/client": "3.5.10",
+    "@apollo/client": "^3.6.9",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "@reduxjs/toolkit": "^1.7.2",
     "@theonlydevsever/utilities": "^1.9.0",
     "axios": "^0.26.0",
+    "axios-retry": "^3.3.1",
     "dayjs": "^1.11.1",
     "graphql": "^16.5.0",
     "react": "17.0.2",
