@@ -2,7 +2,6 @@ import React, { FC, useState } from "react";
 import { View, ViewProps } from "react-native";
 import { Image } from "react-native-image-crop-picker";
 
-import DogImage from "@/assets/images/test-pup.jpg";
 import CameraOutlineIcon from "@/assets/svg/camera-outline.svg";
 import { Avatar } from "@/components";
 import { ImagePickerModal } from "@/modals";
@@ -27,7 +26,7 @@ export const ImageInput: FC<ImageInputProps> = ({ onChange = () => {}, style, va
             <Avatar
                 onPress={() => setIsPickerModalOpen(true)}
                 size="xl"
-                source={value ? { uri: value } : DogImage}
+                source={value ? { uri: value } : undefined}
             >
                 {({ height, width }) => (
                     <CameraOutlineIcon height={height} width={width} {...styles.icon} />

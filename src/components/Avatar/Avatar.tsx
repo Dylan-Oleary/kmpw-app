@@ -1,7 +1,8 @@
 import React, { FC, ReactNode, useMemo } from "react";
-import { StyleProp, View, ViewStyle, TouchableOpacity } from "react-native";
+import { ImageSourcePropType, StyleProp, TouchableOpacity, View, ViewStyle } from "react-native";
 import { SvgProps } from "react-native-svg";
 
+import DefaultAvatarImage from "@/assets/images/logo_white_bg.png";
 import { Image, IImageProps } from "@/components";
 import { theme } from "@/constants";
 import { AvatarSize } from "@/types";
@@ -12,11 +13,12 @@ type AvatarChildrenOpts = SvgProps & {
     size?: AvatarSize;
 };
 
-interface IAvatarProps extends IImageProps {
+interface IAvatarProps extends Omit<IImageProps, "source"> {
     children?: (opts: AvatarChildrenOpts) => ReactNode;
     containerStyle?: StyleProp<ViewStyle>;
     onPress?: () => void;
     size?: AvatarSize;
+    source?: ImageSourcePropType;
 }
 
 export const getAvatarWidth: (size: AvatarSize) => number = (size) => {
@@ -74,7 +76,7 @@ export const Avatar: FC<IAvatarProps> = ({
     containerStyle,
     onPress,
     size = "base",
-    source,
+    source = DefaultAvatarImage,
     ...rest
 }) => {
     const width = useMemo(() => getAvatarWidth(size), [size]);

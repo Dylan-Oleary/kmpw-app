@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { ViewProps } from "react-native";
 import dayjs from "dayjs";
 
-import DogImage from "@/assets/images/test-pup.jpg";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import PawSolidIcon from "@/assets/svg/paw-solid.svg";
 import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
@@ -43,7 +42,7 @@ export const DogConfirmation: FC<DogConfirmationProps> = ({
                         ? { uri: dog.newProfilePicture.path }
                         : dog?.profilePicture
                         ? { uri: dog?.profilePicture }
-                        : DogImage
+                        : undefined
                 }
             />
         </Container>

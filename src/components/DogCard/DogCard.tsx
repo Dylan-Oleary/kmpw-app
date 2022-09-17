@@ -3,7 +3,6 @@ import { StyleProp, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } f
 import { useNavigation } from "@react-navigation/native";
 
 import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
-import DogImage from "@/assets/images/test-pup.jpg";
 import { Avatar, Container, SafetyLevel, Text, TextProps, UpdateActions } from "@/components";
 import { getDogAge } from "@/lib";
 import { HomeStackNavigationProp } from "@/navigation";
@@ -46,7 +45,9 @@ export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
                     <PencilAltIcon color={styles.editIcon.color} />
                 </TouchableOpacity>
                 <View style={styles.dogImageColumn}>
-                    <Avatar source={dog?.profilePicture ? { uri: dog.profilePicture } : DogImage} />
+                    <Avatar
+                        source={dog?.profilePicture ? { uri: dog.profilePicture } : undefined}
+                    />
                 </View>
                 <View style={styles.dogInfoContainer}>
                     <View style={styles.infoRow}>
