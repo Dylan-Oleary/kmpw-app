@@ -37,11 +37,10 @@ export const GET_USER = gql`
                 current {
                     condition {
                         code
-                        icon
-                        text
                     }
                     feelslike_c
                     feelslike_f
+                    is_day
                     temp_c
                     temp_f
                 }

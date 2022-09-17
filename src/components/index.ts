@@ -14,3 +14,4 @@ export * from "./StatusBar";
 export * from "./Text";
 export * from "./WarmWeatherAlert";
 export * from "./WeatherBanner";
+export * from "./WeatherIcon";

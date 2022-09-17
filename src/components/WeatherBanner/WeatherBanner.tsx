@@ -2,8 +2,7 @@ import React, { FC } from "react";
 import { View, ViewProps } from "react-native";
 import dayjs from "dayjs";
 
-import CloudIcon from "@/assets/svg/cloud.svg";
-import { HeaderText, Text, WarmWeatherAlert } from "@/components";
+import { HeaderText, Text, WarmWeatherAlert, WeatherIcon } from "@/components";
 import { DATE_FORMATS, WARM_WEATHER_ALERT_TEMP_F } from "@/constants";
 import { Weather } from "@/types";
 
@@ -48,10 +47,12 @@ export const WeatherBanner: FC<IWeatherBannerProps> = ({
             </View>
             <View style={styles.divider} />
             <View style={styles.iconContainer}>
-                <CloudIcon color={styles.textColor.color} />
-                <Text size="xxs" style={styles.textColor}>
-                    {weather?.current?.condition?.text}
-                </Text>
+                {weather?.current && (
+                    <WeatherIcon
+                        iconCode={weather?.current?.condition?.code}
+                        isDay={Boolean(weather?.current?.is_day)}
+                    />
+                )}
             </View>
         </View>
         {weather?.current && weather.current.feelslike_c >= WARM_WEATHER_ALERT_TEMP_F && (
