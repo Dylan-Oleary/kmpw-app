@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: theme.colors.brand5,
         flexDirection: "row",
-        paddingBottom: 20
+        paddingBottom: 10
     },
     divider: {
         backgroundColor: theme.colors.white,
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     iconContainer: {
         alignItems: "center",
         justifyContent: "center",
-        paddingHorizontal: 20
+        paddingHorizontal: 10
     },
     infoContainer: {
         flexDirection: "row",
