@@ -355,11 +355,21 @@ PODS:
     - React-perflogger (= 0.67.2)
   - RNBootSplash (4.3.2):
     - React-Core
+  - RNImageCropPicker (0.38.0):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.38.0)
+    - TOCropViewController
+  - RNImageCropPicker/QBImagePickerController (0.38.0):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController
   - RNScreens (3.17.0):
     - React-Core
     - React-RCTImage
   - RNSVG (12.4.4):
     - React-Core
+  - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -424,6 +434,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -443,6 +454,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - TOCropViewController
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -516,6 +528,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -572,8 +586,10 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 2450b43df7ffe8e805a0b3dcb2abd4282f1f1836
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
   RNBootSplash: 5f346163977573d6b2aeba1b25df9d2245c0d73c
+  RNImageCropPicker: ffbba608264885c241cbf3a8f78eb7aeeb978241
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   RNSVG: ecd661f380a07ba690c9c5929c475a44f432d674
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

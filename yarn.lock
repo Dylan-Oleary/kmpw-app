@@ -6817,6 +6817,11 @@ react-native-geolocation-service@^5.3.0-beta.4:
   resolved "https://registry.yarnpkg.com/react-native-geolocation-service/-/react-native-geolocation-service-5.3.0.tgz#2f361ce003457651b656266d5e1328f3e335e693"
   integrity sha512-imK/yjxqPMIydSjZLpqPh7U073Fpe1JAaZHiIzLzWnzv89OGey6t4Zj/POg3+xtmGcbDoMcEOx8hbNY/fXaD9Q==
 
+react-native-image-crop-picker@^0.38.0:
+  version "0.38.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.38.0.tgz#3f67a0ec40618e3cd6e05d3e7b90e70d01eaddf8"
+  integrity sha512-FaLASXOP7R23pi20vMiVlXl0Y7cwTdl7y7yBqrlrsSH9gl9ibsU5y4mYWPYRbe8x9F/3zPGUE+1F0Gj/QF/peg==
+
 react-native-modal@^13.0.1:
   version "13.0.1"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-13.0.1.tgz#691f1e646abb96fa82c1788bf18a16d585da37cd"

@@ -46,7 +46,7 @@ export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
                     <PencilAltIcon color={styles.editIcon.color} />
                 </TouchableOpacity>
                 <View style={styles.dogImageColumn}>
-                    <Avatar source={DogImage} />
+                    <Avatar source={dog?.profilePicture ? { uri: dog.profilePicture } : DogImage} />
                 </View>
                 <View style={styles.dogInfoContainer}>
                     <View style={styles.infoRow}>

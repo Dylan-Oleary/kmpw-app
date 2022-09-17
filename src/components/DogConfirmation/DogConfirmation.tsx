@@ -9,14 +9,15 @@ import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
 import { Avatar, BrandHeader, Button, Container, DogInformation } from "@/components";
 import { DATE_FORMATS } from "@/constants";
 import { globalStyles } from "@/styles";
-import { Dog } from "@/types";
+import { Dog, DogFormSubmission } from "@/types";
 
 import { styles } from "./styles";
 
 interface DogConfirmationProps extends ViewProps {
     cancelButtonText?: string;
     confirmButtonText?: string;
-    dog: Pick<Dog, "birthday" | "breed" | "name" | "weightImperial">;
+    dog: Pick<Dog, "birthday" | "breed" | "name" | "profilePicture" | "weightImperial"> &
+        Pick<DogFormSubmission, "newProfilePicture">;
     isLoading?: boolean;
     isRemoval?: boolean;
     onCancel: () => void;
@@ -35,7 +36,16 @@ export const DogConfirmation: FC<DogConfirmationProps> = ({
 }) => (
     <Container style={style}>
         <Container style={[globalStyles.flexRow, globalStyles.justifyFlexCenter]}>
-            <Avatar size="xl" source={DogImage} />
+            <Avatar
+                size="xl"
+                source={
+                    dog?.newProfilePicture?.path
+                        ? { uri: dog.newProfilePicture.path }
+                        : dog?.profilePicture
+                        ? { uri: dog?.profilePicture }
+                        : DogImage
+                }
+            />
         </Container>
         <Container style={styles.dogInfoContainer}>
             <Container style={[globalStyles.flexRow, globalStyles.alignItemsCenter]}>
