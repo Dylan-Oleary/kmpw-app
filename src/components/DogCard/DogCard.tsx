@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { StyleProp, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,7 +22,8 @@ interface DogInformationProps extends Pick<TextProps, "size"> {
 
 export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
     const [isUpdateMenuOpen, setIsUpdateMenuOpen] = useState<boolean>(false);
-    const { navigate } = useNavigation<HomeStackNavigationProp>();
+    const navigation = useNavigation<HomeStackNavigationProp>();
+    const { navigate } = navigation;
     const { birthday, breed, name, safetyLevel, weightImperial } = dog;
 
     const onLongPress = () => {
@@ -30,6 +31,14 @@ export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
 
         setIsUpdateMenuOpen(true);
     };
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener("transitionEnd", () => {
+            setIsUpdateMenuOpen(false);
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <TouchableOpacity

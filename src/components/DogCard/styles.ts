@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
     editIconContainer: {
         position: "absolute",
         right: 10,
-        top: 10
+        top: 10,
+        zIndex: 1
     },
     editIcon: {
         color: theme.colors.brand5
