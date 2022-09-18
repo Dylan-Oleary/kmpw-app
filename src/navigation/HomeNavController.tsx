@@ -1,7 +1,12 @@
 import React, { FC } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { commonScreenOptions, HomeStackParams } from "@/navigation";
+import {
+    brandHeaderOptions,
+    commonScreenOptions,
+    getActiveNavigationHeaderOptions,
+    HomeStackParams
+} from "@/navigation";
 import {
     AddOrEditDogScreen,
     ConfirmAddOrEditDogScreen,
@@ -18,17 +23,26 @@ export const HomeNavController: FC = () => {
             <Stack.Screen
                 name="AddOrEditDog"
                 component={AddOrEditDogScreen}
-                options={commonScreenOptions}
+                options={{
+                    ...commonScreenOptions,
+                    ...getActiveNavigationHeaderOptions(brandHeaderOptions)
+                }}
             />
             <Stack.Screen
                 name="ConfirmAddOrEditDog"
                 component={ConfirmAddOrEditDogScreen}
-                options={commonScreenOptions}
+                options={{
+                    ...commonScreenOptions,
+                    ...getActiveNavigationHeaderOptions(brandHeaderOptions)
+                }}
             />
             <Stack.Screen
                 name="ConfirmRemoveDog"
                 component={ConfirmRemoveDogScreen}
-                options={commonScreenOptions}
+                options={{
+                    ...commonScreenOptions,
+                    ...getActiveNavigationHeaderOptions(brandHeaderOptions)
+                }}
             />
         </Stack.Navigator>
     );

@@ -1,9 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Platform } from "react-native";
 
 import { UNAUTHORIZED_SCREEN_NAMES } from "@/constants";
-import { commonScreenOptions } from "@/navigation";
+import { commonScreenOptions, getActiveNavigationHeaderOptions } from "@/navigation";
 import { LoginScreen, RegisterScreen } from "@/screens";
 
 import { UnauthorizedStackParams } from "./types";
@@ -16,15 +15,7 @@ export const UnauthorizedNavController = () => (
         <Stack.Screen
             component={RegisterScreen}
             name={UNAUTHORIZED_SCREEN_NAMES.REGISTER}
-            options={{
-                ...Platform.select({
-                    ios: {
-                        headerShadowVisible: false,
-                        headerShown: true,
-                        headerTitle: ""
-                    }
-                })
-            }}
+            options={getActiveNavigationHeaderOptions()}
         />
     </Stack.Navigator>
 );

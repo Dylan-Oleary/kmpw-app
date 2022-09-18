@@ -33,7 +33,6 @@
 		40F1ED3E288E266F000780B3 /* check-circle.svg in Resources */ = {isa = PBXBuildFile; fileRef = D61EE2C7068741A38CADE48B /* check-circle.svg */; };
 		40F1ED3F288E266F000780B3 /* check-shield.svg in Resources */ = {isa = PBXBuildFile; fileRef = E1AC902448D44B01969B7CDD /* check-shield.svg */; };
 		40F1ED40288E266F000780B3 /* close-circle.svg in Resources */ = {isa = PBXBuildFile; fileRef = FACD930DC7194C8283A1BA86 /* close-circle.svg */; };
-		40F1ED41288E266F000780B3 /* cloud.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0406026AE85D47B3BD59C7B1 /* cloud.svg */; };
 		40F1ED42288E266F000780B3 /* logout.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3432A0D0386149A283D7C083 /* logout.svg */; };
 		40F1ED43288E266F000780B3 /* pencil-alt.svg in Resources */ = {isa = PBXBuildFile; fileRef = B362C2E7A19446DFBEFECC3E /* pencil-alt.svg */; };
 		40F1ED44288E266F000780B3 /* plus.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0DA28170CF0146C1BF80B65D /* plus.svg */; };
@@ -54,11 +53,9 @@
 		40F1ED63288E2D48000780B3 /* check-circle.svg in Resources */ = {isa = PBXBuildFile; fileRef = D61EE2C7068741A38CADE48B /* check-circle.svg */; };
 		40F1ED64288E2D48000780B3 /* check-shield.svg in Resources */ = {isa = PBXBuildFile; fileRef = E1AC902448D44B01969B7CDD /* check-shield.svg */; };
 		40F1ED65288E2D48000780B3 /* close-circle.svg in Resources */ = {isa = PBXBuildFile; fileRef = FACD930DC7194C8283A1BA86 /* close-circle.svg */; };
-		40F1ED66288E2D48000780B3 /* cloud.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0406026AE85D47B3BD59C7B1 /* cloud.svg */; };
 		40F1ED67288E2D48000780B3 /* logout.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3432A0D0386149A283D7C083 /* logout.svg */; };
 		40F1ED68288E2D48000780B3 /* pencil-alt.svg in Resources */ = {isa = PBXBuildFile; fileRef = B362C2E7A19446DFBEFECC3E /* pencil-alt.svg */; };
 		40F1ED69288E2D48000780B3 /* plus.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0DA28170CF0146C1BF80B65D /* plus.svg */; };
-		4404F2A1203C4ED0818ACD05 /* cloud.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0406026AE85D47B3BD59C7B1 /* cloud.svg */; };
 		502CF255DBE1282280ABE315 /* libPods-kmpwappCommonPods-kmpwappStg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F15CB8A7E50D18F82A5343D /* libPods-kmpwappCommonPods-kmpwappStg.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9290BC33654536AA11BF799A /* libPods-kmpwappCommonPods-kmpwapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3DEDBC549A8DAA837C3878 /* libPods-kmpwappCommonPods-kmpwapp.a */; };
@@ -89,7 +86,6 @@
 		00E356EE1AD99517003FC87E /* kmpwappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kmpwappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* kmpwappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kmpwappTests.m; sourceTree = "<group>"; };
-		0406026AE85D47B3BD59C7B1 /* cloud.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = cloud.svg; path = ../src/assets/svg/cloud.svg; sourceTree = "<group>"; };
 		0961FDB0E1DC4934AF69F4B3 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../src/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		0DA28170CF0146C1BF80B65D /* plus.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = plus.svg; path = ../src/assets/svg/plus.svg; sourceTree = "<group>"; };
 		0E80303EB3B039EAD1234546 /* Pods-kmpwappCommonPods-kmpwappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kmpwappCommonPods-kmpwappTests.debug.xcconfig"; path = "Target Support Files/Pods-kmpwappCommonPods-kmpwappTests/Pods-kmpwappCommonPods-kmpwappTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -295,7 +291,6 @@
 				D61EE2C7068741A38CADE48B /* check-circle.svg */,
 				E1AC902448D44B01969B7CDD /* check-shield.svg */,
 				FACD930DC7194C8283A1BA86 /* close-circle.svg */,
-				0406026AE85D47B3BD59C7B1 /* cloud.svg */,
 				3432A0D0386149A283D7C083 /* logout.svg */,
 				B362C2E7A19446DFBEFECC3E /* pencil-alt.svg */,
 				0DA28170CF0146C1BF80B65D /* plus.svg */,
@@ -513,7 +508,6 @@
 				A29A3A6C15D94956BC4B372A /* check-circle.svg in Resources */,
 				34C7A86B09714E688D304948 /* check-shield.svg in Resources */,
 				A88F9F633A8E44C8AD51381D /* close-circle.svg in Resources */,
-				4404F2A1203C4ED0818ACD05 /* cloud.svg in Resources */,
 				D384008364804F2AA5D4A7E2 /* logout.svg in Resources */,
 				F80A89A4A069423BB745D210 /* pencil-alt.svg in Resources */,
 				0B3D7E904B2F488F91091041 /* plus.svg in Resources */,
@@ -537,7 +531,6 @@
 				40F1ED3E288E266F000780B3 /* check-circle.svg in Resources */,
 				40F1ED3F288E266F000780B3 /* check-shield.svg in Resources */,
 				40F1ED40288E266F000780B3 /* close-circle.svg in Resources */,
-				40F1ED41288E266F000780B3 /* cloud.svg in Resources */,
 				40F1ED42288E266F000780B3 /* logout.svg in Resources */,
 				40F1ED43288E266F000780B3 /* pencil-alt.svg in Resources */,
 				40F1ED44288E266F000780B3 /* plus.svg in Resources */,
@@ -561,7 +554,6 @@
 				40F1ED63288E2D48000780B3 /* check-circle.svg in Resources */,
 				40F1ED64288E2D48000780B3 /* check-shield.svg in Resources */,
 				40F1ED65288E2D48000780B3 /* close-circle.svg in Resources */,
-				40F1ED66288E2D48000780B3 /* cloud.svg in Resources */,
 				40F1ED67288E2D48000780B3 /* logout.svg in Resources */,
 				40F1ED68288E2D48000780B3 /* pencil-alt.svg in Resources */,
 				40F1ED69288E2D48000780B3 /* plus.svg in Resources */,
