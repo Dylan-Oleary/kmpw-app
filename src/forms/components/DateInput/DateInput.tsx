@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import { StyleProp, TouchableOpacity, ViewStyle } from "react-native";
+import { Platform, StyleProp, TouchableOpacity, ViewStyle } from "react-native";
 import dayjs from "dayjs";
 
 import { DATE_FORMATS } from "@/constants";
@@ -69,6 +69,13 @@ export const DateInput: FC<DateInputProps> = ({
                     error={error}
                     label={label}
                     forceLiveValidation={isLiveValidationActive}
+                    onPressIn={(event) => {
+                        // Handle iOS TouchableOpacity issue
+                        if (Platform.OS === "ios") {
+                            event.preventDefault();
+                            setIsDatePickerModalOpen(true);
+                        }
+                    }}
                     placeholder={placeholder}
                     postFix={postFix}
                     preFix={preFix}
