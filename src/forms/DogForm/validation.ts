@@ -16,6 +16,10 @@ export const buildDogMutationData: (data: DogFormSubmission) => GraphQlDogMutati
         weightImperial
     };
 
+    if (!isValueOfType(mutationData?.profilePicture, "string")) {
+        delete mutationData?.profilePicture;
+    }
+
     return mutationData;
 };
 

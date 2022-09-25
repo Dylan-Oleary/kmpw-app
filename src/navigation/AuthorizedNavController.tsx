@@ -3,9 +3,9 @@ import { AppState, AppStateStatus } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { LOCATION_CACHE_IN_MILLISECONDS } from "@/constants";
+import { StatusBar } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { checkCurrentLocationPermission, isTimestampStale, getUserGeoLocation } from "@/lib";
+import { checkCurrentLocationPermission, getUserGeoLocation } from "@/lib";
 import { HomeNavController } from "@/navigation";
 import { setLocation, setLocationError } from "@/redux";
 import { LocationDisabledScreen } from "@/screens";
@@ -19,7 +19,7 @@ export const AuthorizedNavController: FC = () => {
     const appState = useRef<AppStateStatus>(AppState.currentState);
     const dispatch = useAppDispatch();
     const locationState = useAppSelector(({ location }) => location);
-    const { permissionGranted, permissionRequested, requestTimestamp } = locationState;
+    const { permissionGranted, permissionRequested } = locationState;
 
     const handleAppStateChange: (newAppState: AppStateStatus) => void = async (newAppState) => {
         if (
@@ -28,18 +28,8 @@ export const AuthorizedNavController: FC = () => {
             newAppState === "active"
         ) {
             const isDeviceLocationPermitted = await checkCurrentLocationPermission();
-            let shouldFetchLocation = false;
 
-            shouldFetchLocation =
-                isDeviceLocationPermitted &&
-                ((permissionGranted &&
-                    isTimestampStale(
-                        Date.now(),
-                        (requestTimestamp as number) + LOCATION_CACHE_IN_MILLISECONDS
-                    )) ||
-                    !permissionGranted);
-
-            if (shouldFetchLocation) {
+            if (isDeviceLocationPermitted) {
                 getUserGeoLocation()
                     .then((response) => dispatch(setLocation(response)))
                     .catch((error) => dispatch(setLocationError(error)));
@@ -77,5 +67,7 @@ export const AuthorizedNavController: FC = () => {
                 <Stack.Screen component={LocationDisabledScreen} name="LocationDisabled" />
             </Stack.Navigator>
         )
-    ) : null;
+    ) : (
+        <StatusBar />
+    );
 };

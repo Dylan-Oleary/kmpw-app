@@ -1,0 +1,32 @@
+import React, { FC } from "react";
+import { Platform } from "react-native";
+import Lottie from "lottie-react-native";
+
+import DogBallAnimation from "@/assets/lottie/dog_ball_animation.json";
+import { Container, StatusBar } from "@/components";
+import { globalStyles } from "@/styles";
+
+export interface FullScreenLoaderProps {
+    isLoading: boolean;
+}
+
+export const FullScreenLoader: FC<FullScreenLoaderProps> = ({ children, isLoading = false }) => (
+    <Container style={globalStyles.defaultFlex}>
+        {isLoading ? (
+            <>
+                <StatusBar withBrand={Platform.OS === "ios"} />
+                <Container
+                    style={[
+                        globalStyles.defaultFlex,
+                        globalStyles.alignItemsCenter,
+                        globalStyles.justifyFlexCenter
+                    ]}
+                >
+                    <Lottie source={DogBallAnimation} autoPlay loop />
+                </Container>
+            </>
+        ) : (
+            children
+        )}
+    </Container>
+);

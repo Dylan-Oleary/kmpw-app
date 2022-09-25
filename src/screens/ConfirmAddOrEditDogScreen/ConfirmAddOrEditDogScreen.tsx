@@ -62,8 +62,8 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={globalStyles.defaultFlex}>
-            <Container style={[globalStyles.defaultFlex, styles.contentContainer]}>
+        <Container style={globalStyles.defaultFlex}>
+            <ScrollView contentContainerStyle={styles.contentContainer}>
                 <Container>
                     <BrandHeader content={["Confirm your ", "pup."]} size="2xl" />
                     <Text style={styles.headerBodyText}>
@@ -85,7 +85,7 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
                     onConfirm={handleSubmit}
                     style={styles.detailsContainer}
                 />
-            </Container>
-        </ScrollView>
+            </ScrollView>
+        </Container>
     );
 };
