@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { StatusBar } from "@/components";
+import { OverlayLoader, StatusBar } from "@/components";
 import { useAppDispatch } from "@/hooks";
 import { AppStackParams, AuthorizedNavController, UnauthorizedNavController } from "@/navigation";
 import {
@@ -20,7 +20,8 @@ const Stack = createNativeStackNavigator<AppStackParams>();
 
 const App = () => {
     const dispatch = useAppDispatch();
-    const { isLoadingInitialData, isNavigationReady } = useApplicationSelector();
+    const { isLoadingInitialData, isNavigationReady, showLoadingOverlay } =
+        useApplicationSelector();
     const { accessToken } = useUserSelector();
 
     useEffect(() => {
@@ -37,17 +38,19 @@ const App = () => {
 
     return (
         <NavigationContainer onReady={() => dispatch(setIsNavigationReady(true))}>
-            <SafeAreaProvider style={globalStyles.defaultFlex}>
-                <StatusBar withBrand={accessToken ? true : false} />
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen
-                        component={
-                            accessToken ? AuthorizedNavController : UnauthorizedNavController
-                        }
-                        name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
-                    />
-                </Stack.Navigator>
-            </SafeAreaProvider>
+            <OverlayLoader isLoading={showLoadingOverlay}>
+                <SafeAreaProvider style={globalStyles.defaultFlex}>
+                    <StatusBar withBrand={accessToken ? true : false} />
+                    <Stack.Navigator screenOptions={{ headerShown: false }}>
+                        <Stack.Screen
+                            component={
+                                accessToken ? AuthorizedNavController : UnauthorizedNavController
+                            }
+                            name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
+                        />
+                    </Stack.Navigator>
+                </SafeAreaProvider>
+            </OverlayLoader>
         </NavigationContainer>
     );
 };

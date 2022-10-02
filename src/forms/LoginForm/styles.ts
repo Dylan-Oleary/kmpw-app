@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     formFieldsContainer: {
         marginTop: theme.spacing[6]
     },
-    submitButtonContainer: {
+    spacer: {
         marginTop: theme.spacing[4]
     },
     submitIcon: {

@@ -5,7 +5,7 @@ import { logoutUser } from "@/api";
 import LogoutIcon from "@/assets/svg/logout.svg";
 import { Button, Container } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { clearUser } from "@/redux";
+import { clearUser, setShowLoadingOverlay } from "@/redux";
 
 import { styles } from "./styles";
 
@@ -15,23 +15,34 @@ export const Footer: FC = () => {
     const { accessToken } = useAppSelector((state) => state.user);
 
     const handleLogout = () => {
+        dispatch(setShowLoadingOverlay(true));
+
         logoutUser(accessToken)
             .then(() => client.clearStore())
             .catch((error) => {
                 //TODO: Handle API errors
                 console.log(error);
             })
-            .finally(() => dispatch(clearUser()));
+            .finally(() => {
+                dispatch(setShowLoadingOverlay(false));
+                dispatch(clearUser());
+            });
     };
 
     return (
         <Container style={styles.container}>
             <Button
-                icon={<LogoutIcon color={styles.logoutIcon.color} />}
+                containerStyle={styles.button}
+                icon={<LogoutIcon {...styles.logoutIcon} />}
                 onPress={handleLogout}
                 text="Logout"
+                textStyle={styles.buttonText}
             />
-            <Button text="Terms &#38; Legal" />
+            <Button
+                containerStyle={styles.button}
+                text="Terms &#38; Legal"
+                textStyle={styles.buttonText}
+            />
         </Container>
     );
 };

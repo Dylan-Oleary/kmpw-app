@@ -1,11 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
 
-import { registerUser } from "@/api";
+import { KmpwApiError, registerUser } from "@/api";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
-import { Alert, AlertControl, Button, Container, Text } from "@/components";
+import {
+    Alert,
+    AlertControl,
+    Button,
+    Container,
+    errorAlertDefaultConfig,
+    Text
+} from "@/components";
 import { PasswordInput, TextInput } from "@/forms";
 import { useAppDispatch } from "@/hooks";
-import { setUserTokens } from "@/redux";
+import { setShowLoadingOverlay, setUserTokens, useApplicationSelector } from "@/redux";
 import { FormInputWithError } from "@/types";
 
 import {
@@ -18,6 +25,7 @@ import { styles } from "./styles";
 
 export const RegisterForm: FC = () => {
     const dispatch = useAppDispatch();
+    const { showLoadingOverlay = false } = useApplicationSelector();
     const [alert, setAlert] = useState<AlertControl>({ show: false });
     const [email, setEmail] = useState<FormInputWithError>({ value: "" });
     const [password, setPassword] = useState<FormInputWithError>({ value: "" });
@@ -53,11 +61,34 @@ export const RegisterForm: FC = () => {
                 return;
             }
 
+            dispatch(setShowLoadingOverlay(true));
             registerUser({
                 email: email.value?.trim() as string,
                 password: password?.value?.trim() as string,
                 confirmPassword: confirmPassword?.value?.trim() as string
-            }).then((response) => dispatch(setUserTokens(response)));
+            })
+                .then((response) => {
+                    dispatch(setShowLoadingOverlay(false));
+                    dispatch(setUserTokens(response));
+                })
+                .catch((error: KmpwApiError) => {
+                    const alertConfig: AlertControl = {
+                        ...errorAlertDefaultConfig,
+                        show: true
+                    };
+
+                    if (error?.response?.data) {
+                        const { status } = error.response.data;
+
+                        if (status === 409) {
+                            alertConfig.body =
+                                "It looks like this email is already taken. Please try a different email";
+                        }
+                    }
+
+                    setAlert(alertConfig);
+                    dispatch(setShowLoadingOverlay(false));
+                });
         });
     };
 
@@ -86,18 +117,17 @@ export const RegisterForm: FC = () => {
             </Text>
             {alert?.show && alert?.title && (
                 <Alert
+                    {...alert}
                     isDismissable
-                    messageList={alert?.messageList}
                     onDismiss={() => setAlert({ ...alert, show: false })}
                     style={styles.spacer}
-                    theme={alert?.theme}
-                    title={alert?.title}
                 />
             )}
             <Container style={styles.formFieldsContainer}>
                 <TextInput
                     autoCapitalize="none"
                     autoComplete="email"
+                    editable={!showLoadingOverlay}
                     error={email?.error}
                     keyboardType="email-address"
                     label="Email"
@@ -107,6 +137,7 @@ export const RegisterForm: FC = () => {
                     value={email?.value}
                 />
                 <PasswordInput
+                    editable={!showLoadingOverlay}
                     error={password?.error}
                     label="Password"
                     onFocus={() => {
@@ -120,6 +151,7 @@ export const RegisterForm: FC = () => {
                     value={password?.value}
                 />
                 <PasswordInput
+                    editable={!showLoadingOverlay}
                     error={confirmPassword?.error}
                     forceLiveValidation={enableConfirmPasswordValidation}
                     label="Confirm Password"
@@ -134,6 +166,7 @@ export const RegisterForm: FC = () => {
                 />
                 <Button
                     containerStyle={styles.spacer}
+                    disabled={showLoadingOverlay}
                     icon={<ArrowRightIcon color={styles.submitIcon.color} />}
                     onPress={handleSubmit}
                     text="Get Started"

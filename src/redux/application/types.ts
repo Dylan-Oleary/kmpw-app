@@ -9,4 +9,5 @@ export interface IApplicationState {
     errors: IApplicationError[];
     isLoadingInitialData: boolean;
     isNavigationReady: boolean;
+    showLoadingOverlay: boolean;
 }

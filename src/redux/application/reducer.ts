@@ -8,7 +8,8 @@ export const applicationSlice = createSlice({
     initialState: {
         errors: [],
         isLoadingInitialData: true,
-        isNavigationReady: false
+        isNavigationReady: false,
+        showLoadingOverlay: false
     } as IApplicationState,
     reducers: {
         addApplicationError: (state, action: PayloadAction<IApplicationError>) => {
@@ -22,6 +23,9 @@ export const applicationSlice = createSlice({
         },
         setIsNavigationReady: (state, action: PayloadAction<boolean>) => {
             state.isNavigationReady = action?.payload || false;
+        },
+        setShowLoadingOverlay: (state, action: PayloadAction<boolean>) => {
+            state.showLoadingOverlay = action?.payload || false;
         }
     },
     extraReducers: (builder) => {
@@ -45,7 +49,8 @@ export const {
     addApplicationError,
     clearApplicationErrors,
     finishInitialDataLoad,
-    setIsNavigationReady
+    setIsNavigationReady,
+    setShowLoadingOverlay
 } = applicationSlice.actions;
 export const { reducer: applicationReducer } = applicationSlice;
 
