@@ -26,23 +26,24 @@ export const styles = StyleSheet.create({
 export const getContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (
     insets: EdgeInsets
 ) => {
-    const { top } = insets;
+    const { top = 0 } = insets;
 
     return {
         backgroundColor: theme.colors.white,
         flexGrow: 1,
         ...Platform.select({
+            android: {
+                paddingTop: theme.spacing[6]
+            },
             ios: {
-                paddingTop: top / 2
+                paddingTop: top > 0 ? top / 2 : theme.spacing[6]
             }
         })
     };
 };
 
-export const getFooterContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (
-    insets: EdgeInsets
-) => {
-    const { bottom } = insets;
+export const getFooterContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (insets) => {
+    const { bottom = 0 } = insets;
 
     return {
         backgroundColor: theme.colors.brand5,
@@ -54,7 +55,7 @@ export const getFooterContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyl
                 paddingBottom: theme.spacing[8]
             },
             ios: {
-                paddingBottom: bottom
+                paddingBottom: bottom > 0 ? bottom : theme.spacing[8]
             }
         })
     };

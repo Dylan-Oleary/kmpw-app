@@ -14,14 +14,8 @@ export const styles = StyleSheet.create({
         backgroundColor: theme.colors.white,
         flexDirection: "row",
         justifyContent: "space-between",
-        shadowColor: theme.colors.black,
-        shadowOffset: {
-            width: 0,
-            height: 1
-        },
-        shadowOpacity: 0.4,
-        shadowRadius: 1.41,
-        elevation: 2
+        borderTopColor: theme.colors.brand5,
+        borderTopWidth: 0.25
     },
     logoutIcon: {
         color: theme.colors.brand5
