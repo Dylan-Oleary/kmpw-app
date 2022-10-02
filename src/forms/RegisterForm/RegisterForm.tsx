@@ -1,8 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
 
-import { registerUser } from "@/api";
+import { KmpwApiError, registerUser } from "@/api";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
-import { Alert, AlertControl, Button, Container, Text } from "@/components";
+import {
+    Alert,
+    AlertControl,
+    Button,
+    Container,
+    errorAlertDefaultConfig,
+    Text
+} from "@/components";
 import { PasswordInput, TextInput } from "@/forms";
 import { useAppDispatch } from "@/hooks";
 import { setUserTokens } from "@/redux";
@@ -57,7 +64,25 @@ export const RegisterForm: FC = () => {
                 email: email.value?.trim() as string,
                 password: password?.value?.trim() as string,
                 confirmPassword: confirmPassword?.value?.trim() as string
-            }).then((response) => dispatch(setUserTokens(response)));
+            })
+                .then((response) => dispatch(setUserTokens(response)))
+                .catch((error: KmpwApiError) => {
+                    const alertConfig: AlertControl = {
+                        ...errorAlertDefaultConfig,
+                        show: true
+                    };
+
+                    if (error?.response?.data) {
+                        const { status } = error.response.data;
+
+                        if (status === 409) {
+                            alertConfig.body =
+                                "It looks like this email is already taken. Please try a different email";
+                        }
+                    }
+
+                    setAlert(alertConfig);
+                });
         });
     };
 
@@ -86,12 +111,10 @@ export const RegisterForm: FC = () => {
             </Text>
             {alert?.show && alert?.title && (
                 <Alert
+                    {...alert}
                     isDismissable
-                    messageList={alert?.messageList}
                     onDismiss={() => setAlert({ ...alert, show: false })}
                     style={styles.spacer}
-                    theme={alert?.theme}
-                    title={alert?.title}
                 />
             )}
             <Container style={styles.formFieldsContainer}>

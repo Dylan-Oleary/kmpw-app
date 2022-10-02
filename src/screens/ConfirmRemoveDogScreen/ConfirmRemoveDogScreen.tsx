@@ -3,7 +3,15 @@ import { ScrollView } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useDeleteDogMutation } from "@/api";
-import { Alert, AlertControl, BrandHeader, Container, DogConfirmation, Text } from "@/components";
+import {
+    Alert,
+    AlertControl,
+    BrandHeader,
+    Container,
+    DogConfirmation,
+    errorAlertDefaultConfig,
+    Text
+} from "@/components";
 import { resetHomeStack } from "@/lib";
 import { ConfirmRemoveDogScreenRouteProp, HomeStackNavigationProp } from "@/navigation";
 import { globalStyles } from "@/styles";
@@ -23,9 +31,7 @@ export const ConfirmRemoveDogScreen: FC = () => {
             onCompleted: () => dispatch(resetHomeStack()),
             onError: () =>
                 setAlert({
-                    title: "Oh no!",
-                    body: "We couldn't complete your request at the moment. Please try again.",
-                    theme: "error",
+                    ...errorAlertDefaultConfig,
                     show: true
                 })
         };

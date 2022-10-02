@@ -11,6 +11,7 @@ import { getContainerStyle, getFooterImageStyle, styles } from "./styles";
 
 export const RegisterScreen: FC = () => {
     const insets = useSafeAreaInsets();
+
     return (
         <ScrollView contentContainerStyle={getContainerStyle()}>
             <Container style={styles.contentContainer}>
