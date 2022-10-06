@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import { theme } from "@/constants";
 
@@ -29,9 +29,12 @@ export const styles = StyleSheet.create({
         borderTopRightRadius: 0,
         borderTopLeftRadius: 0,
         borderWidth: 0.66,
-        maxHeight: 250,
-        marginTop: -2,
+        marginTop: Platform.select({
+            android: -26,
+            ios: -2
+        }),
         marginRight: 0,
+        shadowColor: "transparent",
         elevation: 0
     },
     listItem: {

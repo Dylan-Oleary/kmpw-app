@@ -24,6 +24,7 @@ export interface SelectDropdownProps<T = {}, DataType = {}> {
     onBlur?: () => void;
     onChange: (selectedValue: T, error?: string) => void;
     onFocus?: () => void;
+    onLayout?: (event: LayoutChangeEvent) => void;
     placeholder?: string;
     validation?: FormInputValidator;
     valueKey: string;
@@ -63,6 +64,7 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({
     onBlur,
     onChange = () => {},
     onFocus,
+    onLayout,
     placeholder = "",
     validation,
     value,
@@ -93,6 +95,11 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({
 
         setIsDropdownOpen(true);
         onFocus?.();
+    };
+
+    const handleMount: (event: LayoutChangeEvent) => void = (event) => {
+        setMountedWidth(event);
+        onLayout?.(event);
     };
 
     const setMountedWidth: (event: LayoutChangeEvent) => void = ({
@@ -131,7 +138,7 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({
     }, [forceLiveValidation]);
 
     return (
-        <View onLayout={setMountedWidth} style={containerStyle}>
+        <View onLayout={handleMount} style={containerStyle}>
             {label && <InputLabel>{label}</InputLabel>}
             <Dropdown
                 // TODO: Optimize to use auto-scroll

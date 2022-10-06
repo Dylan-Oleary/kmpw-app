@@ -67,8 +67,8 @@ export const DateInput: FC<DateInputProps> = ({
                     containerStyle={containerStyle}
                     editable={false}
                     error={error}
-                    label={label}
                     forceLiveValidation={isLiveValidationActive}
+                    label={label}
                     onPressIn={(event) => {
                         // Handle iOS TouchableOpacity issue
                         if (Platform.OS === "ios") {

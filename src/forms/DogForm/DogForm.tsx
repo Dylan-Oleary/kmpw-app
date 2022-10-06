@@ -4,10 +4,9 @@ import { Image } from "react-native-image-crop-picker";
 import { isValueOfType } from "@theonlydevsever/utilities";
 import dayjs from "dayjs";
 
-import { useGetBreedsQuery } from "@/api/graphql";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { Alert, AlertControl, BrandHeader, Button, Container } from "@/components";
-import { DateInput, EmptyBreedList, ImageInput, SelectDropdown, TextInput } from "@/forms";
+import { BreedInput, DateInput, ImageInput, TextInput } from "@/forms";
 import { convertDateToStartOfDay, removeAllNonDigits } from "@/lib";
 import { Breed, Dog, DogFormSubmission, FormInputWithError } from "@/types";
 
@@ -33,7 +32,6 @@ export interface DogFormProps {
 export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
     const isEditForm = useRef<boolean>(isValueOfType(dog, "object"));
     const [alert, setAlert] = useState<AlertControl>({ show: false });
-    const { breeds } = useGetBreedsQuery();
     const [name, setName] = useState<FormInputWithError>({ value: dog?.name || "" });
     const [breed, setBreed] = useState<FormInputWithError<Breed>>({ value: dog?.breed });
     const [weightImperial, setWeightImperial] = useState<FormInputWithError>({
@@ -120,22 +118,12 @@ export const DogForm: FC<DogFormProps> = ({ dog, onSubmit, style }) => {
                     validation={validateName}
                     value={name?.value}
                 />
-                <SelectDropdown
-                    data={breeds}
-                    emptyListComponent={EmptyBreedList}
+                <BreedInput
                     error={breed?.error}
                     forceLiveValidation={hasSubmissionBeenAttempted}
-                    label="Breed"
-                    labelKey="name"
-                    //@ts-ignore
-                    onChange={(value, error) => setBreed({ error, value })}
-                    placeholder="Breed"
-                    //@ts-ignore
+                    onConfirm={(value, error) => setBreed({ error, value })}
                     validation={validateBreed}
-                    //@ts-ignore
                     value={breed?.value}
-                    valueKey="id"
-                    withSearch
                 />
                 <TextInput
                     error={weightImperial?.error}
