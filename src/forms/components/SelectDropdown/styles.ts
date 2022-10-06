@@ -29,7 +29,6 @@ export const styles = StyleSheet.create({
         borderTopRightRadius: 0,
         borderTopLeftRadius: 0,
         borderWidth: 0.66,
-        maxHeight: 250,
         marginTop: -2,
         marginRight: 0,
         elevation: 0

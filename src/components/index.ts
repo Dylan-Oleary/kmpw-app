@@ -1,6 +1,7 @@
 export * from "./Alert";
 export * from "./Avatar";
 export * from "./BrandHeader";
+export * from "./BreedStats";
 export * from "./Button";
 export * from "./Container";
 export * from "./DogCard";
