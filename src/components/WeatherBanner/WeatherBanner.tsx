@@ -29,7 +29,9 @@ export const WeatherBanner: FC<IWeatherBannerProps> = ({
                         {dayjs().format(DATE_FORMATS.FULL_MONTH_WITH_DAY)}
                     </HeaderText>
                     <Text size="xs" style={styles.textColor}>
-                        updated at {dayjs(lastUpdatedTimestamp).format(DATE_FORMATS.TIME)}
+                        {loading
+                            ? "updating..."
+                            : `updated at ${dayjs(lastUpdatedTimestamp).format(DATE_FORMATS.TIME)}`}
                     </Text>
                 </View>
                 <View style={styles.temperatureContainer}>

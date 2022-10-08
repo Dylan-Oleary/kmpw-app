@@ -57,7 +57,7 @@ export const HomeScreen: FC = () => {
             <Container style={getContainerStyle(insets)}>
                 <WeatherBanner
                     lastUpdatedTimestamp={requestTimestamp}
-                    loading={loading}
+                    loading={loading || isRefreshing}
                     style={styles.weatherBanner}
                     weather={user?.weather}
                 />
