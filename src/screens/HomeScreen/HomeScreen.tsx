@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +12,7 @@ import {
     Footer,
     FullScreenLoader,
     Image,
+    LocationErrorAlert,
     RefreshControl,
     Text,
     WeatherBanner
@@ -22,6 +23,7 @@ import { getUserGeoLocation } from "@/lib";
 import { HomeStackNavigationProp } from "@/navigation";
 import { setLocation, setLocationError, useLocationSelector } from "@/redux";
 import { screenWidth } from "@/styles";
+import { User } from "@/types";
 
 import { getContainerStyle, styles } from "./styles";
 
@@ -29,10 +31,14 @@ export const HomeScreen: FC = () => {
     const insets = useSafeAreaInsets();
     const dispatch = useAppDispatch();
     const { navigate } = useNavigation<HomeStackNavigationProp>();
-    const { location: geolocation, requestTimestamp } = useLocationSelector();
+    const {
+        errors: locationErrors,
+        location: geolocation,
+        requestTimestamp
+    } = useLocationSelector();
     const [isInitialDataFetchComplete, setIsInitialDataFetchComplete] = useState<boolean>(false);
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-    const { loading, refetchUser, user } = useGetUserQuery({
+    const { loading, prevUser, refetchUser, user } = useGetUserQuery({
         geolocation,
         onCompleted: () => setIsInitialDataFetchComplete(true),
         onError: () => setIsInitialDataFetchComplete(true)
@@ -40,11 +46,15 @@ export const HomeScreen: FC = () => {
 
     const onRefresh = useCallback(() => {
         setIsRefreshing(true);
-
         getUserGeoLocation()
             .then((response) => dispatch(setLocation(response)))
-            .catch((error) => dispatch(setLocationError(error)));
+            .catch((error) => {
+                dispatch(setLocationError(error));
+                setIsRefreshing(false);
+            });
     }, []);
+
+    const userDataToRender = useMemo<User | null>(() => user || prevUser || null, [user, prevUser]);
 
     useEffect(() => {
         if (geolocation?.latitude && geolocation?.longitude && isInitialDataFetchComplete) {
@@ -59,8 +69,9 @@ export const HomeScreen: FC = () => {
                     lastUpdatedTimestamp={requestTimestamp}
                     loading={loading || isRefreshing}
                     style={styles.weatherBanner}
-                    weather={user?.weather}
+                    weather={user?.weather || prevUser?.weather}
                 />
+                {locationErrors?.length > 0 && <LocationErrorAlert />}
                 <ScrollView
                     refreshControl={
                         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
@@ -75,10 +86,10 @@ export const HomeScreen: FC = () => {
                     <Container>
                         <Image aspectRatio={[16, 8]} source={DogImage} width={screenWidth} />
                     </Container>
-                    {Boolean(!loading && user) && (
+                    {userDataToRender && (
                         <Container style={styles.contentContainer}>
-                            {(user?.dogs || []).length > 0 ? (
-                                <DogList dogs={user?.dogs || []} loading={loading} />
+                            {(userDataToRender?.dogs || []).length > 0 ? (
+                                <DogList dogs={userDataToRender?.dogs || []} loading={loading} />
                             ) : (
                                 <DogForm
                                     onSubmit={(data) => navigate("ConfirmAddOrEditDog", { data })}

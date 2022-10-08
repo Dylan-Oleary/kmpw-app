@@ -1,6 +1,8 @@
 import { PermissionsAndroid, PermissionStatus, Platform } from "react-native";
 import Geolocation, { GeoCoordinates } from "react-native-geolocation-service";
 
+import { setLocationPermissions, store } from "@/redux";
+
 export const buildGeolocationString = (latitude?: number, longitude?: number) =>
     latitude && longitude ? `${latitude},${longitude}` : "";
 
@@ -54,8 +56,16 @@ export const getUserGeoLocation: () => Promise<{
                             requestTimestamp: timestamp
                         });
                     },
-                    (error) => reject(error),
-                    { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
+                    (error) => {
+                        store.dispatch(
+                            setLocationPermissions({
+                                permissionGranted: true,
+                                permissionRequested: true
+                            })
+                        );
+                        reject(error);
+                    },
+                    { enableHighAccuracy: false, maximumAge: 0, timeout: 7500 }
                 );
             });
         }

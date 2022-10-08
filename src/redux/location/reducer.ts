@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { GeoCoordinates } from "react-native-geolocation-service";
+import { isValueOfType } from "@theonlydevsever/utilities";
 
 import { useAppSelector } from "@/hooks";
 import { clearUser, IApplicationError, ILocationState } from "@/redux";
@@ -34,7 +35,20 @@ export const locationSlice = createSlice({
             state.requestTimestamp = requestTimestamp;
         },
         setLocationError: (state, action: PayloadAction<IApplicationError>) => {
-            state.errors.push(action.payload);
+            state.errors = [action.payload];
+        },
+        setLocationPermissions: (
+            state,
+            action: PayloadAction<{ permissionGranted?: boolean; permissionRequested?: boolean }>
+        ) => {
+            const { permissionGranted, permissionRequested } = action.payload;
+
+            if (isValueOfType(permissionGranted, "boolean")) {
+                state.permissionGranted = permissionGranted as boolean;
+            }
+            if (isValueOfType(permissionRequested, "boolean")) {
+                state.permissionRequested = permissionRequested as boolean;
+            }
         }
     },
     extraReducers: (builder) => {
@@ -48,7 +62,7 @@ export const locationSlice = createSlice({
     }
 });
 
-export const { setLocation, setLocationError } = locationSlice.actions;
+export const { setLocation, setLocationError, setLocationPermissions } = locationSlice.actions;
 export const { reducer: locationReducer } = locationSlice;
 
 export const useLocationSelector = () => useAppSelector(({ location }) => location);

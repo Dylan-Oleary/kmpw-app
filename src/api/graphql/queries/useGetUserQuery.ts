@@ -77,21 +77,21 @@ export const useGetUserQuery = (opts: UseGetUserExtendedQueryOpts) => {
     const variables = buildGetUserQueryVariables(
         buildGeolocationString(geolocation?.latitude, geolocation?.longitude)
     );
-    const { data, error, loading, refetch } = useQuery<GetUserQueryResult, GetUserQueryVariables>(
-        GET_USER,
-        {
-            skip: !variables.location,
-            variables,
-            onCompleted: ({ me: user }) => {
-                if (!id) dispatch(setUserIdentifier(user.id));
+    const { data, error, loading, previousData, refetch } = useQuery<
+        GetUserQueryResult,
+        GetUserQueryVariables
+    >(GET_USER, {
+        errorPolicy: "all",
+        variables,
+        onCompleted: ({ me: user }) => {
+            if (!id) dispatch(setUserIdentifier(user.id));
 
-                onCompleted?.();
-            },
-            onError: () => {
-                onError?.();
-            }
+            onCompleted?.();
+        },
+        onError: () => {
+            onError?.();
         }
-    );
+    });
 
     const refetchUser: (
         opts: UseGetUserQueryBaseOpts
@@ -105,5 +105,5 @@ export const useGetUserQuery = (opts: UseGetUserExtendedQueryOpts) => {
         });
     };
 
-    return { error, loading, refetchUser, user: data?.me };
+    return { error, loading, refetchUser, prevUser: previousData?.me, user: data?.me };
 };

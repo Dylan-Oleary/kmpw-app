@@ -1,6 +1,7 @@
 import React, { FC, memo } from "react";
 import { View, ViewProps } from "react-native";
 import dayjs from "dayjs";
+import { isValueOfType } from "@theonlydevsever/utilities";
 
 import { HeaderText, Text, WarmWeatherAlert, WeatherIcon } from "@/components";
 import { DATE_FORMATS, WARM_WEATHER_ALERT_TEMP_F } from "@/constants";
@@ -26,19 +27,19 @@ export const WeatherBanner: FC<IWeatherBannerProps> = memo(
                         <Text size="xs" style={styles.textColor}>
                             {loading
                                 ? "updating..."
-                                : `updated at ${dayjs(lastUpdatedTimestamp).format(
+                                : `updated at ${dayjs(lastUpdatedTimestamp || dayjs()).format(
                                       DATE_FORMATS.TIME
                                   )}`}
                         </Text>
                     </View>
                     <View style={styles.temperatureContainer}>
                         <HeaderText size="xl" style={styles.textColor}>
-                            {!isNaN(weather!.current!.temp_c)
+                            {isValueOfType(weather?.current?.temp_c, "number")
                                 ? `${Math.round(weather!.current?.temp_c)}°`
                                 : ""}
                         </HeaderText>
                         <Text size="xs" style={styles.textColor}>
-                            {!isNaN(weather!.current?.feelslike_c)
+                            {isValueOfType(weather?.current?.feelslike_c, "number")
                                 ? `Feels like ${Math.round(weather!.current?.feelslike_c)}°`
                                 : ""}
                         </Text>

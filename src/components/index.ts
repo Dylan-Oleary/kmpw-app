@@ -12,6 +12,7 @@ export * from "./HeaderText";
 export * from "./Image";
 export * from "./ImagePicker";
 export * from "./Loader";
+export * from "./LocationErrorAlert";
 export * from "./Modal";
 export * from "./RefreshControl";
 export * from "./StatusBar";
