@@ -7,6 +7,9 @@ export const GET_BREEDS = gql`
         breeds {
             id
             name
+            lifeSpanAvg
+            heightImperialAvg
+            weightImperialAvg
         }
     }
 `;

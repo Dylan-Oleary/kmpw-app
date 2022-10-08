@@ -12,6 +12,9 @@ export const DOG_FRAGMENT = gql`
         breed {
             id
             name
+            lifeSpanAvg
+            heightImperialAvg
+            weightImperialAvg
         }
         safetyLevel {
             level

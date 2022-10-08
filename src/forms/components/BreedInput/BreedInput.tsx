@@ -1,9 +1,16 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import { LayoutChangeEvent, Platform, StyleProp, TouchableOpacity, ViewStyle } from "react-native";
+import {
+    LayoutChangeEvent,
+    Platform,
+    ScrollView,
+    StyleProp,
+    TouchableOpacity,
+    ViewStyle
+} from "react-native";
 
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { useGetBreedsQuery } from "@/api";
-import { Button, Container, Modal } from "@/components";
+import { BreedStats, Button, Container, Modal } from "@/components";
 import { EmptyBreedList, SelectDropdown, TextInput } from "@/forms";
 import { Breed, FormInputValidator } from "@/types";
 
@@ -114,6 +121,11 @@ export const BreedInput: FC<BreedInputProps> = ({
                     valueKey="id"
                     withSearch
                 />
+                {selectedBreed && (
+                    <ScrollView style={styles.breedStatsContainer}>
+                        <BreedStats {...selectedBreed} />
+                    </ScrollView>
+                )}
                 <Container style={styles.actionsRow}>
                     <Button
                         icon={<ArrowRightIcon color={styles.submitIcon.color} />}

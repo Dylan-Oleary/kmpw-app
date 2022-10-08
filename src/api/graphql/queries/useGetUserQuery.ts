@@ -38,6 +38,9 @@ export const GET_USER = gql`
                 breed {
                     id
                     name
+                    lifeSpanAvg
+                    heightImperialAvg
+                    weightImperialAvg
                 }
                 safetyLevel {
                     level

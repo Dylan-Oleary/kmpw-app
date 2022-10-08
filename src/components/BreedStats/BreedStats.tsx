@@ -1,10 +1,28 @@
 import React, { FC } from "react";
 
-import { Container, Text } from "@/components";
+import { Container, DogInformation } from "@/components";
 import { Breed } from "@/types";
 
-export const BreedStats: FC<Breed> = ({ name }) => (
+import { styles } from "./styles";
+
+export const BreedStats: FC<Breed> = ({ lifeSpanAvg, heightImperialAvg, weightImperialAvg }) => (
     <Container>
-        <Text>{name}</Text>
+        <DogInformation
+            label="Avg. lifespan"
+            size="sm"
+            value={lifeSpanAvg ? `${lifeSpanAvg} years` : undefined}
+        />
+        <DogInformation
+            label="Avg. height"
+            size="sm"
+            style={styles.statRow}
+            value={heightImperialAvg ? `${heightImperialAvg} in.` : undefined}
+        />
+        <DogInformation
+            label="Avg. weight"
+            size="sm"
+            style={styles.statRow}
+            value={weightImperialAvg ? `${weightImperialAvg} lbs` : undefined}
+        />
     </Container>
 );
