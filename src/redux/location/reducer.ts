@@ -29,6 +29,7 @@ export const locationSlice = createSlice({
                 requestTimestamp = Date.now()
             } = action.payload;
 
+            state.errors = [];
             state.permissionGranted = permissionGranted;
             state.permissionRequested = true;
             state.location = location;

@@ -65,7 +65,7 @@ export const getUserGeoLocation: () => Promise<{
                         );
                         reject(error);
                     },
-                    { enableHighAccuracy: false, maximumAge: 0, timeout: 7500 }
+                    { enableHighAccuracy: false, maximumAge: 0, timeout: 5000 }
                 );
             });
         }

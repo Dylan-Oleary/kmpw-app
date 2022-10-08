@@ -63,7 +63,11 @@ export const HomeScreen: FC = () => {
     }, [geolocation, requestTimestamp]);
 
     return (
-        <FullScreenLoader isLoading={!isInitialDataFetchComplete}>
+        <FullScreenLoader
+            isLoading={
+                !isInitialDataFetchComplete || (locationErrors?.length === 0 && !geolocation)
+            }
+        >
             <Container style={getContainerStyle(insets)}>
                 <WeatherBanner
                     lastUpdatedTimestamp={requestTimestamp}

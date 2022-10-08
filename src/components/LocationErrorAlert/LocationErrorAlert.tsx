@@ -15,7 +15,7 @@ export const LocationErrorAlert: FC<ViewProps> = ({ style, ...props }) => (
                 <ExclamationTriangleIcon {...styles.icon} />
                 <Text size="xs" style={styles.text}>
                     We had some trouble fetching the weather in your area. As a result, some
-                    information may be missing or unavailable.
+                    information may be missing or inaccurate.
                 </Text>
             </View>
         }
