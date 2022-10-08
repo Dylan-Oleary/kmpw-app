@@ -15,9 +15,7 @@ export interface IImagePickerProps extends ViewProps {
 
 const COMMON_IMAGE_PICKER_OPTIONS: Partial<Options> = {
     cropping: true,
-    height: 128,
     mediaType: "photo",
-    width: 128,
     // Android only
     cropperActiveWidgetColor: theme.colors.brand5,
     cropperCircleOverlay: true,
