@@ -1,4 +1,4 @@
-import { PermissionsAndroid, Platform } from "react-native";
+import { PermissionsAndroid, PermissionStatus, Platform } from "react-native";
 import Geolocation, { GeoCoordinates } from "react-native-geolocation-service";
 
 export const buildGeolocationString = (latitude?: number, longitude?: number) =>
@@ -13,9 +13,19 @@ export const checkCurrentLocationPermission: () => Promise<boolean> = async () =
         }
 
         if (Platform.OS === "android") {
-            return await PermissionsAndroid.check(
+            let permissionGranted = false;
+
+            permissionGranted = await PermissionsAndroid.check(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
             );
+
+            if (!permissionGranted) {
+                return await PermissionsAndroid.check(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+                );
+            }
+
+            return permissionGranted;
         }
 
         throw new Error(`Unsupported OS: ${Platform.OS}`);
@@ -69,9 +79,17 @@ export const requestLocationAccess: () => Promise<boolean> = async () => {
         }
 
         if (Platform.OS === "android") {
-            const permissionStatus = await PermissionsAndroid.request(
+            let permissionStatus: PermissionStatus = "denied";
+
+            permissionStatus = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
             );
+
+            if (permissionStatus !== PermissionsAndroid.RESULTS.GRANTED) {
+                permissionStatus = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+                );
+            }
 
             return permissionStatus === PermissionsAndroid.RESULTS.GRANTED;
         }

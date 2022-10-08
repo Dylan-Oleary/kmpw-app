@@ -18,13 +18,15 @@ export const LocationDisabledScreen: FC = () => {
                 <Container style={[getContainerStyle(insets), styles.transparentBackground]}>
                     <BrandHeader
                         content={[
-                            "KMPW uses location information to let you know ",
-                            "when it's okay ",
-                            "to take your pup for a stroll."
+                            "Keep My Paws Warm ",
+                            "uses your location to determine ",
+                            "the weather & temperature ",
+                            "in your area."
                         ]}
                         size="2xl"
+                        swapColorOrder
                     />
-                    <Container style={styles.locationCtaText}>
+                    <Container style={[styles.locationCtaText, styles.transparentBackground]}>
                         <BrandHeader
                             content={["Please enable your location ", "to get started "]}
                             size="2xl"
