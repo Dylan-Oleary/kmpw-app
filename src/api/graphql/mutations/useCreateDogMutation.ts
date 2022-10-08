@@ -23,6 +23,9 @@ export const CREATE_DOG = gql`
             breed {
                 id
                 name
+                lifeSpanAvg
+                heightImperialAvg
+                weightImperialAvg
             }
             safetyLevel {
                 level
