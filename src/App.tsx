@@ -22,7 +22,7 @@ const App = () => {
     const dispatch = useAppDispatch();
     const { isLoadingInitialData, isNavigationReady, showLoadingOverlay } =
         useApplicationSelector();
-    const { accessToken } = useUserSelector();
+    const { accessToken, isInitialized: isUserInitialized } = useUserSelector();
 
     useEffect(() => {
         dispatch(initializeUser()).then(() => {
@@ -31,10 +31,10 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        if (!isLoadingInitialData && isNavigationReady) {
+        if (!isLoadingInitialData && isNavigationReady && isUserInitialized) {
             RNBootSplash.hide({ fade: true });
         }
-    }, [isLoadingInitialData, isNavigationReady]);
+    }, [isLoadingInitialData, isNavigationReady, isUserInitialized]);
 
     return (
         <NavigationContainer onReady={() => dispatch(setIsNavigationReady(true))}>

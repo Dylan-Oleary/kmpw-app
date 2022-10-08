@@ -5,7 +5,7 @@ import { clearUser, initializeUser, setUserTokens, IUserState } from "@/redux";
 
 export const userSlice = createSlice({
     name: "user",
-    initialState: {} as IUserState,
+    initialState: { isInitialized: false } as IUserState,
     reducers: {
         setUserIdentifier: (state, action: PayloadAction<string>) => {
             state.id = action.payload;
@@ -17,6 +17,8 @@ export const userSlice = createSlice({
                 const accessToken = action?.payload;
 
                 if (accessToken) state.accessToken = accessToken;
+
+                state.isInitialized = true;
             })
             .addCase(setUserTokens.fulfilled, (state, action) => {
                 const accessToken = action?.payload;

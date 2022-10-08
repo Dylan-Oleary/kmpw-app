@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { View, ViewProps } from "react-native";
 import dayjs from "dayjs";
 
@@ -14,51 +14,49 @@ interface IWeatherBannerProps extends ViewProps {
     lastUpdatedTimestamp: number | null;
 }
 
-export const WeatherBanner: FC<IWeatherBannerProps> = ({
-    lastUpdatedTimestamp,
-    loading = false,
-    style,
-    weather,
-    ...props
-}) => (
-    <View>
-        <View style={[styles.container, style]} {...props}>
-            <View style={styles.infoContainer}>
-                <View>
-                    <HeaderText size="xl" style={styles.textColor}>
-                        {dayjs().format(DATE_FORMATS.FULL_MONTH_WITH_DAY)}
-                    </HeaderText>
-                    <Text size="xs" style={styles.textColor}>
-                        {loading
-                            ? "updating..."
-                            : `updated at ${dayjs(lastUpdatedTimestamp).format(DATE_FORMATS.TIME)}`}
-                    </Text>
-                </View>
-                <View style={styles.temperatureContainer}>
-                    {weather?.current?.temp_c && (
+export const WeatherBanner: FC<IWeatherBannerProps> = memo(
+    ({ lastUpdatedTimestamp, loading = false, style, weather, ...props }) => (
+        <View>
+            <View style={[styles.container, style]} {...props}>
+                <View style={styles.infoContainer}>
+                    <View>
                         <HeaderText size="xl" style={styles.textColor}>
-                            {Math.round(weather!.current?.temp_c)}&#176;
+                            {dayjs().format(DATE_FORMATS.FULL_MONTH_WITH_DAY)}
                         </HeaderText>
-                    )}
-                    {weather?.current?.feelslike_c && (
                         <Text size="xs" style={styles.textColor}>
-                            Feels like {Math.round(weather!.current?.feelslike_c)}&#176;
+                            {loading
+                                ? "updating..."
+                                : `updated at ${dayjs(lastUpdatedTimestamp).format(
+                                      DATE_FORMATS.TIME
+                                  )}`}
                         </Text>
+                    </View>
+                    <View style={styles.temperatureContainer}>
+                        <HeaderText size="xl" style={styles.textColor}>
+                            {!isNaN(weather!.current!.temp_c)
+                                ? `${Math.round(weather!.current?.temp_c)}°`
+                                : ""}
+                        </HeaderText>
+                        <Text size="xs" style={styles.textColor}>
+                            {!isNaN(weather!.current?.feelslike_c)
+                                ? `Feels like ${Math.round(weather!.current?.feelslike_c)}°`
+                                : ""}
+                        </Text>
+                    </View>
+                </View>
+                <View style={styles.divider} />
+                <View style={styles.iconContainer}>
+                    {Boolean(weather?.current) && (
+                        <WeatherIcon
+                            iconCode={weather?.current?.condition?.code}
+                            isDay={Boolean(weather?.current?.is_day)}
+                        />
                     )}
                 </View>
             </View>
-            <View style={styles.divider} />
-            <View style={styles.iconContainer}>
-                {weather?.current && (
-                    <WeatherIcon
-                        iconCode={weather?.current?.condition?.code}
-                        isDay={Boolean(weather?.current?.is_day)}
-                    />
-                )}
-            </View>
+            {weather?.current && weather.current.feelslike_c >= WARM_WEATHER_ALERT_TEMP_F && (
+                <WarmWeatherAlert />
+            )}
         </View>
-        {weather?.current && weather.current.feelslike_c >= WARM_WEATHER_ALERT_TEMP_F && (
-            <WarmWeatherAlert />
-        )}
-    </View>
+    )
 );

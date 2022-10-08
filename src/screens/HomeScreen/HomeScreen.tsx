@@ -75,7 +75,7 @@ export const HomeScreen: FC = () => {
                     <Container>
                         <Image aspectRatio={[16, 8]} source={DogImage} width={screenWidth} />
                     </Container>
-                    {!loading && user && (
+                    {Boolean(!loading && user) && (
                         <Container style={styles.contentContainer}>
                             {(user?.dogs || []).length > 0 ? (
                                 <DogList dogs={user?.dogs || []} loading={loading} />
