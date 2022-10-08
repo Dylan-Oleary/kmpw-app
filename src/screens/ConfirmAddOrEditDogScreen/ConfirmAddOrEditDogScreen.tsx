@@ -1,9 +1,18 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { ScrollView } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { uploadDogImage, useCreateDogMutation, useUpdateDogMutation } from "@/api";
-import { Alert, AlertControl, BrandHeader, Container, DogConfirmation, Text } from "@/components";
+import {
+    Alert,
+    AlertControl,
+    BrandHeader,
+    Container,
+    DogConfirmation,
+    errorAlertDefaultConfig,
+    FullScreenLoader,
+    Text
+} from "@/components";
 import { buildDogMutationData } from "@/forms";
 import { useAppSelector } from "@/hooks";
 import { resetHomeStack } from "@/lib";
@@ -15,15 +24,19 @@ import { styles } from "./styles";
 export const ConfirmAddOrEditDogScreen: FC = () => {
     const { accessToken } = useAppSelector(({ user }) => user);
     const [alert, setAlert] = useState<AlertControl>({ show: false });
-    const { dispatch, goBack } = useNavigation<HomeStackNavigationProp>();
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const hasMounted = useRef<boolean>(false);
+    const { dispatch, goBack, setOptions } = useNavigation<HomeStackNavigationProp>();
     const {
         params: { data, id }
     } = useRoute<ConfirmAddOrEditDogScreenRouteProp>();
     const { createDog, loading: isCreateDogLoading } = useCreateDogMutation();
     const { updateDog, loading: isUpdateDogLoading } = useUpdateDogMutation(id as string);
-    const isLoading = isCreateDogLoading || isUpdateDogLoading;
+    const isLoading = isCreateDogLoading || isUpdateDogLoading || isSubmitting;
 
     const handleSubmit = async () => {
+        setIsSubmitting(true);
+
         let hasPhotoUploadError: boolean = false;
 
         if (data?.newProfilePicture) {
@@ -47,13 +60,13 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
 
                 dispatch(resetHomeStack());
             },
-            onError: () =>
+            onError: () => {
                 setAlert({
-                    title: "Oh no!",
-                    body: "We couldn't complete your request at the moment. Please try again.",
-                    theme: "error",
+                    ...errorAlertDefaultConfig,
                     show: true
-                })
+                });
+                setIsSubmitting(false);
+            }
         };
 
         // TODO: Fix this
@@ -61,31 +74,41 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
         return id ? updateDog(mutationOptions) : createDog(mutationOptions);
     };
 
+    useEffect(() => {
+        if (hasMounted.current) {
+            setOptions({ headerShown: !isLoading });
+        } else {
+            hasMounted.current = true;
+        }
+    }, [isLoading]);
+
     return (
-        <Container style={globalStyles.defaultFlex}>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
-                <Container>
-                    <BrandHeader content={["Confirm your ", "pup."]} size="2xl" />
-                    <Text style={styles.headerBodyText}>
-                        Check out your pup's details below and make sure everything looks good.
-                    </Text>
-                    {alert?.show && (
-                        <Alert
-                            body={alert?.body}
-                            style={styles.alertContainer}
-                            theme={alert?.theme}
-                            title={alert?.title}
-                        />
-                    )}
-                </Container>
-                <DogConfirmation
-                    dog={data}
-                    isLoading={isLoading}
-                    onCancel={goBack}
-                    onConfirm={handleSubmit}
-                    style={styles.detailsContainer}
-                />
-            </ScrollView>
-        </Container>
+        <FullScreenLoader isLoading={isLoading}>
+            <Container style={globalStyles.defaultFlex}>
+                <ScrollView contentContainerStyle={styles.contentContainer}>
+                    <Container>
+                        <BrandHeader content={["Confirm your ", "pup."]} size="2xl" />
+                        <Text style={styles.headerBodyText}>
+                            Check out your pup's details below and make sure everything looks good.
+                        </Text>
+                        {alert?.show && (
+                            <Alert
+                                body={alert?.body}
+                                style={styles.alertContainer}
+                                theme={alert?.theme}
+                                title={alert?.title}
+                            />
+                        )}
+                    </Container>
+                    <DogConfirmation
+                        dog={data}
+                        isLoading={isLoading}
+                        onCancel={goBack}
+                        onConfirm={handleSubmit}
+                        style={styles.detailsContainer}
+                    />
+                </ScrollView>
+            </Container>
+        </FullScreenLoader>
     );
 };
