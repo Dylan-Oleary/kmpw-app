@@ -44,7 +44,7 @@ export const LoginForm: FC = () => {
                         case 401:
                         case 404:
                             alertConfig.body =
-                                "The email and/or password you have enteredis incorrect.";
+                                "The email and/or password you have entered is incorrect.";
                             break;
                         default:
                             break;
