@@ -6,7 +6,7 @@ import { Dog, GraphQlDogMutationData } from "@/types";
 export type CreateDogMutationResult = { createDog: Dog };
 export type CreateDogMutationVariables = {
     data: GraphQlDogMutationData;
-    temperatureFarenheit: number;
+    temperatureFarenheit?: number;
 };
 
 export const CREATE_DOG = gql`
@@ -41,9 +41,10 @@ export const useCreateDogMutation = () => {
         CreateDogMutationResult,
         CreateDogMutationVariables
     >(CREATE_DOG, {
+        errorPolicy: "all",
         variables: {
             data: {} as GraphQlDogMutationData,
-            temperatureFarenheit: user?.weather!.current.temp_f
+            temperatureFarenheit: user?.weather?.current?.temp_f
         },
         update: (cache, { data }) => {
             const newDog = data?.createDog;
