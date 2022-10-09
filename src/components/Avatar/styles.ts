@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, StyleProp, ViewStyle } from "react-native";
 
 import { theme } from "@/constants";
 
@@ -20,4 +20,10 @@ export const styles = StyleSheet.create({
         bottom: 0,
         position: "absolute"
     }
+});
+
+export const getShimmerStyles: (width: number) => StyleProp<ViewStyle> = (width) => ({
+    borderRadius: styles.avatar.borderRadius,
+    height: width,
+    width
 });

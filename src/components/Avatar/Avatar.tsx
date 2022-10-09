@@ -1,5 +1,7 @@
-import React, { FC, ReactNode, useMemo } from "react";
+import React, { FC, ReactNode, useMemo, useState } from "react";
 import { ImageSourcePropType, StyleProp, TouchableOpacity, View, ViewStyle } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 import { SvgProps } from "react-native-svg";
 
 import DefaultAvatarImage from "@/assets/images/logo_white_bg.png";
@@ -7,7 +9,7 @@ import { Image, IImageProps } from "@/components";
 import { theme } from "@/constants";
 import { AvatarSize } from "@/types";
 
-import { styles } from "./styles";
+import { getShimmerStyles, styles } from "./styles";
 
 type AvatarChildrenOpts = SvgProps & {
     size?: AvatarSize;
@@ -81,6 +83,7 @@ export const Avatar: FC<IAvatarProps> = ({
     source = DefaultAvatarImage,
     ...rest
 }) => {
+    const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
     const width = useMemo(() => getAvatarWidth(size), [size]);
     const { iconContainerStyle, iconStyle } = useMemo(() => getAvatarIconStyles(width), [width]);
 
@@ -91,13 +94,20 @@ export const Avatar: FC<IAvatarProps> = ({
             onPress={() => onPress?.()}
             style={[styles.container, containerStyle, { width }]}
         >
-            <Image
-                aspectRatio={[1, 1]}
-                imageStyle={styles.avatar}
-                source={source}
-                width={width}
-                {...rest}
-            />
+            <ShimmerPlaceHolder
+                LinearGradient={LinearGradient}
+                style={getShimmerStyles(width)}
+                visible={isImageLoaded}
+            >
+                <Image
+                    aspectRatio={[1, 1]}
+                    imageStyle={styles.avatar}
+                    source={source}
+                    onLoadEnd={() => setIsImageLoaded(true)}
+                    width={width}
+                    {...rest}
+                />
+            </ShimmerPlaceHolder>
             {children && <View style={iconContainerStyle}>{children({ size, ...iconStyle })}</View>}
         </TouchableOpacity>
     );
