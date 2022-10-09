@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { StyleProp, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from "react-native";
+import HapticFeedback from "react-native-haptic-feedback";
 import { useNavigation } from "@react-navigation/native";
 
 import PencilAltIcon from "@/assets/svg/pencil-alt.svg";
@@ -27,9 +28,8 @@ export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
     const { birthday, breed, name, safetyLevel, weightImperial } = dog;
 
     const onLongPress = () => {
-        if (isUpdateMenuOpen) return;
-
-        setIsUpdateMenuOpen(true);
+        HapticFeedback.trigger("impactMedium");
+        setIsUpdateMenuOpen(!isUpdateMenuOpen);
     };
 
     useEffect(() => {
@@ -55,6 +55,7 @@ export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
                 </TouchableOpacity>
                 <View style={styles.dogImageColumn}>
                     <Avatar
+                        onLongPress={onLongPress}
                         source={dog?.profilePicture ? { uri: dog.profilePicture } : undefined}
                     />
                 </View>

@@ -16,6 +16,7 @@ type AvatarChildrenOpts = SvgProps & {
 interface IAvatarProps extends Omit<IImageProps, "source"> {
     children?: (opts: AvatarChildrenOpts) => ReactNode;
     containerStyle?: StyleProp<ViewStyle>;
+    onLongPress?: () => void;
     onPress?: () => void;
     size?: AvatarSize;
     source?: ImageSourcePropType;
@@ -75,6 +76,7 @@ export const Avatar: FC<IAvatarProps> = ({
     children,
     containerStyle,
     onPress,
+    onLongPress,
     size = "base",
     source = DefaultAvatarImage,
     ...rest
@@ -85,6 +87,7 @@ export const Avatar: FC<IAvatarProps> = ({
     return (
         <TouchableOpacity
             activeOpacity={onPress ? theme.ACTIVE_OPACITY : 1}
+            onLongPress={() => onLongPress?.()}
             onPress={() => onPress?.()}
             style={[styles.container, containerStyle, { width }]}
         >

@@ -368,6 +368,8 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController
+  - RNReactNativeHapticFeedback (1.14.0):
+    - React-Core
   - RNScreens (3.17.0):
     - React-Core
     - React-RCTImage
@@ -440,6 +442,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -538,6 +541,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-bootsplash"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
+  RNReactNativeHapticFeedback:
+    :path: "../node_modules/react-native-haptic-feedback"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -597,6 +602,7 @@ SPEC CHECKSUMS:
   ReactCommon: d98c6c96b567f9b3a15f9fd4cc302c1eda8e3cf2
   RNBootSplash: 5f346163977573d6b2aeba1b25df9d2245c0d73c
   RNImageCropPicker: ffbba608264885c241cbf3a8f78eb7aeeb978241
+  RNReactNativeHapticFeedback: 1e3efeca9628ff9876ee7cdd9edec1b336913f8c
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   RNSVG: ecd661f380a07ba690c9c5929c475a44f432d674
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
