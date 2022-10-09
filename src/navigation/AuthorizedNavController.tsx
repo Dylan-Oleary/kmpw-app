@@ -3,7 +3,7 @@ import { AppState, AppStateStatus } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { StatusBar } from "@/components";
+import { FullScreenLoader } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { checkCurrentLocationPermission, getUserGeoLocation } from "@/lib";
 import { HomeNavController } from "@/navigation";
@@ -53,21 +53,21 @@ export const AuthorizedNavController: FC = () => {
         };
     }, [locationState]);
 
-    return permissionRequested ? (
-        permissionGranted ? (
-            <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen
-                    name="HomeStack"
-                    component={HomeNavController}
-                    options={{ tabBarStyle: { display: "none" } }}
-                />
-            </Tab.Navigator>
-        ) : (
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen component={LocationDisabledScreen} name="LocationDisabled" />
-            </Stack.Navigator>
-        )
-    ) : (
-        <StatusBar />
+    return (
+        <FullScreenLoader isLoading={!permissionRequested}>
+            {permissionGranted ? (
+                <Tab.Navigator screenOptions={{ headerShown: false }}>
+                    <Tab.Screen
+                        name="HomeStack"
+                        component={HomeNavController}
+                        options={{ tabBarStyle: { display: "none" } }}
+                    />
+                </Tab.Navigator>
+            ) : (
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen component={LocationDisabledScreen} name="LocationDisabled" />
+                </Stack.Navigator>
+            )}
+        </FullScreenLoader>
     );
 };

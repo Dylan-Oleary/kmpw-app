@@ -9,12 +9,16 @@ export const locationSlice = createSlice({
     name: "location",
     initialState: {
         errors: [],
+        isFetchingLocation: false,
         permissionGranted: false,
         permissionRequested: false,
         location: null,
         requestTimestamp: null
     } as ILocationState,
     reducers: {
+        setIsFetchingLocation: (state, action: PayloadAction<boolean>) => {
+            state.isFetchingLocation = action?.payload || false;
+        },
         setLocation: (
             state,
             action: PayloadAction<{
@@ -30,6 +34,7 @@ export const locationSlice = createSlice({
             } = action.payload;
 
             state.errors = [];
+            state.isFetchingLocation = false;
             state.permissionGranted = permissionGranted;
             state.permissionRequested = true;
             state.location = location;
@@ -37,6 +42,7 @@ export const locationSlice = createSlice({
         },
         setLocationError: (state, action: PayloadAction<IApplicationError>) => {
             state.errors = [action.payload];
+            state.isFetchingLocation = false;
         },
         setLocationPermissions: (
             state,
@@ -55,6 +61,7 @@ export const locationSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(clearUser.fulfilled, (state) => ({
             errors: [],
+            isFetchingLocation: false,
             permissionGranted: state.permissionGranted,
             permissionRequested: state.permissionRequested,
             location: null,
@@ -63,7 +70,8 @@ export const locationSlice = createSlice({
     }
 });
 
-export const { setLocation, setLocationError, setLocationPermissions } = locationSlice.actions;
+export const { setIsFetchingLocation, setLocation, setLocationError, setLocationPermissions } =
+    locationSlice.actions;
 export const { reducer: locationReducer } = locationSlice;
 
 export const useLocationSelector = () => useAppSelector(({ location }) => location);

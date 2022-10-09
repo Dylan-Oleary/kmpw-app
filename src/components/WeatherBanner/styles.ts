@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 
+import { WEATHER_ICON_DEFAULT_SIZE } from "@/components";
 import { theme } from "@/constants";
+import { globalStyles } from "@/styles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -14,8 +16,8 @@ export const styles = StyleSheet.create({
         width: 1
     },
     iconContainer: {
-        alignItems: "center",
-        justifyContent: "center",
+        ...globalStyles.alignItemsCenter,
+        ...globalStyles.justifyFlexCenter,
         paddingHorizontal: 10
     },
     infoContainer: {
@@ -29,5 +31,16 @@ export const styles = StyleSheet.create({
     },
     textColor: {
         color: theme.colors.white
+    },
+    weatherIconPlaceholderContainer: {
+        ...globalStyles.alignItemsCenter,
+        ...globalStyles.justifyFlexCenter,
+        height: WEATHER_ICON_DEFAULT_SIZE,
+        width: WEATHER_ICON_DEFAULT_SIZE
+    },
+    weatherIconPlaceholder: {
+        color: theme.colors.white,
+        height: 24,
+        width: 24
     }
 });

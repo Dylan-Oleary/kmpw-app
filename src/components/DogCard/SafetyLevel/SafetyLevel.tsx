@@ -13,7 +13,12 @@ import { styles } from "./styles";
 
 export type SafetyLevelProps = SafetyLevelType & ViewProps;
 
-export const SafetyLevel: FC<SafetyLevelProps> = ({ level, message, style, ...rest }) => {
+export const SafetyLevel: FC<SafetyLevelProps> = ({
+    level = 3,
+    message = "Use your best judgment",
+    style,
+    ...rest
+}) => {
     const iconProps = { color: styles.text.color };
 
     let icon;

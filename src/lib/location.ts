@@ -1,7 +1,7 @@
 import { PermissionsAndroid, PermissionStatus, Platform } from "react-native";
 import Geolocation, { GeoCoordinates } from "react-native-geolocation-service";
 
-import { setLocationPermissions, store } from "@/redux";
+import { setIsFetchingLocation, setLocationPermissions, store } from "@/redux";
 
 export const buildGeolocationString = (latitude?: number, longitude?: number) =>
     latitude && longitude ? `${latitude},${longitude}` : "";
@@ -42,6 +42,7 @@ export const getUserGeoLocation: () => Promise<{
     requestTimestamp: number;
 }> = async () => {
     try {
+        store.dispatch(setIsFetchingLocation(true));
         const isLocationPermitted = await requestLocationAccess();
 
         if (isLocationPermitted) {

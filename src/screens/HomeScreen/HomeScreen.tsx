@@ -33,6 +33,7 @@ export const HomeScreen: FC = () => {
     const { navigate } = useNavigation<HomeStackNavigationProp>();
     const {
         errors: locationErrors,
+        isFetchingLocation,
         location: geolocation,
         requestTimestamp
     } = useLocationSelector();
@@ -71,7 +72,7 @@ export const HomeScreen: FC = () => {
             <Container style={getContainerStyle(insets)}>
                 <WeatherBanner
                     lastUpdatedTimestamp={requestTimestamp}
-                    loading={loading || isRefreshing}
+                    loading={loading || isRefreshing || isFetchingLocation}
                     style={styles.weatherBanner}
                     weather={user?.weather || prevUser?.weather}
                 />

@@ -9,10 +9,12 @@ interface WeatherIconProps extends Omit<IImageProps, "height" | "source" | "widt
     size?: number;
 }
 
+export const WEATHER_ICON_DEFAULT_SIZE = 44;
+
 export const WeatherIcon: FC<WeatherIconProps> = ({
     iconCode = "1000",
     isDay = true,
-    size = 44,
+    size = WEATHER_ICON_DEFAULT_SIZE,
     ...rest
 }) => (
     <Image

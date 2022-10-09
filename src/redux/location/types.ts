@@ -4,6 +4,7 @@ import { IApplicationError } from "@/redux";
 
 export interface ILocationState {
     errors: IApplicationError[];
+    isFetchingLocation: boolean;
     location: GeoCoordinates | null;
     permissionGranted: boolean;
     permissionRequested: boolean;

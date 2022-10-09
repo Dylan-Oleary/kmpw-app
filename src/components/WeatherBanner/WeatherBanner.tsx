@@ -3,6 +3,7 @@ import { View, ViewProps } from "react-native";
 import dayjs from "dayjs";
 import { isValueOfType } from "@theonlydevsever/utilities";
 
+import NoSignalIcon from "@/assets/svg/no-signal.svg";
 import { HeaderText, Text, WarmWeatherAlert, WeatherIcon } from "@/components";
 import { DATE_FORMATS, WARM_WEATHER_ALERT_TEMP_F } from "@/constants";
 import { Weather } from "@/types";
@@ -47,11 +48,15 @@ export const WeatherBanner: FC<IWeatherBannerProps> = memo(
                 </View>
                 <View style={styles.divider} />
                 <View style={styles.iconContainer}>
-                    {Boolean(weather?.current) && (
+                    {Boolean(weather?.current) ? (
                         <WeatherIcon
                             iconCode={weather?.current?.condition?.code}
                             isDay={Boolean(weather?.current?.is_day)}
                         />
+                    ) : (
+                        <View style={styles.weatherIconPlaceholderContainer}>
+                            <NoSignalIcon {...styles.weatherIconPlaceholder} />
+                        </View>
                     )}
                 </View>
             </View>
