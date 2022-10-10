@@ -17,6 +17,7 @@ export * from "./Modal";
 export * from "./RefreshControl";
 export * from "./StatusBar";
 export * from "./Text";
+export * from "./Toast";
 export * from "./WarmWeatherAlert";
 export * from "./WeatherBanner";
 export * from "./WeatherIcon";

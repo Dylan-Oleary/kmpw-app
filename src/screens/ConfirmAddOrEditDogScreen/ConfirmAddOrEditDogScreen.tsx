@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { ScrollView } from "react-native";
+import { useToast } from "react-native-toast-notifications";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { isValueOfType } from "@theonlydevsever/utilities";
 
 import { uploadDogImage, useCreateDogMutation, useUpdateDogMutation } from "@/api";
 import {
@@ -15,13 +17,15 @@ import {
 } from "@/components";
 import { buildDogMutationData } from "@/forms";
 import { useAppSelector } from "@/hooks";
-import { resetHomeStack } from "@/lib";
+import { formatPossessiveNoun, resetHomeStack } from "@/lib";
 import { ConfirmAddOrEditDogScreenRouteProp, HomeStackNavigationProp } from "@/navigation";
 import { globalStyles } from "@/styles";
+import { GraphQlDogMutationData } from "@/types";
 
 import { styles } from "./styles";
 
 export const ConfirmAddOrEditDogScreen: FC = () => {
+    const toast = useToast();
     const { accessToken } = useAppSelector(({ user }) => user);
     const [alert, setAlert] = useState<AlertControl>({ show: false });
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -34,6 +38,17 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
     const { updateDog, loading: isUpdateDogLoading } = useUpdateDogMutation(id as string);
     const isLoading = isCreateDogLoading || isUpdateDogLoading || isSubmitting;
 
+    const buildSuccessMessage: (data: GraphQlDogMutationData, isCreate: boolean) => string = (
+        data,
+        isCreate = true
+    ) => {
+        if (isCreate) {
+            return `Hello, ${data?.name}. Welcome to Woxy!`;
+        }
+
+        return `${formatPossessiveNoun(data?.name)} info was successfully updated!`;
+    };
+
     const handleSubmit = async () => {
         setIsSubmitting(true);
 
@@ -45,7 +60,6 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
                     data.profilePicture = secure_url;
                 })
                 .catch(() => {
-                    //TODO: Log error
                     hasPhotoUploadError = true;
                 });
         }
@@ -54,11 +68,19 @@ export const ConfirmAddOrEditDogScreen: FC = () => {
         const mutationOptions = {
             variables: { data: mutationData },
             onCompleted: () => {
-                if (hasPhotoUploadError) {
-                    // TODO: Show a toast / error message
-                }
-
                 dispatch(resetHomeStack());
+                toast.show(buildSuccessMessage(mutationData, isValueOfType(id, "undefined")), {
+                    type: "success"
+                });
+
+                if (hasPhotoUploadError) {
+                    toast.show(
+                        `An error occurred while updating ${formatPossessiveNoun(
+                            mutationData?.name
+                        )} photo.`,
+                        { type: "warning" }
+                    );
+                }
             },
             onError: () => {
                 setAlert({

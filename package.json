@@ -70,6 +70,7 @@
     "react-native-screens": "3.17.0",
     "react-native-shimmer-placeholder": "2.0.7",
     "react-native-svg": "12.4.4",
+    "react-native-toast-notifications": "3.3.1",
     "react-redux": "7.2.8"
   },
   "devDependencies": {

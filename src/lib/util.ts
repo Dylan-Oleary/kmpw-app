@@ -1,3 +1,6 @@
+export const formatPossessiveNoun: (noun: string) => string = (noun) =>
+    `${noun}${noun?.trim()?.endsWith("s") ? "'" : "'s"}`;
+
 export const getRatio: (x: number, y: number, precision?: number) => number = (
     x,
     y,

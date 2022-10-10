@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import RNBootSplash from "react-native-bootsplash";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
+import { ToastProvider } from "react-native-toast-notifications";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { FullScreenLoader, OverlayLoader, StatusBar } from "@/components";
+import { FullScreenLoader, getToastProviderOptions, OverlayLoader, StatusBar } from "@/components";
 import { useAppDispatch } from "@/hooks";
 import { AppStackParams, AuthorizedNavController, UnauthorizedNavController } from "@/navigation";
 import {
@@ -18,7 +19,13 @@ import { globalStyles } from "@/styles";
 
 const Stack = createNativeStackNavigator<AppStackParams>();
 
-const App = () => {
+interface ApplicationStackProps {
+    accessToken?: string;
+    isLoadingInitialData: boolean;
+    isNavigationReady: boolean;
+}
+
+const App: FC = () => {
     const dispatch = useAppDispatch();
     const { isLoadingInitialData, isNavigationReady, showLoadingOverlay } =
         useApplicationSelector();
@@ -41,21 +48,37 @@ const App = () => {
             <OverlayLoader isLoading={showLoadingOverlay}>
                 <SafeAreaProvider style={globalStyles.defaultFlex}>
                     <StatusBar withBrand={accessToken ? true : false} />
-                    <FullScreenLoader isLoading={isLoadingInitialData || !isNavigationReady}>
-                        <Stack.Navigator screenOptions={{ headerShown: false }}>
-                            <Stack.Screen
-                                component={
-                                    accessToken
-                                        ? AuthorizedNavController
-                                        : UnauthorizedNavController
-                                }
-                                name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
-                            />
-                        </Stack.Navigator>
-                    </FullScreenLoader>
+                    <ApplicationStack
+                        accessToken={accessToken}
+                        isLoadingInitialData={isLoadingInitialData}
+                        isNavigationReady={isNavigationReady}
+                    />
                 </SafeAreaProvider>
             </OverlayLoader>
         </NavigationContainer>
+    );
+};
+
+const ApplicationStack: FC<ApplicationStackProps> = ({
+    accessToken,
+    isLoadingInitialData,
+    isNavigationReady
+}) => {
+    const insets = useSafeAreaInsets();
+
+    return (
+        <ToastProvider {...getToastProviderOptions(insets)}>
+            <FullScreenLoader isLoading={isLoadingInitialData || !isNavigationReady}>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen
+                        component={
+                            accessToken ? AuthorizedNavController : UnauthorizedNavController
+                        }
+                        name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
+                    />
+                </Stack.Navigator>
+            </FullScreenLoader>
+        </ToastProvider>
     );
 };
 

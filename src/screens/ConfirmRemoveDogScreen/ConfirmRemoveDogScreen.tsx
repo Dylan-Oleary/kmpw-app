@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { ScrollView } from "react-native";
+import { useToast } from "react-native-toast-notifications";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useDeleteDogMutation } from "@/api";
@@ -20,6 +21,7 @@ import { globalStyles } from "@/styles";
 import { styles } from "./styles";
 
 export const ConfirmRemoveDogScreen: FC = () => {
+    const toast = useToast();
     const [alert, setAlert] = useState<AlertControl>({ show: false });
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const hasMounted = useRef<boolean>(false);
@@ -34,7 +36,10 @@ export const ConfirmRemoveDogScreen: FC = () => {
         setIsSubmitting(true);
 
         const mutationOptions = {
-            onCompleted: () => dispatch(resetHomeStack()),
+            onCompleted: () => {
+                dispatch(resetHomeStack());
+                toast.show(`${dog?.name} was successfully removed.`, { type: "success" });
+            },
             onError: () => {
                 setAlert({
                     ...errorAlertDefaultConfig,
@@ -57,8 +62,8 @@ export const ConfirmRemoveDogScreen: FC = () => {
 
     return (
         <FullScreenLoader isLoading={isLoading}>
-            <ScrollView contentContainerStyle={globalStyles.defaultFlex}>
-                <Container style={[globalStyles.defaultFlex, styles.contentContainer]}>
+            <Container style={globalStyles.defaultFlex}>
+                <ScrollView contentContainerStyle={styles.contentContainer}>
                     <Container>
                         <BrandHeader content={["Are you ", "sure?"]} size="2xl" />
                         <Text style={styles.headerBodyText}>
@@ -82,8 +87,8 @@ export const ConfirmRemoveDogScreen: FC = () => {
                         onConfirm={onConfirm}
                         style={styles.detailsContainer}
                     />
-                </Container>
-            </ScrollView>
+                </ScrollView>
+            </Container>
         </FullScreenLoader>
     );
 };
