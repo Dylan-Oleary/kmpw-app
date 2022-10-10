@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { OverlayLoader, StatusBar } from "@/components";
+import { FullScreenLoader, OverlayLoader, StatusBar } from "@/components";
 import { useAppDispatch } from "@/hooks";
 import { AppStackParams, AuthorizedNavController, UnauthorizedNavController } from "@/navigation";
 import {
@@ -41,14 +41,18 @@ const App = () => {
             <OverlayLoader isLoading={showLoadingOverlay}>
                 <SafeAreaProvider style={globalStyles.defaultFlex}>
                     <StatusBar withBrand={accessToken ? true : false} />
-                    <Stack.Navigator screenOptions={{ headerShown: false }}>
-                        <Stack.Screen
-                            component={
-                                accessToken ? AuthorizedNavController : UnauthorizedNavController
-                            }
-                            name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
-                        />
-                    </Stack.Navigator>
+                    <FullScreenLoader isLoading={isLoadingInitialData || !isNavigationReady}>
+                        <Stack.Navigator screenOptions={{ headerShown: false }}>
+                            <Stack.Screen
+                                component={
+                                    accessToken
+                                        ? AuthorizedNavController
+                                        : UnauthorizedNavController
+                                }
+                                name={accessToken ? "AuthorizedNav" : "UnauthorizedNav"}
+                            />
+                        </Stack.Navigator>
+                    </FullScreenLoader>
                 </SafeAreaProvider>
             </OverlayLoader>
         </NavigationContainer>
