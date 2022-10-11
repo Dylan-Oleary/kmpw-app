@@ -38,11 +38,6 @@ export const Footer: FC = () => {
                 text="Logout"
                 textStyle={styles.buttonText}
             />
-            <Button
-                containerStyle={styles.button}
-                text="Terms &#38; Legal"
-                textStyle={styles.buttonText}
-            />
         </Container>
     );
 };

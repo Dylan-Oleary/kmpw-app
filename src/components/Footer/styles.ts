@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { theme } from "@/constants";
+import { globalStyles } from "@/styles";
 
 export const styles = StyleSheet.create({
     button: {
@@ -10,10 +11,10 @@ export const styles = StyleSheet.create({
         color: theme.colors.brand5
     },
     container: {
-        alignItems: "center",
+        ...globalStyles.alignItemsCenter,
+        ...globalStyles.justifyFlexEnd,
         backgroundColor: theme.colors.white,
         flexDirection: "row",
-        justifyContent: "space-between",
         borderTopColor: theme.colors.brand5,
         borderTopWidth: 0.25
     },
