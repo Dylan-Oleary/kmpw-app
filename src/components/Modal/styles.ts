@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         padding: 30,
+        paddingBottom: 15,
         position: "absolute",
         bottom: 0,
         left: 0,

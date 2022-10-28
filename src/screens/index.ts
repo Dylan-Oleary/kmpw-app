@@ -1,3 +1,4 @@
+export * from "./AccountScreen";
 export * from "./AddOrEditDogScreen";
 export * from "./ConfirmAddOrEditDogScreen";
 export * from "./ConfirmRemoveDogScreen";
