@@ -2,6 +2,7 @@ import { PermissionsAndroid, PermissionStatus, Platform } from "react-native";
 import Geolocation, { GeoCoordinates } from "react-native-geolocation-service";
 
 import { setIsFetchingLocation, setLocationPermissions, store } from "@/redux";
+import { Weather } from "@/types";
 
 export const buildGeolocationString = (latitude?: number, longitude?: number) =>
     latitude && longitude ? `${latitude},${longitude}` : "";
@@ -34,6 +35,21 @@ export const checkCurrentLocationPermission: () => Promise<boolean> = async () =
     } catch (error) {
         throw error;
     }
+};
+
+export const formatLocationName: (weather: Weather) => string = (weather) => {
+    let locationName = "";
+    const { location } = weather;
+
+    if (location?.name) {
+        locationName = location.name;
+
+        if (location?.region) {
+            locationName += `, ${location.region}`;
+        }
+    }
+
+    return locationName;
 };
 
 export const getUserGeoLocation: () => Promise<{

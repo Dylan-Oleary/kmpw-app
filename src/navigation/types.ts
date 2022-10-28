@@ -19,6 +19,9 @@ export type UnauthorizedStackParams = {
     Register: undefined;
 };
 
+export type AccountScreenRouteProp = RouteProp<Pick<HomeStackParams, "Account">>;
+export type AccountScreenRouteParams = {};
+
 export type AddOrEditDogScreenRouteProp = RouteProp<Pick<HomeStackParams, "AddOrEditDog">>;
 export type AddOrEditDogScreenRouteParams = {
     dog?: Dog;
@@ -37,10 +40,15 @@ export type ConfirmRemoveDogScreenRouteParams = {
     dog: Dog;
 };
 
+export type DeleteAccountScreenRouteProp = RouteProp<Pick<HomeStackParams, "DeleteAccount">>;
+export type DeleteAccountScreenRouteParams = {};
+
 export type HomeStackNavigationProp = NativeStackNavigationProp<HomeStackParams>;
 export type HomeStackParams = {
+    Account: AccountScreenRouteParams;
     AddOrEditDog: AddOrEditDogScreenRouteParams;
     ConfirmAddOrEditDog: ConfirmAddOrEditDogScreenRouteParams;
     ConfirmRemoveDog: ConfirmRemoveDogScreenRouteParams;
+    DeleteAccount: DeleteAccountScreenRouteParams;
     Home: undefined;
 };

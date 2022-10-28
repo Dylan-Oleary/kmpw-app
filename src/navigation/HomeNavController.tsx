@@ -8,9 +8,11 @@ import {
     HomeStackParams
 } from "@/navigation";
 import {
+    AccountScreen,
     AddOrEditDogScreen,
     ConfirmAddOrEditDogScreen,
     ConfirmRemoveDogScreen,
+    DeleteAccountScreen,
     HomeScreen
 } from "@/screens";
 
@@ -39,6 +41,22 @@ export const HomeNavController: FC = () => {
             <Stack.Screen
                 name="ConfirmRemoveDog"
                 component={ConfirmRemoveDogScreen}
+                options={{
+                    ...commonScreenOptions,
+                    ...getActiveNavigationHeaderOptions(brandHeaderOptions)
+                }}
+            />
+            <Stack.Screen
+                name="Account"
+                component={AccountScreen}
+                options={{
+                    ...commonScreenOptions,
+                    ...getActiveNavigationHeaderOptions(brandHeaderOptions)
+                }}
+            />
+            <Stack.Screen
+                name="DeleteAccount"
+                component={DeleteAccountScreen}
                 options={{
                     ...commonScreenOptions,
                     ...getActiveNavigationHeaderOptions(brandHeaderOptions)

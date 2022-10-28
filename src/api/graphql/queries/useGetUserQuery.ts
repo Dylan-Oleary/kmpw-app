@@ -2,6 +2,7 @@ import { GeoCoordinates } from "react-native-geolocation-service";
 import { useDispatch } from "react-redux";
 import { ApolloQueryResult, gql, useQuery } from "@apollo/client";
 
+import { USER_DETAILS_FRAGMENT, WEATHER_DETAILS_FRAGMENT } from "@/api/graphql";
 import { buildGeolocationString } from "@/lib";
 import { setUserIdentifier, useUserSelector } from "@/redux";
 import { User } from "@/types";
@@ -19,13 +20,11 @@ export type UseGetUserExtendedQueryOpts = {
 } & UseGetUserQueryBaseOpts;
 
 export const GET_USER = gql`
+    ${USER_DETAILS_FRAGMENT}
+    ${WEATHER_DETAILS_FRAGMENT}
     query GetUser($location: CurrentWeatherWhere) {
         me(location: $location) {
-            id
-            email
-            createdAt
-            updatedAt
-            reauthenticationAt
+            ...UserDetails
             dogs {
                 id
                 createdAt
@@ -48,20 +47,7 @@ export const GET_USER = gql`
                 }
             }
             weather {
-                current {
-                    condition {
-                        code
-                    }
-                    feelslike_c
-                    feelslike_f
-                    is_day
-                    temp_c
-                    temp_f
-                }
-                location {
-                    name
-                    region
-                }
+                ...WeatherDetails
             }
         }
     }

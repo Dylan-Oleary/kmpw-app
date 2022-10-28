@@ -10,7 +10,7 @@ export const FullScreenLoader: FC<LoaderProps> = ({ children, isLoading = false 
     <Container style={globalStyles.defaultFlex}>
         {isLoading ? (
             <>
-                <StatusBar withBrand={Platform.OS === "ios"} />
+                {Platform.OS === "android" && <StatusBar />}
                 <Container
                     style={[
                         globalStyles.defaultFlex,

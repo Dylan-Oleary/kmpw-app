@@ -5,7 +5,9 @@ export type AuthorizedScreenOrController = AuthorizedStackParams & HomeStackPara
 export const AUTHORIZED_SCREEN_NAMES: {
     [key: string]: keyof AuthorizedScreenOrController;
 } = {
+    ACCOUNT: "Account",
     ADD_OR_EDIT_DOG: "AddOrEditDog",
+    DELETE_ACCOUNT: "DeleteAccount",
     HOME: "Home",
     HOME_STACK: "HomeStack",
     LOCATION_DISABLED: "LocationDisabled"

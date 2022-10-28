@@ -31,7 +31,7 @@ export const getContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (
         ...globalStyles.defaultFlex,
         ...Platform.select({
             ios: {
-                paddingBottom: bottom
+                paddingBottom: bottom * 0.6
             }
         })
     };
