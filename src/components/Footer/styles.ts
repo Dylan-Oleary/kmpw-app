@@ -18,7 +18,9 @@ export const styles = StyleSheet.create({
         borderTopColor: theme.colors.brand5,
         borderTopWidth: 0.25
     },
-    logoutIcon: {
-        color: theme.colors.brand5
+    userIcon: {
+        color: theme.colors.brand5,
+        height: 14,
+        width: 14
     }
 });

@@ -14,5 +14,10 @@ export const styles = StyleSheet.create({
     },
     confirmButton: {
         marginLeft: theme.spacing[2]
+    },
+    icon: {
+        color: theme.colors.white,
+        height: 12,
+        width: 12
     }
 });

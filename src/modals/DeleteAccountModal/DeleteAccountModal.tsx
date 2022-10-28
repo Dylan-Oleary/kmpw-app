@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 
+import TrashOutlineIcon from "@/assets/svg/trash-outline.svg";
 import { Alert, BrandHeader, Button, Container, Modal } from "@/components";
 import { useAppDispatch } from "@/hooks";
 import { setShowLoadingOverlay } from "@/redux";
@@ -48,6 +49,7 @@ export const DeleteAccountModal: FC<IDeleteAccountModalProps> = ({
                 <Button onPress={onRequestClose} secondary text="Go back" />
                 <Button
                     containerStyle={styles.confirmButton}
+                    icon={<TrashOutlineIcon {...styles.icon} />}
                     onPress={handleDelete}
                     text="Delete account"
                 />

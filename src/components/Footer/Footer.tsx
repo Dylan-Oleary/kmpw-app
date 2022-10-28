@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-import LogoutIcon from "@/assets/svg/logout.svg";
+import UserIcon from "@/assets/svg/user.svg";
 import { Button, Container } from "@/components";
 import { HomeStackNavigationProp } from "@/navigation";
 
@@ -14,7 +14,7 @@ export const Footer: FC = () => {
         <Container style={styles.container}>
             <Button
                 containerStyle={styles.button}
-                icon={<LogoutIcon {...styles.logoutIcon} />}
+                icon={<UserIcon {...styles.userIcon} />}
                 //@ts-ignore
                 onPress={() => navigate("Account")}
                 text="Account"
