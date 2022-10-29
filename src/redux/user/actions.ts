@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getFreshTokens } from "@/api";
@@ -34,6 +35,16 @@ export const initializeUser = createAsyncThunk(
                 return null;
             }
         } catch (error) {
+            const { response } = error as AxiosError;
+
+            if (response) {
+                const { status = 500 } = response;
+
+                if (status === 401 || status === 404) {
+                    return null;
+                }
+            }
+
             throw rejectWithValue({
                 status: 500,
                 message: "Token Error"

@@ -6,14 +6,34 @@ import { globalStyles } from "@/styles";
 
 export const styles = StyleSheet.create({
     actionsRow: {
-        ...globalStyles.flexRow
+        ...globalStyles.flexRow,
+        marginTop: theme.spacing[4]
     },
-    buttonRowItem: {
-        marginLeft: theme.spacing["3"]
+    actionsRowNthItem: {
+        marginLeft: theme.spacing[2]
     },
     contentContainer: {
         ...globalStyles.defaultFlex,
         padding: 30
+    },
+    deleteAccountIcon: {
+        height: 12,
+        width: 12
+    },
+    icon: {
+        color: theme.colors.white
+    },
+    profileInfoContainer: {
+        ...globalStyles.defaultFlex
+    },
+    profileInfo: {
+        flex: 0
+    },
+    profileInfoNthItem: {
+        marginTop: theme.spacing[2]
+    },
+    stack: {
+        marginTop: theme.spacing[4]
     }
 });
 

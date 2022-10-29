@@ -1,9 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { useApolloClient } from "@apollo/client";
 
+import { deleteUser } from "@/api";
 import TrashOutlineIcon from "@/assets/svg/trash-outline.svg";
-import { Alert, BrandHeader, Button, Container, Modal } from "@/components";
+import {
+    Alert,
+    AlertControl,
+    BrandHeader,
+    Button,
+    Container,
+    errorAlertDefaultConfig,
+    Modal
+} from "@/components";
 import { useAppDispatch } from "@/hooks";
-import { setShowLoadingOverlay } from "@/redux";
+import { clearUser, setShowLoadingOverlay, useUserSelector } from "@/redux";
 
 import { styles } from "./styles";
 
@@ -16,21 +26,25 @@ export const DeleteAccountModal: FC<IDeleteAccountModalProps> = ({
     isVisible = false,
     onRequestClose = () => {}
 }) => {
+    const client = useApolloClient();
     const dispatch = useAppDispatch();
+    const { accessToken } = useUserSelector();
+    const [errorAlert, setErrorAlert] = useState<AlertControl>({ show: false });
 
     const handleDelete = () => {
         dispatch(setShowLoadingOverlay(true));
 
-        // logoutUser(accessToken)
-        //     .then(() => client.clearStore())
-        //     .catch((error) => {
-        //         //TODO: Handle API errors
-        //         console.log(error);
-        //     })
-        //     .finally(() => {
-        //         dispatch(setShowLoadingOverlay(false));
-        //         dispatch(clearUser());
-        //     });
+        deleteUser(accessToken)
+            .then(() => {
+                client.clearStore();
+                dispatch(clearUser());
+            })
+            .catch(() => {
+                setErrorAlert({ ...errorAlertDefaultConfig, show: true });
+            })
+            .finally(() => {
+                dispatch(setShowLoadingOverlay(false));
+            });
     };
 
     return (
@@ -45,6 +59,14 @@ export const DeleteAccountModal: FC<IDeleteAccountModalProps> = ({
                 theme="warning"
                 title="Woof!"
             />
+            {errorAlert?.show && (
+                <Alert
+                    isDismissable
+                    onDismiss={() => setErrorAlert({ ...errorAlert, show: false })}
+                    style={styles.alert}
+                    {...errorAlert}
+                />
+            )}
             <Container style={styles.actionsRow}>
                 <Button onPress={onRequestClose} secondary text="Go back" />
                 <Button
