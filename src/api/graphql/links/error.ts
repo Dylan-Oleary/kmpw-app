@@ -11,6 +11,16 @@ export const errorLink = onError(({ forward, graphQLErrors, networkError, operat
             const { extensions } = error;
 
             switch (extensions?.code) {
+                case "NOT_FOUND":
+                    // @ts-ignore
+                    if (extensions?.exception?.errorCode === "KMPW0020") {
+                        // The user does not exist in the system anymore
+                        return new Observable(() => {
+                            store.dispatch(clearUser());
+                        });
+                    } else {
+                        return;
+                    }
                 case "UNAUTHENTICATED":
                     return new Observable((observer) => {
                         getRefreshTokenFromStorage()
@@ -31,7 +41,7 @@ export const errorLink = onError(({ forward, graphQLErrors, networkError, operat
 
                                         observer.error(error);
 
-                                        if (status === 401) {
+                                        if (status === 401 || status === 404) {
                                             return await store.dispatch(clearUser());
                                         }
 
