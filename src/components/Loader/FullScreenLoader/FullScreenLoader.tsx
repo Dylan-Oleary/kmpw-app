@@ -18,7 +18,7 @@ export const FullScreenLoader: FC<LoaderProps> = ({ children, isLoading = false 
                         globalStyles.justifyFlexCenter
                     ]}
                 >
-                    <Lottie source={DogBallAnimation} autoPlay loop />
+                    <Lottie source={DogBallAnimation} autoPlay loop style={{ marginRight: -14 }} />
                 </Container>
             </>
         ) : (
