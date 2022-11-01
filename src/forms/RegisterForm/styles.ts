@@ -5,6 +5,9 @@ import { globalStyles } from "@/styles";
 
 export const styles = StyleSheet.create({
     checkboxContainer: {
+        marginBottom: theme.spacing[5]
+    },
+    checkboxLabel: {
         ...globalStyles.flexRow,
         flexWrap: "wrap"
     },

@@ -45,7 +45,8 @@ export const RegisterForm: FC = () => {
         validateSubmission({
             email: email?.value,
             password: password?.value,
-            confirmPassword: confirmPassword?.value
+            confirmPassword: confirmPassword?.value,
+            isTosChecked: isTosChecked?.value
         }).then(([isReadyToSubmit, errors]) => {
             if (!hasSubmissionBeenAttempted) setHasSubmissionBeenAttempted(true);
 
@@ -168,9 +169,10 @@ export const RegisterForm: FC = () => {
                     value={confirmPassword?.value}
                 />
                 <Checkbox
+                    containerStyle={styles.checkboxContainer}
                     isChecked={isTosChecked?.value}
                     label={
-                        <Container style={styles.checkboxContainer}>
+                        <Container style={styles.checkboxLabel}>
                             <Text size="xs">I have read and agree to the Woxy</Text>
                             <Link
                                 label=" terms of service "
