@@ -8,9 +8,11 @@ import {
     Button,
     Container,
     errorAlertDefaultConfig,
+    Link,
     Text
 } from "@/components";
-import { PasswordInput, TextInput } from "@/forms";
+import { PRIVACY_POLICY_URL } from "@/constants";
+import { Checkbox, PasswordInput, TextInput } from "@/forms";
 import { useAppDispatch } from "@/hooks";
 import { setShowLoadingOverlay, setUserTokens, useApplicationSelector } from "@/redux";
 import { FormInputWithError } from "@/types";
@@ -30,6 +32,7 @@ export const RegisterForm: FC = () => {
     const [email, setEmail] = useState<FormInputWithError>({ value: "" });
     const [password, setPassword] = useState<FormInputWithError>({ value: "" });
     const [confirmPassword, setConfirmPassword] = useState<FormInputWithError>({ value: "" });
+    const [isTosChecked, setIsTosChecked] = useState<FormInputWithError<boolean>>({ value: false });
     const [hasSubmissionBeenAttempted, setHasSubmissionBeenAttempted] = useState<boolean>(false);
 
     const [hasPasswordBeenFocused, setHasPasswordBeenFocused] = useState<boolean>(false);
@@ -42,7 +45,8 @@ export const RegisterForm: FC = () => {
         validateSubmission({
             email: email?.value,
             password: password?.value,
-            confirmPassword: confirmPassword?.value
+            confirmPassword: confirmPassword?.value,
+            isTosChecked: isTosChecked?.value
         }).then(([isReadyToSubmit, errors]) => {
             if (!hasSubmissionBeenAttempted) setHasSubmissionBeenAttempted(true);
 
@@ -163,6 +167,31 @@ export const RegisterForm: FC = () => {
                     onChange={(value) => setConfirmPassword({ ...confirmPassword, value })}
                     placeholder="Confirm Password"
                     value={confirmPassword?.value}
+                />
+                <Checkbox
+                    containerStyle={styles.checkboxContainer}
+                    isChecked={isTosChecked?.value}
+                    label={
+                        <Container style={styles.checkboxLabelContainer}>
+                            <Text size="xs">
+                                I have read and agree to the Woxy{" "}
+                                <Link
+                                    label="terms of service"
+                                    labelStyle={styles.link}
+                                    link={PRIVACY_POLICY_URL}
+                                    size="xs"
+                                />{" "}
+                                and{" "}
+                                <Link
+                                    label="privacy policy"
+                                    labelStyle={styles.link}
+                                    link={PRIVACY_POLICY_URL}
+                                    size="xs"
+                                />
+                            </Text>
+                        </Container>
+                    }
+                    onPress={(value) => setIsTosChecked({ value })}
                 />
                 <Button
                     containerStyle={styles.spacer}

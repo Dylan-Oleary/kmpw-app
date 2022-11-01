@@ -11,6 +11,7 @@ export * from "./Footer";
 export * from "./HeaderText";
 export * from "./Image";
 export * from "./ImagePicker";
+export * from "./Link";
 export * from "./Loader";
 export * from "./LocationErrorAlert";
 export * from "./Modal";

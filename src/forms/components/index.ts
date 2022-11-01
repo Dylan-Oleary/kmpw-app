@@ -1,4 +1,5 @@
 export * from "./BreedInput";
+export * from "./Checkbox";
 export * from "./DateInput";
 export * from "./DatePicker";
 export * from "./ImageInput";

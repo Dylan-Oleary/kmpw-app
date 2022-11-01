@@ -6792,6 +6792,11 @@ react-native-bootsplash@4.3.2:
     jimp "^0.16.1"
     picocolors "^1.0.0"
 
+react-native-bouncy-checkbox@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-bouncy-checkbox/-/react-native-bouncy-checkbox-3.0.5.tgz#8f9960247e4651c33db043f45a7793aa7e58e26b"
+  integrity sha512-lEUBgqZjJa7ru4SA9pPd3dYhsdPW8a+CIgRv6Gp9J/WxAvgbrzcYdODRngE5xbQboQPjQzPePpp5/w9janWHYg==
+
 react-native-codegen@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.0.8.tgz#b7796a54074139d956fff2862cf1285db43c891b"
