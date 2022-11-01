@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import { theme } from "@/constants";
 
@@ -35,11 +35,13 @@ export const styles = StyleSheet.create({
     preFixContainer: {
         borderBottomRightRadius: 0,
         borderTopRightRadius: 0,
-        borderRightWidth: 0
+        borderRightWidth: 0,
+        ...Platform.select({ ios: { height: 37 } })
     },
     postFixContainer: {
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: 0,
-        borderLeftWidth: 0
+        borderLeftWidth: 0,
+        ...Platform.select({ ios: { height: 37 } })
     }
 });
