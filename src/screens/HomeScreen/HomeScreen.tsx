@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 
 import { useGetUserQuery } from "@/api";
-import DogImage from "@/assets/images/test-pup.jpg";
+import DogImage from "@/assets/images/mountain-pup.jpg";
 import {
     BrandHeader,
     Container,

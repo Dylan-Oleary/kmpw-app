@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { ScrollView } from "react-native";
 
-import DogImage from "@/assets/images/test-pup.jpg";
+import DogImage from "@/assets/images/choco-lab.jpg";
 import { BrandHeader, Container, Image } from "@/components";
 import { RegisterForm } from "@/forms";
 import { screenWidth } from "@/styles";

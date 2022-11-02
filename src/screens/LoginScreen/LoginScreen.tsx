@@ -3,14 +3,13 @@ import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import DogImage from "@/assets/images/pup-trio.jpg";
+import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { BrandHeader, Button, Container, HeaderText, Image, Text } from "@/components";
 import { UNAUTHORIZED_SCREEN_NAMES } from "@/constants";
 import { LoginForm } from "@/forms";
 import { UnauthorizedStackNavigationProp } from "@/navigation";
 import { screenWidth } from "@/styles";
-
-import DogImage from "@/assets/images/test-pup.jpg";
-import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 
 import { getContainerStyle, getFooterContainerStyle, styles } from "./styles";
 
