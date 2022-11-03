@@ -4,24 +4,15 @@ import { EdgeInsets } from "react-native-safe-area-context";
 import { theme } from "@/constants";
 
 export const styles = StyleSheet.create({
-    backgroundImage: {
-        height: "100%",
-        width: "100%"
+    icon: {
+        color: theme.colors.white
     },
-    locationCtaText: {
-        marginTop: theme.spacing[7]
+    settingsActionContainer: {
+        flexGrow: 1,
+        marginTop: theme.spacing[6]
     },
     settingsButton: {
         marginTop: theme.spacing[4]
-    },
-    settingsButtonText: {
-        color: theme.colors.white
-    },
-    transparentBackground: {
-        backgroundColor: "transparent"
-    },
-    wrapperContainer: {
-        flex: 1
     }
 });
 
@@ -40,21 +31,6 @@ export const getContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (
             },
             ios: {
                 paddingTop: top / 2
-            }
-        })
-    };
-};
-
-export const getFooterContainerStyle: (insets: EdgeInsets) => StyleProp<ViewStyle> = (
-    insets: EdgeInsets
-) => {
-    const { bottom } = insets;
-
-    return {
-        ...Platform.select({
-            ios: {
-                backgroundColor: theme.colors.brand5,
-                paddingBottom: bottom
             }
         })
     };

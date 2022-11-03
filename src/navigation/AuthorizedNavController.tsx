@@ -6,9 +6,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FullScreenLoader } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { checkCurrentLocationPermission, getUserGeoLocation } from "@/lib";
-import { HomeNavController } from "@/navigation";
+import {
+    brandHeaderOptions,
+    commonScreenOptions,
+    getActiveNavigationHeaderOptions,
+    HomeNavController
+} from "@/navigation";
 import { setLocation, setLocationError } from "@/redux";
-import { LocationDisabledScreen } from "@/screens";
+import { DeleteAccountScreen, LocationDisabledScreen } from "@/screens";
 
 import { AuthorizedStackParams } from "./types";
 
@@ -66,6 +71,14 @@ export const AuthorizedNavController: FC = () => {
             ) : (
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen component={LocationDisabledScreen} name="LocationDisabled" />
+                    <Stack.Screen
+                        name="DeleteAccount"
+                        component={DeleteAccountScreen}
+                        options={{
+                            ...commonScreenOptions,
+                            ...getActiveNavigationHeaderOptions(brandHeaderOptions)
+                        }}
+                    />
                 </Stack.Navigator>
             )}
         </FullScreenLoader>

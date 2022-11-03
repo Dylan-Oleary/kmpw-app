@@ -9,6 +9,7 @@ export type AppStackParams = {
 };
 
 export type AuthorizedStackParams = {
+    DeleteAccount: DeleteAccountScreenRouteParams;
     HomeStack: undefined;
     LocationDisabled: undefined;
 };
