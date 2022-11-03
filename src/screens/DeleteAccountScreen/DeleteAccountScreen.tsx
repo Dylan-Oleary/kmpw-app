@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { ScrollView } from "react-native";
+import { Platform, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { useApolloClient } from "@apollo/client";
@@ -14,6 +14,7 @@ import {
     Container,
     errorAlertDefaultConfig,
     HeaderText,
+    StatusBar,
     Text
 } from "@/components";
 import { TextInput } from "@/forms";
@@ -64,6 +65,7 @@ export const DeleteAccountScreen: FC = () => {
 
     return (
         <Container style={getContainerStyle(insets)}>
+            {Platform.OS === "android" && <StatusBar withBrand />}
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <BrandHeader content={["Delete ", "your account"]} size="2xl" />
                 <Alert

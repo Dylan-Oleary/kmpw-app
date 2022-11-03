@@ -25,6 +25,7 @@ export const ImageInput: FC<ImageInputProps> = ({ onChange = () => {}, style, va
         <View style={style} {...rest}>
             <Avatar
                 onPress={() => setIsPickerModalOpen(true)}
+                onLongPress={() => setIsPickerModalOpen(true)}
                 size="xl"
                 source={value ? { uri: value } : undefined}
             >
