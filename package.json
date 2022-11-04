@@ -1,7 +1,7 @@
 {
   "name": "kmpw-app",
   "version": "0.1.0",
-  "description": "The React Native application for Keep My Paws Warm",
+  "description": "The React Native application for Woxy",
   "private": true,
   "repository": {
     "type": "git",
