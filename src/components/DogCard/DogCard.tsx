@@ -46,40 +46,42 @@ export const DogCard: FC<DogCardProps> = ({ dog, ...props }) => {
             onLongPress={onLongPress}
             {...props}
         >
-            <Container style={styles.infoContainer}>
-                <TouchableOpacity
-                    onPress={() => setIsUpdateMenuOpen(!isUpdateMenuOpen)}
-                    style={styles.editIconContainer}
-                >
-                    <PencilAltIcon color={styles.editIcon.color} />
-                </TouchableOpacity>
-                <View style={styles.dogImageColumn}>
-                    <Avatar
-                        onLongPress={onLongPress}
-                        source={dog?.profilePicture ? { uri: dog.profilePicture } : undefined}
+            <Container style={styles.cardContainer}>
+                <Container style={styles.infoContainer}>
+                    <TouchableOpacity
+                        onPress={() => setIsUpdateMenuOpen(!isUpdateMenuOpen)}
+                        style={styles.editIconContainer}
+                    >
+                        <PencilAltIcon color={styles.editIcon.color} />
+                    </TouchableOpacity>
+                    <View style={styles.dogImageColumn}>
+                        <Avatar
+                            onLongPress={onLongPress}
+                            source={dog?.profilePicture ? { uri: dog.profilePicture } : undefined}
+                        />
+                    </View>
+                    <View style={styles.dogInfoContainer}>
+                        <View style={styles.infoRow}>
+                            <DogInformation label="Name" value={name} />
+                            <DogInformation label="Weight" value={`${weightImperial} lbs`} />
+                        </View>
+                        <View style={[styles.infoRow, styles.nthInfoRow]}>
+                            <DogInformation label="Breed" value={breed?.name} />
+                            <DogInformation label="Age" value={getDogAge(birthday)} />
+                        </View>
+                    </View>
+                </Container>
+                {isUpdateMenuOpen ? (
+                    <UpdateActions
+                        onExitPress={() => setIsUpdateMenuOpen(false)}
+                        onDeletePress={() => navigate("ConfirmRemoveDog", { dog })}
+                        onUpdatePress={() => navigate("AddOrEditDog", { dog })}
+                        style={styles.footerContainer}
                     />
-                </View>
-                <View style={styles.dogInfoContainer}>
-                    <View style={styles.infoRow}>
-                        <DogInformation label="Name" value={name} />
-                        <DogInformation label="Weight" value={`${weightImperial} lbs`} />
-                    </View>
-                    <View style={[styles.infoRow, styles.nthInfoRow]}>
-                        <DogInformation label="Breed" value={breed?.name} />
-                        <DogInformation label="Age" value={getDogAge(birthday)} />
-                    </View>
-                </View>
+                ) : (
+                    <SafetyLevel {...safetyLevel} style={styles.footerContainer} />
+                )}
             </Container>
-            {isUpdateMenuOpen ? (
-                <UpdateActions
-                    onExitPress={() => setIsUpdateMenuOpen(false)}
-                    onDeletePress={() => navigate("ConfirmRemoveDog", { dog })}
-                    onUpdatePress={() => navigate("AddOrEditDog", { dog })}
-                    style={styles.footerContainer}
-                />
-            ) : (
-                <SafetyLevel {...safetyLevel} style={styles.footerContainer} />
-            )}
         </TouchableOpacity>
     );
 };

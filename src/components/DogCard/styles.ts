@@ -2,7 +2,23 @@ import { StyleSheet } from "react-native";
 
 import { theme } from "@/constants";
 
+const BORDER_RADIUS = 10;
+
 export const styles = StyleSheet.create({
+    cardContainer: {
+        backgroundColor: theme.colors.gray3,
+        borderRadius: BORDER_RADIUS,
+        // Android shadows
+        elevation: 3,
+        // iOS shadows
+        shadowColor: theme.colors.black,
+        shadowOffset: {
+            width: 0,
+            height: 1
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22
+    },
     dogImageColumn: {
         alignContent: "center",
         justifyContent: "center",
@@ -25,11 +41,10 @@ export const styles = StyleSheet.create({
     },
     infoContainer: {
         backgroundColor: theme.colors.gray3,
-        borderColor: theme.colors.gray5,
-        borderWidth: 1,
+        borderColor: theme.colors.gray3,
+        borderTopLeftRadius: BORDER_RADIUS,
+        borderTopRightRadius: BORDER_RADIUS,
         borderBottomWidth: 0,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
         flexDirection: "row",
         position: "relative"
     },
@@ -44,8 +59,8 @@ export const styles = StyleSheet.create({
         fontWeight: "700"
     },
     footerContainer: {
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: BORDER_RADIUS,
+        borderBottomRightRadius: BORDER_RADIUS,
         height: 48,
         paddingVertical: 12
     },
