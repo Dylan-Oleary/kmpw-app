@@ -1,9 +1,10 @@
 import React, { FC } from "react";
-import { ScrollView } from "react-native";
+import { ImageBackground, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import DogImage from "@/assets/images/pup-trio.jpg";
+import BackgroundPattern from "@/assets/patterns/paw-bone-pattern.png";
 import ArrowRightIcon from "@/assets/svg/arrow-right.svg";
 import { BrandHeader, Button, Container, HeaderText, Image, Text } from "@/components";
 import { UNAUTHORIZED_SCREEN_NAMES } from "@/constants";
@@ -26,20 +27,24 @@ export const LoginScreen: FC = () => {
                 </Container>
             </Container>
             <Image aspectRatio={[16, 8]} source={DogImage} width={screenWidth} />
-            <Container style={getFooterContainerStyle(insets)}>
-                <HeaderText style={styles.footerText}>Looking to get</HeaderText>
-                <HeaderText style={styles.footerText}>started?</HeaderText>
-                <Text style={[styles.footerText, styles.footerCopy]}>
-                    It takes 2 minutes to sign up, and let’s you save multiple pups and gain
-                    additional features.
-                </Text>
-                <Button
-                    containerStyle={styles.registerButtonContainer}
-                    icon={<ArrowRightIcon color={styles.footerText.color} />}
-                    onPress={() => navigate(UNAUTHORIZED_SCREEN_NAMES.REGISTER)}
-                    secondary
-                    text="Register Today"
-                />
+            <Container style={styles.imageBackgroundContainer}>
+                <ImageBackground source={BackgroundPattern} resizeMode="cover">
+                    <Container style={getFooterContainerStyle(insets)}>
+                        <HeaderText style={styles.footerText}>Looking to get</HeaderText>
+                        <HeaderText style={styles.footerText}>started?</HeaderText>
+                        <Text style={[styles.footerText, styles.footerCopy]}>
+                            It takes 2 minutes to sign up &#8211; save multiple pups, get access to
+                            live weather information, and more!
+                        </Text>
+                        <Button
+                            containerStyle={styles.registerButtonContainer}
+                            icon={<ArrowRightIcon color={styles.footerText.color} />}
+                            onPress={() => navigate(UNAUTHORIZED_SCREEN_NAMES.REGISTER)}
+                            secondary
+                            text="Register Today"
+                        />
+                    </Container>
+                </ImageBackground>
             </Container>
         </ScrollView>
     );
