@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { USER_DETAILS_FRAGMENT, WEATHER_DETAILS_FRAGMENT } from "@/api";
 import {
     AccountActions,
+    Alert,
     BrandHeader,
     Container,
     DogInformation,
@@ -79,6 +80,13 @@ export const AccountScreen: FC = () => {
                             onLogoutConfirm={() => setIsLoading(true)}
                             style={styles.actionsRow}
                         />
+                        <Container style={styles.disclaimerContainer}>
+                            <Alert
+                                theme="warning"
+                                title="Disclaimer"
+                                body="Woxy should never be used to make the final decision on whether or not to walk your dog(s). You know your dog(s) best and by using Woxy, you acknowledge that you alone are responsible for the safety of your dog(s)."
+                            />
+                        </Container>
                     </Container>
                 </ScrollView>
             </Container>

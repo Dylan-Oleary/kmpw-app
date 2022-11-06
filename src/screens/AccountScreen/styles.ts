@@ -12,6 +12,10 @@ export const styles = StyleSheet.create({
         ...globalStyles.defaultFlex,
         padding: 30
     },
+    disclaimerContainer: {
+        ...globalStyles.justifyFlexEnd,
+        flexGrow: 1
+    },
     profileInfoContainer: {
         ...globalStyles.defaultFlex
     },
