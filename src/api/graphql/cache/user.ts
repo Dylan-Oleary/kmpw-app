@@ -1,18 +1,17 @@
 import { gql, useApolloClient } from "@apollo/client";
 
 import { getFragmentCacheResult } from "@/api";
+import { USER_DETAILS_FRAGMENT, WEATHER_DETAILS_FRAGMENT } from "../fragments";
 import { User } from "@/types";
 import { useUserSelector } from "@/redux";
 
 export type GetCachedUserQueryVariables = { id: string };
 
 export const GET_CACHED_USER = gql`
+    ${USER_DETAILS_FRAGMENT}
+    ${WEATHER_DETAILS_FRAGMENT}
     fragment CachedUser on User {
-        id
-        email
-        createdAt
-        updatedAt
-        reauthenticationAt
+        ...UserDetails
         dogs {
             id
             createdAt
@@ -32,20 +31,7 @@ export const GET_CACHED_USER = gql`
             }
         }
         weather {
-            current {
-                condition {
-                    code
-                }
-                feelslike_c
-                feelslike_f
-                is_day
-                temp_c
-                temp_f
-            }
-            location {
-                name
-                region
-            }
+            ...WeatherDetails
         }
     }
 `;

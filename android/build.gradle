@@ -22,6 +22,17 @@ buildscript {
 
 allprojects {
     repositories {
+        // TODO: Remove exclusiveContent when porject uses React Native 0.70.0
+        exclusiveContent {
+            filter {
+                includeGroup "com.facebook.react"
+            }
+            forRepository {
+                maven {
+                    url "$rootDir/../node_modules/react-native/android"
+                }
+            }
+       }
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")

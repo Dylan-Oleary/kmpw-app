@@ -20,6 +20,6 @@ export * from "./RefreshControl";
 export * from "./StatusBar";
 export * from "./Text";
 export * from "./Toast";
-export * from "./WarmWeatherAlert";
+export * from "./WeatherAlert";
 export * from "./WeatherBanner";
 export * from "./WeatherIcon";

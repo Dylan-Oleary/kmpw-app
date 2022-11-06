@@ -14,7 +14,7 @@ import { styles } from "./styles";
 export type SafetyLevelProps = SafetyLevelType & ViewProps;
 
 export const SafetyLevel: FC<SafetyLevelProps> = ({
-    level = 3,
+    level = 5,
     message = "Use your best judgment",
     style,
     ...rest

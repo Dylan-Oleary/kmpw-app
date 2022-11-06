@@ -2,6 +2,14 @@ import { gql } from "@apollo/client";
 
 export const WEATHER_DETAILS_FRAGMENT = gql`
     fragment WeatherDetails on CurrentWeatherResponse {
+        alert {
+            condition {
+                text
+            }
+            message
+            recommendedSafetyLevel
+            type
+        }
         current {
             condition {
                 code

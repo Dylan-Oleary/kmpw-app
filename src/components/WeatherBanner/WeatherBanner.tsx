@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 import { isValueOfType } from "@theonlydevsever/utilities";
 
 import NoSignalIcon from "@/assets/svg/no-signal.svg";
-import { HeaderText, Text, WarmWeatherAlert, WeatherIcon } from "@/components";
-import { DATE_FORMATS, WARM_WEATHER_ALERT_TEMP_F } from "@/constants";
+import { HeaderText, Text, WeatherAlert, WeatherIcon } from "@/components";
+import { DATE_FORMATS } from "@/constants";
 import { Weather } from "@/types";
 
 import { styles } from "./styles";
@@ -60,9 +60,7 @@ export const WeatherBanner: FC<IWeatherBannerProps> = memo(
                     )}
                 </View>
             </View>
-            {weather?.current && weather.current.feelslike_c >= WARM_WEATHER_ALERT_TEMP_F && (
-                <WarmWeatherAlert />
-            )}
+            {weather?.alert && <WeatherAlert {...weather.alert} />}
         </View>
     )
 );

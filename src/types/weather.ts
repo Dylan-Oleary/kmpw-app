@@ -1,10 +1,9 @@
 import { ImageSourcePropType } from "react-native";
 
 export type Weather = {
+    alert: WeatherAlert;
     current: {
-        condition: {
-            code: number;
-        };
+        condition: WeatherCondition;
         feelslike_c: number;
         feelslike_f: number;
         is_day: number;
@@ -15,6 +14,23 @@ export type Weather = {
         name: string;
         region: string;
     };
+};
+
+export type WeatherAlert = {
+    condition: WeatherCondition;
+    message?: string;
+    recommendedSafetyLevel: number;
+    type: WeatherAlertType;
+};
+
+export enum WeatherAlertType {
+    MODERATE = "MODERATE",
+    SEVERE = "SEVERE"
+}
+
+export type WeatherCondition = {
+    code: number;
+    text: string;
 };
 
 export type WeatherIconMap = {
